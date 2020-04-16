@@ -3,13 +3,7 @@ import java.util.HashMap;
 /**
  * 二分搜索
  */
-
 public class Search {
-
-    enum Result {
-        HAD,
-        SUBSCRIPT
-    }
 
     public static void main(String[] args) {
         float[] arr = {1, 2, 3, 4, 5, 6, 7};
@@ -17,9 +11,9 @@ public class Search {
     }
 
     /**
-     * @param arr
-     * @param target
-     * @return
+     * @param arr    有序数据map
+     * @param target 目标数字
+     * @return 数组下标
      */
     public int find(float[] arr, int target) {
         if (arr.length == 0) {
@@ -39,7 +33,7 @@ public class Search {
                 return middle;
             }
         }
-        return 0;
+        return -1;
     }
 
 }
