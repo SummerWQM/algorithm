@@ -10,7 +10,6 @@ import java.util.Queue;
  */
 public class TreeLevel {
 
-
     public static class TreeNode {
         int val;
         TreeNode left;
