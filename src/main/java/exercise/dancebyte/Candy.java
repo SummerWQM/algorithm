@@ -23,7 +23,7 @@ public class Candy {
 
             // 这里 递减 序列 要 取 最大值 因为 递增的值 可能 大于  递减序列 + 1 的值。
 
-            // 1 2 3 5 4 3  2  1 
+            // 1 2 3 5 4 3  2  1
 
             if (ratings[i - 1] > ratings[i]) {
                 candy_nums[i - 1] = Math.max(candy_nums[i - 1], candy_nums[i] + 1);
