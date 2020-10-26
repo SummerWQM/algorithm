@@ -1,9 +1,6 @@
-package exercise.dancebyte;
+package com.exercise.dancebyte;
 
-import helper.ListNode;
-
-import java.util.ArrayDeque;
-import java.util.Deque;
+import com.helper.ListNode;
 
 // K 个一组 翻转链表
 public class ReverseNode {

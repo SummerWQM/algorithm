@@ -1,14 +1,10 @@
-import java.util.HashMap;
+package com.exercise.leetcode;
 
 /**
  * 二分搜索
  */
 public class Search {
 
-    public static void main(String[] args) {
-        float[] arr = {1, 2, 3, 4, 5, 6, 7};
-        System.out.println(new Search().find(arr, 13));
-    }
 
     /**
      * @param arr    有序数据map

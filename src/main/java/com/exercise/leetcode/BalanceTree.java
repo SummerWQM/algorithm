@@ -1,4 +1,4 @@
-package exercise.leetcode;
+package com.exercise.leetcode;
 
 
 /**

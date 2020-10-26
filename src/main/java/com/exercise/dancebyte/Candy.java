@@ -1,4 +1,4 @@
-package exercise.dancebyte;
+package com.exercise.dancebyte;
 
 import java.util.Arrays;
 

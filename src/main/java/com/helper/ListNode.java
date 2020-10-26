@@ -1,4 +1,4 @@
-package helper;
+package com.helper;
 
 public class ListNode {
     public ListNode next;

@@ -1,4 +1,4 @@
-package helper;
+package com.helper;
 
 public class DoubleList {
     private Node head, tail; // 头尾虚节点

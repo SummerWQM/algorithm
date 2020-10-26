@@ -1,7 +1,7 @@
-package exercise.dancebyte;
+package com.exercise.dancebyte;
 
-import helper.DoubleList;
-import helper.Node;
+import com.helper.DoubleList;
+import com.helper.Node;
 
 import java.util.HashMap;
 
