@@ -1,4 +1,4 @@
-package exercise.dancebyte;
+package com.exercise.dancebyte;
 
 import java.util.Arrays;
 
@@ -31,6 +31,7 @@ public class Candy {
         }
 
         int re = 0;
+
         for (int i = 0; i < n; i++) re += candy_nums[i];
 
         return re;

@@ -1,4 +1,4 @@
-package exercise.leetcode;
+package com.exercise.leetcode;
 
 import java.util.HashMap;
 import java.util.Stack;
