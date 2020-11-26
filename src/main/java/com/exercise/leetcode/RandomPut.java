@@ -18,6 +18,5 @@ public class RandomPut {
         return new int[10];
     }
 
-
 }
 

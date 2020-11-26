@@ -33,7 +33,7 @@ public class LinkReversePrint {
         return re;
     }
 
-    // 栈是线程安全的操作，通过如栈出栈，来控制打印顺序;
+    // 栈是线程安全的操作，通过入栈出栈，来控制打印顺序;
     public int[] reversPrintV2(ListNode head) {
         Stack<ListNode> stack = new Stack<>();
 

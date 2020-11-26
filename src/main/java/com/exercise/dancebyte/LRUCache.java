@@ -38,7 +38,9 @@ class LRUCache {
             cache.addFirst(x);
             // 更新 map 中对应的数据
             map.put(key, x);
+
         } else {
+
             if (cap == cache.size()) {
                 // 删除链表最后一个数据
                 Node last = cache.removeLast();
@@ -47,6 +49,7 @@ class LRUCache {
             // 直接添加到头部
             cache.addFirst(x);
             map.put(key, x);
+
         }
     }
 }
