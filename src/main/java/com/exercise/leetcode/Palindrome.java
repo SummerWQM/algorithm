@@ -15,7 +15,6 @@ public class Palindrome {
         int revertedNumber = 0;
 
         // 当 x < = 则已经反转一半 停止 反转 避免越界
-
         while (x > revertedNumber) {
 
             revertedNumber = revertedNumber * 10 + x % 10;
