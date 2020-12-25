@@ -13,7 +13,7 @@ public class RandomPut {
 
     public int[] packageApple() {
 
-        int[] arr = new int[10];
+        int[] arr = new int[1];
 
         return new int[10];
     }
