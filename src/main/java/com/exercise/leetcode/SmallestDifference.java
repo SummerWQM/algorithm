@@ -15,12 +15,9 @@ public class SmallestDifference {
         Arrays.parallelSort(a);
         Arrays.parallelSort(b);
 
-
-
+        return 0;
 
     }
 
-
-}
 
 }
