@@ -7,33 +7,23 @@
 public class ReversalString {
 
 
-    public void leftReversalStr(char[] str) {
+    public void leftReversalStr(char[] str, int from, int to) {
 
         if (str.length == 0) {
             return;
         }
-        int indexCount = str.length - 1;
-        char one = str[0];
-
-        int r = indexCount, w = 0;
-        for (int i = 0; i < indexCount; i++) {
-
-            str[i] = str[indexCount];
-
-            for (int j = indexCount - 1; j >= i + 1; j--) {
-                str[j + 1] = str[j];
-            }
+        while (from < to) {
+            char t = str[from];
+            str[from++] = str[to];
+            str[to--] = t;
         }
 
-        str[str.length - 1] = one;
-
-        System.out.println(str);
     }
 
 
     public char[] loopMethodStr(char[] str) {
 
-        leftReversalStr(str);
+        leftReversalStr(str, 0, str.length - 1);
         return str;
 
     }
