@@ -1,7 +1,7 @@
 package com.exercise.niuke;
 
 /**
- * int 数组中 元素 差值最大
+ * int 数组中 元素 差值最大，贪心，或者排序
  */
 public class MaxDiffInArray {
 

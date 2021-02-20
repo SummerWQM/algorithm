@@ -5,20 +5,26 @@ import com.exercise.leetcode.RemoveRepeat;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Arrays;
+import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.LongAdder;
 
+@SpringBootApplication
 public class AlgorithmApp {
 
     public static void main(String[] arg) {
 
-        RemoveRepeat r = new RemoveRepeat();
 
-        int[] a = new int[]{
-                3, 2, 2, 3
-        };
+        Queue<Integer> queue = new ArrayBlockingQueue<>(10);
 
+        for (int i = 10; i > 0; i--) {
 
-        System.out.println(r.removeElement(a, 3));
+            queue.offer(i);
+        }
 
-        System.out.println(Arrays.toString(a));
+        while (!queue.isEmpty()) {
+            System.out.println(queue.poll());
+        }
     }
 }

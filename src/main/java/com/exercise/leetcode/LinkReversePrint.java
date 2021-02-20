@@ -49,6 +49,7 @@ public class LinkReversePrint {
         for (int i = 0; i < re.length; i++) {
             re[i] = stack.pop().val;
         }
+
         return re;
     }
 

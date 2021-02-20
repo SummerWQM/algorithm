@@ -18,7 +18,6 @@ public class RemoveRepeat {
                 i++;
             }
         }
-
         return i;
     }
 

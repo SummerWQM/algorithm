@@ -2,6 +2,8 @@ package com.exercise.dancebyte;
 
 import com.helper.ListNode;
 
+import java.util.List;
+
 // K 个一组 翻转链表
 public class ReverseNode {
     public ListNode reverseKGroup(ListNode head, int k) {
@@ -28,17 +30,36 @@ public class ReverseNode {
         return dummy.next;
     }
 
+//    private ListNode reverse(ListNode head) {
+//        ListNode pre = null;
+//        ListNode cur = head;
+//        while (cur != null) {
+//            ListNode next = cur.next;
+//            cur.next = pre;
+//            pre = cur;
+//            cur = next;
+//        }
+//        return pre;
+//    }
+
+
     private ListNode reverse(ListNode head) {
-        ListNode pre = null;
-        ListNode curr = head;
-        while (curr != null) {
-            ListNode next = curr.next;
-            curr.next = pre;
-            pre = curr;
-            curr = next;
+
+        if (head == null || head.next == null) {
+            return head;
         }
-        // 返回翻转之后的链表
-        return pre;
+
+        ListNode tail = reverse(head.next);
+
+        // 空间变化 修改指针
+        head.next.next = head;
+
+        head.next = null;
+
+        // 返回头指针
+
+        return tail;
+
     }
 
     // 翻转一个链表
