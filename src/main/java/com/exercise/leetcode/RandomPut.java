@@ -10,12 +10,16 @@ package com.exercise.leetcode;
  */
 public class RandomPut {
 
+    public int[] packageApple(int[] A) {
+        if((A[i]&1)!=1) {
+            while((A[j]&1)==0) {
+                j+=2;
+            }
+            int tmp = A[i];
+            A[i] = A[j];
+            A[j] = tmp;
+        }
 
-    public int[] packageApple() {
-
-        int[] arr = new int[1];
-
-        return new int[10];
     }
 
 }
