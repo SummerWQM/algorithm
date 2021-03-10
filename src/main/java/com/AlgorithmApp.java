@@ -1,24 +1,30 @@
 package com;
 
-import com.exercise.leetcode.IsHappy;
-import com.exercise.leetcode.RemoveRepeat;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.Arrays;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
+@SpringBootApplication
 public class AlgorithmApp {
 
-    public static void main(String[] arg) {
 
-        RemoveRepeat r = new RemoveRepeat();
+    private static final ThreadPoolExecutor pool;
 
-        int[] a = new int[]{
-                3, 2, 2, 3
-        };
+    static {
+        pool = new ThreadPoolExecutor(
+                2,
+                100,
+                5,
+                TimeUnit.SECONDS,
+                new LinkedBlockingDeque<>(100));
 
-
-        System.out.println(r.removeElement(a, 3));
-
-        System.out.println(Arrays.toString(a));
     }
+
+
+    public static void main(String[] args) {
+
+    }
+    
 }
