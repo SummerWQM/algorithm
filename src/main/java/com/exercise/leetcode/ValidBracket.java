@@ -14,6 +14,8 @@ class ValidBracket {
     public List<String> generateParenthesis(int n) {
         this.result = new ArrayList<>();
         this.DFS(n, n, "");
+
+
         return this.result;
     }
 

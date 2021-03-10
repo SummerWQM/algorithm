@@ -2,7 +2,7 @@ package com.helper;
 
 public class ListNode {
     public ListNode next;
-    int val;
+    public int val;
 
     public ListNode(int x) {
         val = x;

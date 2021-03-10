@@ -10,13 +10,5 @@ package com.exercise.leetcode;
  */
 public class RandomPut {
 
-
-    public int[] packageApple() {
-
-        int[] arr = new int[10];
-
-        return new int[10];
-    }
-
 }
 

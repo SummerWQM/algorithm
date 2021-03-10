@@ -2,13 +2,13 @@ package com;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
 public class AlgorithmApp {
-
 
     private static final ThreadPoolExecutor pool;
 
@@ -22,9 +22,8 @@ public class AlgorithmApp {
 
     }
 
-
     public static void main(String[] args) {
 
     }
-    
+
 }

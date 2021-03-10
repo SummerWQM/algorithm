@@ -18,7 +18,6 @@ public class BSTS {
         }
     }
 
-
     public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
         if (root == null || p == null) return null;
 
