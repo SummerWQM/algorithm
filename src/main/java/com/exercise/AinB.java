@@ -7,7 +7,7 @@ package com.exercise;
 public class AinB {
 
     /**
-     *  方法一 轮询 b 判断是否 每个字符 都在a 中N) （N*N)
+     *  方法一 轮询 b 判断是否 每个4字符 都在a 中N) （N*N)
      *
      */
 
