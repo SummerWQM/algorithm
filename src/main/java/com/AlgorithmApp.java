@@ -2,15 +2,17 @@
 package com;
 
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.lang.reflect.Array;
+
+@SpringBootApplication
 public class AlgorithmApp {
 
     public static void main(String[] args) {
-        double sum = 9.03;
-        for (int i = 0; i < 5; i++) {
-            sum += sum * 0.1;
-            System.out.println(sum);
 
-        }
+        SpringApplication.run(AlgorithmApp.class, args);
 
     }
 }
