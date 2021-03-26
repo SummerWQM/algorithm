@@ -1,9 +1,5 @@
 package com.exercise.leetcode;
 
-import org.apache.logging.log4j.util.Strings;
-
-import java.util.Comparator;
-
 public class CommonPrefix {
 
 

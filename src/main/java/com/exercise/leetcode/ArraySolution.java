@@ -15,7 +15,7 @@ public class ArraySolution {
 
 
     /**
-     *  双指针发 i 是奇数位置  j 是偶数位置
+     * 双指针发 i 是奇数位置  j 是偶数位置
      *
      * @param A
      * @return
