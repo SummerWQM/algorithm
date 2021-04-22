@@ -8,7 +8,7 @@ public class ArrayDoublePoint {
 
     public static void main(String[] a) {
 
-        System.out.println(getGB("abec", "fbcadef"));
+        System.out.println(getGB("fbc", "fbcadef"));
     }
 
     public static boolean getGB(String s1, String s2) {
