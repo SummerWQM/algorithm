@@ -9,8 +9,11 @@ package com.exercise.leetcode;
 public class BSTS {
 
     public static class TreeNode {
+
         int val;
+
         TreeNode left;
+
         TreeNode right;
 
         TreeNode(int x) {
