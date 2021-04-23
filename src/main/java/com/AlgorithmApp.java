@@ -4,12 +4,44 @@ package com;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.HashMap;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.AbstractQueuedSynchronizer;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 @SpringBootApplication
 public class AlgorithmApp {
 
     public static void main(String[] args) {
 
+        ThreadLocal local = new ThreadLocal();
+
+
+        ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(1, 2, 30,
+                TimeUnit.SECONDS,
+                new LinkedBlockingQueue<>(20));
+
+
+        ReentrantReadWriteLock reentrantReadWriteLock = new ReentrantReadWriteLock();
+
+        reentrantReadWriteLock.readLock().lock();
+
+        reentrantReadWriteLock.writeLock().lock();
+
+
+        CountDownLatch latch = new CountDownLatch(3);
+
+        latch.countDown();
+
+
+
         SpringApplication.run(AlgorithmApp.class, args);
+
 
     }
 }
