@@ -26,19 +26,20 @@ public class AlgorithmApp {
                 TimeUnit.SECONDS,
                 new LinkedBlockingQueue<>(20));
 
-
         ReentrantReadWriteLock reentrantReadWriteLock = new ReentrantReadWriteLock();
 
         reentrantReadWriteLock.readLock().lock();
 
+
+
+
         reentrantReadWriteLock.writeLock().lock();
+
 
 
         CountDownLatch latch = new CountDownLatch(3);
 
         latch.countDown();
-
-
 
         SpringApplication.run(AlgorithmApp.class, args);
 
