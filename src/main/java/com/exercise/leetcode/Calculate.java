@@ -39,6 +39,7 @@ public class Calculate {
                 i++;
             } else {
                 long num = 0;
+                // 数字字符串转int
                 while (i < n && Character.isDigit(s.charAt(i))) {
                     num = num * 10 + s.charAt(i) - '0';
                     i++;
@@ -53,14 +54,21 @@ public class Calculate {
     public static void main(String[] a) {
         //  System.out.println( calculate("1+2-(3+8-3)"));
 
-        Deque<Integer> ops = new LinkedList<>();
 
-        ops.push(1);
-        ops.push(2);
-        ops.push(3);
-
-        System.out.println(ops.peek());
-
-
+        System.out.println((repackInt(78919)));
     }
+
+    public static int repackInt(int num) {
+
+        int re = 0;
+        while (num != 0) {
+            int cur = num % 10;
+            re = re * 10 + cur;
+            num = num / 10;
+        }
+
+        return re;
+    }
+
+
 }

@@ -14,9 +14,9 @@ public class Solution1 {
 
         for (int x : nums) {
 
-            pre = Math.max(pre + x, x);
+            pre = Math.max(pre + x, x); // 计算子序列的和，如何 +x 后 大于了 pre+x 从x 开始计算新的子序列。
 
-            max = Math.max(max, pre);
+            max = Math.max(max, pre);// 计算这些 子序列中 最大的一个子序列。
         }
 
 

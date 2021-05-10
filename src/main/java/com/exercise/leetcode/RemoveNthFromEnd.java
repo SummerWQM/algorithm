@@ -65,10 +65,9 @@ public class RemoveNthFromEnd {
             first = first.next;
             second = second.next;
         }
+
         second.next = second.next.next;
-
         return pre.next;
-
     }
 
 }

@@ -1,8 +1,5 @@
 package com.exercise.leetcode;
 
-import java.util.Queue;
-import java.util.concurrent.LinkedBlockingQueue;
-
 public class RotateRight {
 
     static class ListNode {
