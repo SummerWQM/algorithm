@@ -19,12 +19,14 @@ public class RemoveDuplicates {
         int q = 1;
 
         while (q < nums.length) {
+            // 如果想等  0  1 1  1
+            // 移动 q 快指针 知道找到不同的。
+
             if (nums[p] != nums[q]) {
                 nums[p + 1] = nums[q];
                 p++;
             }
             q++;
-
         }
         return p + 1;
 
