@@ -39,15 +39,15 @@ public class NTreeLevel {
         queue.offer(root);
 
         while (!queue.isEmpty()) {
-            List<Integer> curlevel = new ArrayList<Integer>();
-            int curlevelLen = queue.size();
-            for (int i = 1; i <= curlevelLen; ++i) {
+            List<Integer> curLevel = new ArrayList<Integer>();
+            int curLevelLen = queue.size();
+            for (int i = 1; i <= curLevelLen; ++i) {
                 Node node = queue.poll();
-                curlevel.add(node.val);
+                curLevel.add(node.val);
                 // 多叉树 吧 同一层的儿子 全部添加进去 完事。
                 queue.addAll(node.children);
             }
-            res.add(curlevel);
+            res.add(curLevel);
         }
         return res;
     }
