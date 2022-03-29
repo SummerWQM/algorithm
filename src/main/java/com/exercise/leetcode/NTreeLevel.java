@@ -27,7 +27,6 @@ import java.util.Queue;
  * };
  */
 
-
 public class NTreeLevel {
     public List<List<Integer>> levelOrder(Node root) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
