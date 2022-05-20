@@ -1,5 +1,8 @@
 package com.exercise.niuke;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 /**
  * int 数组中 元素 差值最大，贪心，或者排序
  */
@@ -25,5 +28,17 @@ public class MaxDiffInArray {
 
         }
         return max;
+    }
+
+    public static Integer t() {
+        return 0;
+    }
+
+
+    public static void main(String[] a) {
+
+
+
+        Deque<Integer> deque = new LinkedList<>();
     }
 }

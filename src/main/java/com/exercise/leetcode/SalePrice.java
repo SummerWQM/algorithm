@@ -1,5 +1,8 @@
 package com.exercise.leetcode;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 股票的最佳卖出点
  * https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/
@@ -26,8 +29,20 @@ public class SalePrice {
     public static void main(String[] avg) {
         int[] prices = new int[]{1, 2};
 
+        Map<String, Integer> map = new HashMap<>();
 
-        System.out.println(SalePrice.maxProfit(prices));
+        map.put("1", 1);
+        map.put("3", 3);
+        map.put("4", 4);
+        map.put("5", 5);
+        map.forEach((k, v) -> {
+            if (v ==4) {
+                return;
+            }
+            System.out.println(v);
+        });
+
+        //System.out.println(SalePrice.maxProfit(prices));
     }
 
     /*
@@ -47,8 +62,12 @@ public class SalePrice {
                 ans += dif;
             }
         }
+
         return ans;
 
     }
+
+
+
 
 }
