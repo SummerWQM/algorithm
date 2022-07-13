@@ -1,6 +1,11 @@
 package com.exercise.leetcode;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+
+import java.util.Queue;
+
 /**
  * 假设有n个台阶：
  * <p>
@@ -11,7 +16,10 @@ package com.exercise.leetcode;
  * 第 n 阶 =   n-1 一步走到 n 获取 n-2 两阶走到 n
  * d(n) = d(n-1) + d(n-2)
  */
-public class WayToStep {
+@EnableAspectJAutoProxy
+public class WayToStep  {
+
+
 
     public int waysToStep(int n) {
 

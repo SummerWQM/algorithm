@@ -1,5 +1,8 @@
 package com.exercise.leetcode;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+
 public class MergeLink {
     static class ListNode {
         int val;
@@ -45,7 +48,20 @@ public class MergeLink {
         if (l2 != null) {
             cur.next = l2;
         }
+
+
         return tail.next;
     }
+
+
+    public static void main(String[] avgs) {
+        double a = 3.714;
+        int b = 2;
+
+        System.out.println(a - b);
+    }
+
+
+
 
 }

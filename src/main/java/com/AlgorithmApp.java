@@ -1,19 +1,51 @@
 package com;
 
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.alibaba.csp.sentinel.Entry;
+import com.alibaba.csp.sentinel.SphU;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.alibaba.csp.sentinel.slots.block.RuleConstant;
+import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
+import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
+import com.service.impl.SmsImpl1;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import javax.annotation.Resource;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
-@SpringBootApplication
-@Resource
 public class AlgorithmApp {
 
     public static void main(String[] args) {
+
+
+//        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+//
+//        ctx.scan("com.service.impl");
+//
+//        ctx.refresh();
+//
+//        SmsImpl1 sms = ctx.getBean(SmsImpl1.class);
+//
+//        sms.getT();
+
+        initFlowRules();
+        while (true) {
+            Entry entry = null;
+            try {
+                entry = SphU.entry("HelloWorld");
+                /*您的业务逻辑 - 开始*/
+                System.out.println("hello world");
+                /*您的业务逻辑 - 结束*/
+            } catch (BlockException e1) {
+                /*流控逻辑处理 - 开始*/
+                System.out.println("block!");
+                /*流控逻辑处理 - 结束*/
+            } finally {
+                if (entry != null) {
+                    entry.exit();
+                }
+            }
+        }
 
 //        ThreadLocal<String> local = new ThreadLocal<>();
 //
@@ -69,20 +101,35 @@ public class AlgorithmApp {
 //
 //        latch.countDown();
 
-        int[] dp = new int[10];
-        int max = 1;
-
-        Arrays.fill(dp, max);
-
-        for (int i = 0; i < dp.length; i++) {
-            System.out.println(dp[i]);
-        }
-
-        //Collections.swap();
-
+//        int[] dp = new int[10];
+//        int max = 1;
+//
+//        Arrays.fill(dp, max);
+//
+//        for (int i = 0; i < dp.length; i++) {
+//            System.out.println(dp[i]);
+//        }
+//
+//        //Collections.swap();
+//
         //  SpringApplication.run(AlgorithmApp.class, args);
 
 
+//        ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("bean.xml");
+//
+//
+//        ctx.registerShutdownHook();
+    }
+
+    private static void initFlowRules(){
+        List<FlowRule> rules = new ArrayList<>();
+        FlowRule rule = new FlowRule();
+        rule.setResource("HelloWorld");
+        rule.setGrade(RuleConstant.FLOW_GRADE_QPS);
+        // Set limit QPS to 20.
+        rule.setCount(20);
+        rules.add(rule);
+        FlowRuleManager.loadRules(rules);
     }
 
 //    class Context {
@@ -127,4 +174,5 @@ public class AlgorithmApp {
 
 //
 //
-//}
+//
+//
