@@ -5,7 +5,7 @@ public class VersionSort {
 
     public static void main(String[] avg) {
 
-        String[] versions = new String[]{"3.0", "3.1", "1.7.1", "4.1.1", "2.1.3", "2.1.3", "2.0", "2.0.1"};
+        String[] versions = new String[]{"5", "3.0", "3.1", "1.7.1", "4.1.1", "2.1.3", "2.1.3", "2.0", "2.0.1", "2.1.3.0"};
 
         sortVersion(versions);
 
@@ -45,7 +45,6 @@ public class VersionSort {
         if (o2 == null) {
             return 1;
         }
-
 
         String[] a = o1.split("\\.");
         String[] b = o1.split("\\.");
