@@ -5,10 +5,12 @@ public class VersionSort {
 
     public static void main(String[] avg) {
 
-        String[] versions = new String[]{"5", "3.0", "3.1", "1.7.1", "4.1.1", "2.1.3", "2.1.3", "2.0", "2.0.1", "2.1.3.0"};
+        String[] versions = new String[]{"2","1.9.0.1", "5", "3.0", "3.1", "1.7.1", "4.1.1", "2.1.3", "2.1.3", "2.0", "2.0.1", "2.1.3.0"};
+
 
         sortVersion(versions);
 
+        ThreadLocal<String> local = new ThreadLocal<>();
 
         for (String s : versions) {
             System.out.println(s);
@@ -46,14 +48,12 @@ public class VersionSort {
             return 1;
         }
 
-        String[] a = o1.split("\\.");
-        String[] b = o1.split("\\.");
-        int min = Math.min(a.length, b.length) - 1;
+        int min = Math.min(o1.length(), o2.length()) - 1;
         int dif = 0;
         int p = 0;
         while (p <= min + 1) {
             if (p > min) {
-                return a.length > p ? 1 : -1;
+                return o1.length() > p ? 1 : -1;
             }
             dif = o1.charAt(p) - o2.charAt(p);
             if (dif == 0) {
