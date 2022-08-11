@@ -3,7 +3,7 @@ package com.helper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllRange {
+public class FullPermutation {
 
     public static <T> List<List<T>> getSingleFullPermutation(List<T> list) {
         if (list.isEmpty()) {
@@ -17,15 +17,16 @@ public class AllRange {
 
 
     private static <T> void arrange(List<List<T>> resultlist, List<T> list, Integer start, Integer end) {
+        // 走到最后一个元素
         if (start == end - 1) {
             // 将当前数组加到结果集中
             resultlist.add(new ArrayList<>(list));
             return;
         }
 
-        // 将当前位置的数跟后面的数交换，并搜索解
         for (int i = start; i < end; i++) {
             swap(list, start, i);
+            System.out.println(list);
             arrange(resultlist, list, start + 1, end);
             swap(list, start, i);
         }
@@ -48,6 +49,6 @@ public class AllRange {
         arr.add(2);
         arr.add(3);
 
-        System.out.println(AllRange.getSingleFullPermutation(arr));
+        System.out.println(FullPermutation.getSingleFullPermutation(arr));
     }
 }

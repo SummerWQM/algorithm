@@ -32,7 +32,6 @@ public class AlgorithmApp {
 
 
 
-
         reentrantReadWriteLock.writeLock().lock();
 
 
