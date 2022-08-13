@@ -13,7 +13,7 @@ class T {
         for (int i = 0; i < b.length(); i++) {
             t.set(b.charAt(i));
         }
-        System.out.println(t.transfer());
+        System.out.println(t.transfer().toCharArray());
     }
 
     public void set(int ansi) {

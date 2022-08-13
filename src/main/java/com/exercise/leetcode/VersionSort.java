@@ -5,7 +5,7 @@ public class VersionSort {
 
     public static void main(String[] avg) {
 
-        String[] versions = new String[]{"2","1.9.0.1", "5", "3.11.1", "3.1", "1.7.1", "4.1.1", "2.1.3", "2.1.3", "2.0", "2.0.1", "2.1.3.0"};
+        String[] versions = new String[]{"2", "1.9.0.1", "5", "3.11.1", "3.1", "1.7.1", "4.1.1", "2.1.3", "2.1.3", "2.0", "2.0.1", "2.1.3.0"};
 
         sortVersion(versions);
 
@@ -35,18 +35,36 @@ public class VersionSort {
     }
 
     public static int compare(String o1, String o2) {
-        int min = Math.min(o1.length(), o2.length()) - 1;
-        int p = 0;
-        while (p <= min + 1) {
-            if (p > min) {
-                return o1.length() > p ? 1 : -1;
+        int n1 = o1.length();
+        int n2 = o2.length();
+        int i = 0, j = 0;
+        while (i < n1 || j < n2) {
+
+            long num1 = 0;
+            while (i < n1 && o1.charAt(i) != '.') {
+                num1 = num1 * 10 + (o1.charAt(i) - '0');
+                i++;
             }
-            if (o1.charAt(p) != o2.charAt(p)) {
-                return o1.charAt(p) - o2.charAt(p);
+            i++;
+
+            long num2 = 0;
+
+            while (j < n2 && o2.charAt(j) != '.') {
+                num2 = num2 * 10 + (o2.charAt(j) - '0');
+                j++;
             }
-            p++;
+
+            j++;
+
+            if (num1 > num2) {
+                return 1;
+            }
+            if (num1 < num2) {
+                return -1;
+            }
 
         }
+
         return 0;
     }
 }
