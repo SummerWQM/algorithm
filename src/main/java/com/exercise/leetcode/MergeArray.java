@@ -1,11 +1,22 @@
 package com.exercise.leetcode;
 
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * 合并两个有序数组
  */
 public class MergeArray {
+
+    Map<Character, String> dict = new HashMap() {{
+        put('2', "abc");
+        put('3', "def");
+        put('4', "ghi");
+        put('5', "jkl");
+        put('6', "mno");
+        put('7', "pqrs");
+        put('8', "tuv");
+        put('9', "wxyz");
+    }};
 
     /**
      * 合并制定长度 数组
@@ -69,12 +80,12 @@ public class MergeArray {
     }
 
 
-    public static void main(String[] avg) {
-        int[] num1 = new int[]{1, 2, 3, 4, 9, 23};
-        int[] num2 = new int[]{1, 2, 2, 3, 7, 9, 11};
-        System.out.println(Arrays.toString(merge(num1, num2)));
-        System.out.println(Arrays.toString(intersection(num1, num2)));
-    }
+//    public static void main(String[] avg) {
+//        int[] num1 = new int[]{1, 2, 3, 4, 9, 23};
+//        int[] num2 = new int[]{1, 2, 2, 3, 7, 9, 11};
+//        System.out.println(Arrays.toString(merge(num1, num2)));
+//        System.out.println(Arrays.toString(intersection(num1, num2)));
+//    }
 
     /**
      * 求数组交集，排序+双指针
@@ -112,8 +123,107 @@ public class MergeArray {
 
         }
 
+        StringBuffer buffer;
+
+
         return Arrays.copyOfRange(re, 0, index);
 
 
     }
+
+
+    public static int lengthOfLongestSubstring(String s) {
+        if (s.length() == 0) return 0;
+        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+        int max = 0;
+        int left = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (map.containsKey(s.charAt(i))) {
+                // 要取到 最右边的点， "abba" left = 2; 最后进来的i+1 如果取 a left 反而变小了。
+                left = Math.max(left, map.get(s.charAt(i)) + 1);
+            }
+            map.put(s.charAt(i), i);
+            max = Math.max(max, i - left + 1);
+        }
+        return max;
+
+    }
+
+    public static void main(String[] avg) {
+
+        Deque<Integer> stack = new LinkedList<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+
+        Queue<Integer> s = new ArrayDeque<>();
+
+//        s.offer();
+//        s.poll();
+//        s.isEmpty();
+//
+//        s.poll();
+//        s.peek();
+
+        System.out.println(stack.peek());
+
+       // System.out.println(lengthOfLongestSubstring("abba"));
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

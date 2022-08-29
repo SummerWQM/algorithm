@@ -1,20 +1,21 @@
 package com.exercise.leetcode;
 
 import java.util.ArrayList;
+import java.util.List;
 
 class T {
 
     public long[] map = new long[10];
 
-    public static void main(String[] args) {
-
-        String b = "A001";
-        T t = new T();
-        for (int i = 0; i < b.length(); i++) {
-            t.set(b.charAt(i));
-        }
-        System.out.println(t.transfer().toCharArray());
-    }
+//    public static void main(String[] args) {
+//
+//        String b = "A001";
+//        T t = new T();
+//        for (int i = 0; i < b.length(); i++) {
+//            t.set(b.charAt(i));
+//        }
+//        System.out.println(t.transfer().toCharArray());
+//    }
 
     public void set(int ansi) {
 
@@ -51,5 +52,35 @@ class T {
         return s;
     }
 
+
+    public static void main(String[] a) {
+
+        System.out.println(Integer.MAX_VALUE );
+        System.out.println(reverse(Integer.MAX_VALUE));
+    }
+
+
+    public static int reverse(int x) {
+
+        int rev = 0;
+
+        while (x != 0) {
+
+            if (rev < Integer.MIN_VALUE / 10 || rev > Integer.MAX_VALUE / 10) {
+                return 0;
+            }
+
+            int cur = x % 10;
+
+            rev = rev * 10 + cur;
+
+            x /= 10;
+
+        }
+
+        return rev;
+
+
+    }
 
 }
