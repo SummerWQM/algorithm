@@ -1,7 +1,6 @@
 package com.exercise.leetcode;
 
 import java.util.ArrayList;
-import java.util.List;
 
 class T {
 
@@ -55,7 +54,7 @@ class T {
 
     public static void main(String[] a) {
 
-        System.out.println(Integer.MAX_VALUE );
+        System.out.println(Integer.MAX_VALUE);
         System.out.println(reverse(Integer.MAX_VALUE));
     }
 
@@ -65,8 +64,8 @@ class T {
         int rev = 0;
 
         while (x != 0) {
-
-            if (rev < Integer.MIN_VALUE / 10 || rev > Integer.MAX_VALUE / 10) {
+            int tmp = rev % 10;
+            if ((rev < Integer.MIN_VALUE / 10) || (rev > Integer.MAX_VALUE / 10)) {
                 return 0;
             }
 
