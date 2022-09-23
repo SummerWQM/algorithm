@@ -65,9 +65,25 @@
         return new Node[]{tail, head};
     }
 
+    public static Node numberK(Node head, int k) {
+        Node fast = head;
+        Node slow = head;
+        for (int i = 0; i < k; i++) {
+            if (fast == null) {
+                return null;
+            }
+            fast = fast.next;
+        }
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+
     public static void main(String[] avg) {
         Node link = buildLink(10);
         System.out.println(printLink(link));
         System.out.println(printLink(revers(link, 2)));
+        System.out.println(printLink(numberK(link, 2)));
     }
-
