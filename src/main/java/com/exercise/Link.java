@@ -1,8 +1,60 @@
+ /**
+     * 执行过滤花呗支付
+     *
+     * @param context context
+     */
+    private void doFilterAnt(PayTradeOrderContext context) {
+        List<PayTypeDto> payTypeDtos = context.getPayTypeDtos();
+
+        if (CollectionUtils.isEmpty(payTypeDtos)) return;
+
+        for (PayTypeDto payTypeDto : payTypeDtos) {
+            if (!PayTypeEnum.ONLINE.getType().equals(payTypeDto.getPaymentType())) {
+                continue;
+            }
+            List<PayMethodDto> methods = payTypeDto.getPayMethodDtos();
+            if (CollectionUtils.isEmpty(methods)) return;
+
+            List<PayMethodDto> res = methods.stream().filter(i ->
+                    !i.getProductNo().equals(PayMethodEnum.ANT_CREDIT_PAY.getPayMethodCode())
+
+            ).collect(Collectors.toList());
+            payTypeDto.setPayMethodDtos(res);
+        }
+    }
+
+    public Node hasCycle(Node head) {
+        Node fast = head, slow = head;
+        while (true) {
+            if (fast == null || fast.next == null) return null;
+            fast = fast.next.next;
+            slow = slow.next;
+            if (slow == fast) break;
+        }
+        fast = head;
+        while (fast != slow) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return fast;
+    }
+
+
+    public Node getIntersectionNode(Node headA, Node headB) {
+        Node A = headA, B = headB;
+
+        while (A != B) {
+            A = A == null ? headB : A.next;
+            B = B == null ? headA : B.next;
+        }
+        return A;
+    }
+
     public static void main(String[] avg) {
-        Node l1 = buildLink(5);
-        System.out.println(printLink(l1));
+        Node l1 = buildLink(13);
+        System.out.println(printLink(reverseD(l1)));
         //  Node l2 = buildLink(6);
-        System.out.println(printLink(reversK(l1, 2)));
+        // System.out.println(printLink(reversK(l1, 4)));
 //        System.out.println(printLink(merge(l1, l2)));
         //   System.out.println(printLink(add(l1, l2)));
     }
@@ -28,6 +80,15 @@
             head = next;
         }
         return hair.next;
+    }
+
+    public static Node reverseD(Node head) {
+        if (head.next == null) return head;
+        Node result = reverseD(head.next);
+        head.next.next = head;
+        head.next = null;
+        return result;
+
     }
 
     public static Node[] doRevers(Node head, Node tail) {
