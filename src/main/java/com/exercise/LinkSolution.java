@@ -1,27 +1,6 @@
- /**
-     * 执行过滤花呗支付
-     *
-     * @param context context
-     */
-    private void doFilterAnt(PayTradeOrderContext context) {
-        List<PayTypeDto> payTypeDtos = context.getPayTypeDtos();
+package com.exercise;
 
-        if (CollectionUtils.isEmpty(payTypeDtos)) return;
-
-        for (PayTypeDto payTypeDto : payTypeDtos) {
-            if (!PayTypeEnum.ONLINE.getType().equals(payTypeDto.getPaymentType())) {
-                continue;
-            }
-            List<PayMethodDto> methods = payTypeDto.getPayMethodDtos();
-            if (CollectionUtils.isEmpty(methods)) return;
-
-            List<PayMethodDto> res = methods.stream().filter(i ->
-                    !i.getProductNo().equals(PayMethodEnum.ANT_CREDIT_PAY.getPayMethodCode())
-
-            ).collect(Collectors.toList());
-            payTypeDto.setPayMethodDtos(res);
-        }
-    }
+class LinkSolution {
 
     public Node hasCycle(Node head) {
         Node fast = head, slow = head;
@@ -183,3 +162,5 @@
         }
         return head;
     }
+
+}
