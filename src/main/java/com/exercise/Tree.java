@@ -1,6 +1,8 @@
 package com.exercise;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Tree {
@@ -48,6 +50,26 @@ public class Tree {
             indexMap.put(inorder[i], i);
         }
         return myBuildTree(preorder, inorder, 0, n - 1, 0, n - 1);
+    }
+
+    public static TreeNode build(int[] nums, int left, int right) {
+
+        if (left > right) {
+            return null;
+        }
+        int mid = (left + right) / 2;
+        TreeNode root = new TreeNode(nums[mid]);
+        root.left = build(nums, left, mid - 1);
+        root.right = build(nums, mid + 1, right);
+        return root;
+
+    }
+
+
+    public static void main(String[] avg) {
+
+        TreeNode root = build(new int[]{1, 2, 3, 4}, 0, 3);
+
     }
 
 }

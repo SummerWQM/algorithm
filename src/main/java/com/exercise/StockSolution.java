@@ -1,8 +1,11 @@
-/*
-* 股票类
-*/  
+package com.exercise;
+
+class StockSolution {
+    /*
+     * 股票类
+     */
 // 交易一次， 一天买，另一天卖
-public static void main(String[] avg) {
+    public static void main(String[] avg) {
         int[] prices = new int[]{1, 2, 3, 4};
 
         System.out.println(by(prices));
@@ -24,7 +27,7 @@ public static void main(String[] avg) {
     }
 
 
-// 可多次买卖
+    // 可多次买卖
     public static int by2(int[] nums) {
         int n = nums.length;
         int dp[][] = new int[n][2];
@@ -50,3 +53,5 @@ public static void main(String[] avg) {
         }
         return sell2;
     }
+
+}
