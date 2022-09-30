@@ -29,12 +29,6 @@ class ArraySolution {
         nums[j] = tmp;
     }
 
-    public static void main(String[] avg) {
-        int[] nums = new int[]{2, 2, 1, 0, 0, 1, 2};
-        fns(nums);
-        System.out.println(Arrays.toString(nums));
-    }
-
 
     // 递增数组 和为K
     public static ArrayList<Integer> findPair(int[] nums, int k) {
@@ -88,34 +82,41 @@ class ArraySolution {
         return sum;
     }
 
-    public int[] findMaxRightWithStack(int[] array) {
-        if(array == null) {
-            return array;
-        }
-        int size = array.length;
-        int[] result = new int[size];
+    public static void main(String[] avg) {
+
+        int[] nums = new int[]{8, 2, 3, 4, 5, 1, 3, 9, 0};
+
         Stack<Integer> stack = new Stack<>();
 
-        stack.push(0);
+        System.out.println(Arrays.toString(find(nums)));
 
-        int index = 1;
-        while(index < size) {
-            if(!stack.isEmpty() && array[index] > array[stack.peek()]) {
-                result[stack.pop()] = array[index];
-            } else {
-                stack.push(index);
-                index++;
-            }
-        }
-
-        if(!stack.isEmpty()) {
-            result[stack.pop()] = -1;
-        }
-
-        return result;
     }
 
+    // 找出数组 右边第一个 大于自己的数
+    public static int[] find(int[] nums) {
 
+        int[] re = new int[nums.length];
+
+        int index = 0, size = nums.length;
+
+        Stack<Integer> stack = new Stack<>();
+        while (index < size) {
+            // 如索引果入栈的元素  大于栈顶， 就 自选把栈 里的小于自己的 都压入栈
+            if (!stack.isEmpty() && nums[index] > nums[stack.peek()]) {
+                re[stack.pop()] = nums[index];
+            } else {
+                stack.push(index++);
+            }
+
+        }
+        // 最后都没 出栈的 说明后边没有大于自己的。
+        while (!stack.isEmpty()) {
+            re[stack.pop()] = -1;
+        }
+
+        return re;
+
+    }
 
 
 }
