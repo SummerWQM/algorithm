@@ -18,6 +18,9 @@ public class ParkingLot {
     public void enter(Vehicle vehicle) {
 
 
+        // ticket -> in time.
+
+        //
     }
 
     public Floor findFloorAvailable() {

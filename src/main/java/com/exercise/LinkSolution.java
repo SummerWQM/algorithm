@@ -1,15 +1,17 @@
 package com.exercise;
 
+import java.util.Arrays;
+import java.util.List;
+
 class LinkSolution {
 
     public Node hasCycle(Node head) {
         Node fast = head, slow = head;
-        while (true) {
+        do {
             if (fast == null || fast.next == null) return null;
             fast = fast.next.next;
             slow = slow.next;
-            if (slow == fast) break;
-        }
+        } while (slow != fast);
         fast = head;
         while (fast != slow) {
             fast = fast.next;
@@ -29,14 +31,6 @@ class LinkSolution {
         return A;
     }
 
-    public static void main(String[] avg) {
-        Node l1 = buildLink(13);
-        System.out.println(printLink(reverseD(l1)));
-        //  Node l2 = buildLink(6);
-        // System.out.println(printLink(reversK(l1, 4)));
-//        System.out.println(printLink(merge(l1, l2)));
-        //   System.out.println(printLink(add(l1, l2)));
-    }
 
     public static Node reversK(Node head, int k) {
         Node hair = new Node(0);
@@ -154,13 +148,61 @@ class LinkSolution {
     }
 
     public static Node buildLink(int k) {
-        Node head = new Node(k--);
-        Node cur = head;
-        while (k > 0) {
-            cur.next = new Node(k--);
-            cur = cur.next;
+        Node head = new Node(0);
+        Node pre = head;
+        int i = 1;
+        while (i <= k) {
+            pre.next = new Node(i++);
+            pre = pre.next;
         }
-        return head;
+        return head.next;
     }
+
+
+    public static void main(String[] avg) {
+        Node l1 = buildLink(13);
+        Node l2 = buildLink(3);
+        Node l3 = buildLink(8);
+        Node l4 = buildLink(7);
+
+        List<Node> list = Arrays.asList(l1, l2, l3, l4);
+
+        System.out.println(printLink(mergeNLink(list)));
+
+    }
+
+    public static Node mergeNLink(List<Node> list) {
+
+        Node hair = null;
+
+        for (Node link : list) {
+            hair = merge2Link(hair, link);
+        }
+        return hair;
+    }
+
+    public static Node merge2Link(Node l1, Node l2) {
+        Node hair = new Node(0);
+        Node pre = hair;
+        while (l1 != null || l2 != null) {
+            if (l1 == null) {
+                pre.next = l2;
+                l2 = l2.next;
+            } else if (l2 == null) {
+                pre.next = l1;
+                l1 = l1.next;
+            } else if (l1.val > l2.val) {
+                pre.next = l2;
+                l2 = l2.next;
+            } else {
+                pre.next = l1;
+                l1 = l1.next;
+            }
+            pre = pre.next;
+        }
+
+        return hair.next;
+    }
+
 
 }
