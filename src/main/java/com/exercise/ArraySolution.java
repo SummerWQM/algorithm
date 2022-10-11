@@ -184,12 +184,97 @@ class ArraySolution {
 
     }
 
+    /**
+     * 查找数组每一个位置 左边第一个小于自己的数
+     * <p>
+     * 单调递增
+     * <p>
+     * 01、 O(N*N) for i    j = i  j--
+     * 02. stack 使用单调栈，空间换时间。
+     *
+     * @param
+     */
+    public static int[] findFirstLow(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return new int[0];
+        }
+        Stack<Integer> stack = new Stack<>();
+        int[] re = new int[nums.length];
+
+        int index = 0, size = nums.length;
+
+        while (index < size) {
+            // 左边第一个小于自己的，维护一个单调递增的 栈
+            if (!stack.isEmpty() && nums[stack.peek()] >= nums[index]) {
+                stack.pop();
+            } else {
+                re[index] = stack.isEmpty() ? -1 : nums[stack.peek()];
+                stack.push(index++);
+            }
+        }
+        return re;
+    }
+
+    /**
+     * 每个位置 左边第一个 大于自己元素。
+     * <p>
+     * 单调递减 [3,2,1]
+     *
+     * @param
+     */
+    public static int[] findLeftFirstOver(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return new int[0];
+        }
+        int index = 0, size = nums.length;
+        Stack<Integer> stack = new Stack<>();
+        int[] re = new int[size];
+        while (index < size) {
+            if (!stack.isEmpty() && nums[stack.peek()] <= nums[index]) {
+                stack.pop();
+            } else {
+                re[index] = stack.isEmpty() ? -1 : nums[stack.peek()];
+                stack.push(index++);
+            }
+        }
+        return re;
+    }
+
+
+    /**
+     * 右边第一个大于自己的数
+     * <p>
+     * 使用单调递增栈
+     *
+     * @param
+     */
+
+    public static int[] findROver(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return new int[0];
+        }
+        int index = 0, size = nums.length;
+        Stack<Integer> stack = new Stack<>();
+        int[] re = new int[size];
+        Arrays.fill(re, -1);
+        while (index < size) {
+            // 比较栈顶 元素 是否小于当前值
+            if (!stack.isEmpty() && nums[stack.peek()] < nums[index]) {
+                re[stack.pop()] = nums[index];
+            } else {
+                stack.push(index++);
+            }
+        }
+
+        return re;
+    }
+
+
     public static void main(String[] avg) {
 
-        int[] nums = new int[]{8, 3, 4, 4, 4, 2, 3, 4, 5, 1, 3, 3, 0};
+        int[] nums = new int[]{1, 3, 2, 3, 5, 4};
 
-
-        System.out.println(findMore(nums));
+        System.out.println(Arrays.toString(findROver(nums)));
 
     }
 }
