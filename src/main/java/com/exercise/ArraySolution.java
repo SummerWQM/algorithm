@@ -269,12 +269,39 @@ class ArraySolution {
         return re;
     }
 
+    /**
+     * 右边第一个， 小于自己的元素
+     * <p>
+     * 单调递减
+     *
+     * @param
+     */
+
+    public static int[] findRLow(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return new int[0];
+        }
+        int index = 0, size = nums.length;
+        Stack<Integer> stack = new Stack<>();
+        int[] re = new int[size];
+        Arrays.fill(re, -1);
+        while (index < size) {
+            // 比较栈顶 元素 是否大于当前值
+            if (!stack.isEmpty() && nums[stack.peek()] > nums[index]) {
+                re[stack.pop()] = nums[index];
+            } else {
+                stack.push(index++);
+            }
+        }
+        return re;
+    }
+
 
     public static void main(String[] avg) {
 
         int[] nums = new int[]{1, 3, 2, 3, 5, 4};
 
-        System.out.println(Arrays.toString(findROver(nums)));
+        System.out.println(Arrays.toString(findRLow(nums)));
 
     }
 }
