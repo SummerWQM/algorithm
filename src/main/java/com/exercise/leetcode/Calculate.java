@@ -52,10 +52,10 @@ public class Calculate {
     }
 
     public static void main(String[] a) {
-        //  System.out.println( calculate("1+2-(3+8-3)"));
+          System.out.println( calculate("1+2-(3+8-3)"));
 
 
-        System.out.println((repackInt(78919)));
+       // System.out.println((repackInt(78919)));
     }
 
     public static int repackInt(int num) {

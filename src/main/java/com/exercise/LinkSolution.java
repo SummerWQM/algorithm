@@ -169,6 +169,8 @@ class LinkSolution {
 
         System.out.println(printLink(mergeNLink(list)));
 
+        System.out.println(2 / 3 * 3);
+
     }
 
     public static Node mergeNLink(List<Node> list) {
@@ -204,5 +206,54 @@ class LinkSolution {
         return hair.next;
     }
 
+    public static void main(String[] avg) {
+        Node head = build(10);
+        System.out.println(nodeToStr(head));
+        System.out.println(nodeToStr(fs(head)));
+
+    }
+
+    public static String nodeToStr(Node node) {
+        StringBuilder sb = new StringBuilder();
+        while (node != null) {
+            if (node.next != null) {
+                sb.append(node.val).append("->");
+            } else {
+                sb.append(node.val);
+            }
+            node = node.next;
+        }
+        return sb.toString();
+    }
+
+    public static Node build(int k) {
+        Node hair = new Node(0);
+        Node pre = hair;
+        while (k > 0) {
+            pre.next = new Node(k--);
+            pre = pre.next;
+        }
+        return hair.next;
+    }
+
+    public static Node fs(Node node) {
+        if (node.next == null) {
+            return node;
+        }
+        Node newH = fs(node.next);
+        node.next.next = node;
+        node.next = null;
+        return newH;
+    }
+
+
+    static class Node {
+        Node next;
+        int val;
+
+        Node(int k) {
+            val = k;
+        }
+    }
 
 }

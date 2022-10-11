@@ -39,9 +39,10 @@ public class Decompression {
                 read += 2;
                 anchor = read;
             } else {
-                re.append(anchor);
-                anchor = read;
+                re.append(str[anchor]);
                 read++;
+                anchor = read;
+
             }
 
         }
@@ -52,7 +53,7 @@ public class Decompression {
     public static void main(String[] a) {
 
 
-        System.out.println(decompress("a2b3"));
+        System.out.println(decompress("aa2b3"));
 
     }
 

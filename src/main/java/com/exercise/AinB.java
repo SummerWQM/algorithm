@@ -27,7 +27,7 @@ public class AinB {
 
     /**
      *
-     *  方法三  a 散列 到hash 表  然后 轮询 b 就行了。（2 *
+     *  方法三  a 散列 到hash 表  然后 轮询 b 就行了。（2 * N)
      *
      */
 
@@ -46,7 +46,7 @@ public class AinB {
      * 判断B 是否 在A 中 (（1<< StrB[j - 'A']）&&  hash  ) != 0 则 这个字符 在A 中
      */
 
-    public boolean ainB(String one, String two) {
+    public boolean ainB(String A, String B) {
 
         return false;
     }

@@ -32,7 +32,7 @@ public class Combination {
         }
 
         if (target == 0) {
-            ans.add(new ArrayList(path));
+            ans.add(new ArrayList<>(path));
             return;
         }
         for (int i = begin; i < nums.length; i++) {
