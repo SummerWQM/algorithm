@@ -1,9 +1,6 @@
 package com.exercise;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 class ArraySolution {
 
@@ -83,15 +80,6 @@ class ArraySolution {
         return sum;
     }
 
-    public static void main(String[] avg) {
-
-        int[] nums = new int[]{8, 2, 3, 4, 5, 1, 3, 9, 0};
-
-        Stack<Integer> stack = new Stack<>();
-
-        System.out.println(Arrays.toString(find(nums)));
-
-    }
 
     // 找出数组 右边第一个 大于自己的数
     public static int[] find(int[] nums) {
@@ -169,6 +157,40 @@ class ArraySolution {
             }
         }
         return quadruplets;
+    }
+
+    /**
+     * 最早出现，且次数最多的元素,
+     * int[] nums = new int[]{8, 3, 4, 4, 4, 2, 3, 4, 5, 1, 3, 3, 0};
+     */
+    public static int findMore(int[] nums) {
+
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+        HashMap<Integer, Integer> map = new LinkedHashMap<>();
+
+        int max = 0, anchor = 0;
+        for (int i = nums.length - 1; i >= 0; i--) {
+
+            int count = map.getOrDefault(nums[i], 0) + 1;
+            map.put(nums[i], count);
+            if (count >= max) {
+                max = count;
+                anchor = nums[i];
+            }
+        }
+        return anchor;
+
+    }
+
+    public static void main(String[] avg) {
+
+        int[] nums = new int[]{8, 3, 4, 4, 4, 2, 3, 4, 5, 1, 3, 3, 0};
+
+
+        System.out.println(findMore(nums));
+
     }
 }
 

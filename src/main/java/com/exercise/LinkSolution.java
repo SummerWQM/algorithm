@@ -206,12 +206,7 @@ class LinkSolution {
         return hair.next;
     }
 
-    public static void main(String[] avg) {
-        Node head = build(10);
-        System.out.println(nodeToStr(head));
-        System.out.println(nodeToStr(fs(head)));
 
-    }
 
     public static String nodeToStr(Node node) {
         StringBuilder sb = new StringBuilder();
@@ -247,13 +242,5 @@ class LinkSolution {
     }
 
 
-    static class Node {
-        Node next;
-        int val;
-
-        Node(int k) {
-            val = k;
-        }
-    }
 
 }

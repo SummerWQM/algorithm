@@ -7,7 +7,7 @@ public abstract class Vehicle {
 
     protected String name;
 
-    private final VehicleTypeEnum vehicleType\\
+    private final VehicleTypeEnum vehicleType;
 
     public Vehicle(VehicleTypeEnum vehicleType) {
         this.vehicleType = vehicleType;
