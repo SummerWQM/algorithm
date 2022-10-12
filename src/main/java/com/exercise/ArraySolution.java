@@ -236,6 +236,7 @@ class ArraySolution {
                 re[index] = stack.isEmpty() ? -1 : nums[stack.peek()];
                 stack.push(index++);
             }
+
         }
         return re;
     }
@@ -299,9 +300,7 @@ class ArraySolution {
 
     public static void main(String[] avg) {
 
-        int[] nums = new int[]{1, 3, 2, 3, 5, 4};
-
-        System.out.println(Arrays.toString(findRLow(nums)));
+        int[] nums = new int[]{2, 4};
 
     }
 }
