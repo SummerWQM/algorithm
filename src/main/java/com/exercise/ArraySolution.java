@@ -294,6 +294,8 @@ class ArraySolution {
                 stack.push(index++);
             }
         }
+
+
         return re;
     }
 
@@ -302,6 +304,7 @@ class ArraySolution {
 
         int[] nums = new int[]{2, 4};
 
+        System.out.println(Character.isLetter('*'));
     }
 }
 
