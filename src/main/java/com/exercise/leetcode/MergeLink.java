@@ -29,8 +29,8 @@ public class MergeLink {
      * @return
      */
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        ListNode tail = new ListNode(0);
-        ListNode cur = tail;
+        ListNode hair = new ListNode(0);
+        ListNode cur = hair;
         while (l1 != null && l2 != null) {
             if (l1.val > l2.val) {
                 cur.next = l2;
@@ -50,7 +50,7 @@ public class MergeLink {
         }
 
 
-        return tail.next;
+        return hair.next;
     }
 
 

@@ -25,4 +25,5 @@ public class Palindrome {
         return x == revertedNumber || x == revertedNumber / 10;
     }
 
+
 }
