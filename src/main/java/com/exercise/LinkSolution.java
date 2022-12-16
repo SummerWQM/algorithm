@@ -55,6 +55,32 @@ class LinkSolution {
         return hair.next;
     }
 
+
+    public static Node reversK(Node head, int m, int n) {
+        Node hair = new Node(0);
+        hair.next = head;
+        Node start = hair, end = hair, pre = hair;
+
+        for (int i = 0; i < n; i++) {
+            end = end.next;
+        }
+        System.out.println(end.val);
+        for (int i = 0; i < m; i++) {
+            if(i>0) {
+                pre = pre.next;
+            }
+            start = start.next;
+        }
+        System.out.println(start.val);
+        System.out.println(pre.val);
+        Node[] rev = doRevers(start, end);
+
+        pre.next = rev[0];
+
+        return hair.next;
+    }
+
+
     public static Node reverseD(Node head) {
         if (head.next == null) return head;
         Node result = reverseD(head.next);
@@ -73,6 +99,7 @@ class LinkSolution {
             pre = cur;
             cur = next;
         }
+
         return new Node[]{tail, head};
     }
 
@@ -160,16 +187,11 @@ class LinkSolution {
 
 
     public static void main(String[] avg) {
-        Node l1 = buildLink(13);
-        Node l2 = buildLink(3);
-        Node l3 = buildLink(8);
-        Node l4 = buildLink(7);
+        Node l1 = buildLink(5);
 
-        List<Node> list = Arrays.asList(l1, l2, l3, l4);
+        System.out.println(printLink(l1));
 
-        System.out.println(printLink(mergeNLink(list)));
-
-        System.out.println(2 / 3 * 3);
+        System.out.println(printLink(reversK(l1, 2, 4)));
 
     }
 
@@ -207,7 +229,6 @@ class LinkSolution {
     }
 
 
-
     public static String nodeToStr(Node node) {
         StringBuilder sb = new StringBuilder();
         while (node != null) {
@@ -240,7 +261,6 @@ class LinkSolution {
         node.next = null;
         return newH;
     }
-
 
 
 }
