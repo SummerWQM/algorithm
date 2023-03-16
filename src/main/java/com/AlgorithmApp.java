@@ -186,3 +186,51 @@
 ////
 ////
 ////
+
+package com;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class AlgorithmApp {
+
+    /*
+     * Bean 加载过程
+     *
+     *  加载类 ->  选择构造函数(@Autowire 指定) -> 普通对象 -> (属性赋值)依赖注入
+     *
+     *           -> 初始化（前 postConstruct） -> 初始化(@InitializingBean) -> 初始化后（执行AOP)）
+     *
+     *           -> 代理对象 - (没有对代理对象的依赖注入，从容器拿出来的代理对象，没有依赖值)-->
+     *
+     *           -> 放入MAP单例池 -> Bean对象
+     *
+     * @param args
+     */
+
+    public static void main(String[] args) {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+
+
+    }
+
+    static class User {
+
+        public void test() {
+        }
+
+    }
+
+    /*
+     *  AOP -> 创建代理对象，赋值 target 对象 （普通对象） =》 放入Map单例池容器
+     */
+    static class UserProxy extends User {
+
+        User target;
+        public void test() {
+            //@Before
+            // super.test()
+            //切面逻辑
+            target.test();
+        }
+    }
+}
