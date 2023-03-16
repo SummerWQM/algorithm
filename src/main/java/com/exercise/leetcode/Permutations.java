@@ -38,7 +38,7 @@ public class Permutations {
      */
     private void dfs(int[] nums, int len, int depath, Deque<Integer> path, boolean[] used
             , List<List<Integer>> res) {
-
+// 变换这一不 即可就是 子集
         if (depath == len) {
             res.add(new ArrayList<>(path));
         }

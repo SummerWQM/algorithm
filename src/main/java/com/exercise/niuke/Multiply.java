@@ -1,5 +1,7 @@
 package com.exercise.niuke;
 
+import java.util.HashMap;
+
 public class Multiply {
 
     public String multiply(String num1, String num2) {
@@ -24,6 +26,9 @@ public class Multiply {
             if (i == 0 && res[i] == 0) continue;
             result.append(res[i]);
         }
+
+       // HashMap<Integer> map = new HashMap<>();
+
         return result.toString();
     }
 

@@ -1,57 +1,124 @@
+package com.exercise.leetcode;
 
-// 子集，多集合，迭代算法。
+import java.util.*;
 
-    public static void main(String[] avg) {
+/**
+ * https://leetcode.cn/problems/combination-sum-ii/submissions/
+ * <p>
+ * 组合数、组合数二
+ */
+public class Combination {
 
-        List<Integer> arr1 = Arrays.asList(1);
-        List<Integer> arr11 = Arrays.asList(8);
 
-        List<Integer> arr2 = Arrays.asList(4);
+    // 不重复的组合
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
 
-        List<Integer> arr3 = Arrays.asList(6);
+        Deque<Integer> path = new LinkedList<>();
 
-        List<Integer> arr4 = Arrays.asList(11);
+        List<List<Integer>> ans = new ArrayList<>();
 
-        List<Integer> arr44 = Arrays.asList(13);
-
-        List<List<Integer>> comb1 = Arrays.asList(arr1, arr11);
-        List<List<Integer>> comb2 = Arrays.asList(arr2, arr3);
-
-        List<List<Integer>> comb3 = Arrays.asList(arr4, arr44);
-
-        List<List<List<Integer>>> combArr = Arrays.asList(comb1, comb2, comb3);
-        List<List<Integer>> com = combination(combArr);
-
-        System.out.println(Arrays.toString(com.toArray()));
+        if (candidates == null || candidates.length == 0) {
+            return ans;
+        }
+        Arrays.sort(candidates);
+        dfs(candidates, 0, target, path, ans);
+        return ans;
     }
 
-    public static List<List<Integer>> combination(List<List<List<Integer>>> combinationArr) {
-        //活动数量
-        int size = combinationArr.size();
-        int[] index = new int[size];
-        List<List<Integer>> re = new ArrayList<>();
-        do {
-            List<Integer> discountRuleList = Lists.newArrayList();
-            for (int i = 0; i < size; i++) {
-                List<Integer> list = combinationArr.get(i).get(index[i]);
-                discountRuleList.addAll(list);
+    public void dfs(int[] nums, int begin, int target, Deque<Integer> path, List<List<Integer>> ans) {
+
+        if (target < 0) {
+            return;
+        }
+
+        if (target == 0) {
+            ans.add(new ArrayList<>(path));
+            return;
+        }
+        for (int i = begin; i < nums.length; i++) {
+
+            if (i > begin && nums[i] == nums[i - 1]) {
+                continue;
             }
-            
-            re.add(discountRuleList);
 
-        } while (changeIndex(index, combinationArr));
+            path.addLast(nums[i]);
 
-        return re;
+            dfs(nums, i + 1, target - nums[i], path, ans);
+            path.removeLast();
+        }
     }
 
-    public static boolean changeIndex(int[] index, List<List<List<Integer>>> list) {
-        for (int i = list.size() - 1; i >= 0; i--) {
-            if (index[i] == list.get(i).size() - 1) {
-                index[i] = 0;
+
+    /**
+     * 组合数，可以重复使用,得到目标值组合
+     *
+     * @param candidates
+     * @param target
+     * @return
+     */
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+
+        Deque<Integer> path = new LinkedList<>();
+
+        List<List<Integer>> ans = new ArrayList<>();
+
+        if (candidates == null || candidates.length == 0) {
+            return ans;
+        }
+        dfs2(candidates, 0, target, path, ans);
+        return ans;
+    }
+
+    public void dfs2(int[] nums, int begin, int target, Deque<Integer> path, List<List<Integer>> ans) {
+
+        if (target < 0) {
+            return;
+        }
+        if (target == 0) {
+            ans.add(new ArrayList<>(path));
+            return;
+        }
+        for (int i = begin; i < nums.length; i++) {
+            path.addLast(nums[i]);
+            dfs2(nums, i, target - nums[i], path, ans);
+            path.removeLast();
+        }
+
+
+    }
+
+
+
+    public int searchV2(int[] nums, int target) {
+        int n = nums.length;
+        if (n == 0) {
+            return -1;
+        }
+        if (n == 1) {
+            return nums[0] == target ? 0 : -1;
+        }
+        int l = 0, r = n - 1;
+        while (l <= r) {
+            int mid = (l + r) / 2;
+            if (nums[mid] == target) {
+                return mid;
+            }
+            if (nums[0] <= nums[mid]) {
+                if (nums[0] <= target && target < nums[mid]) {
+                    r = mid - 1;
+                } else {
+                    l = mid + 1;
+                }
             } else {
-                index[i]++;
-                return true;
+                if (nums[mid] < target && target <= nums[n - 1]) {
+                    l = mid + 1;
+                } else {
+                    r = mid - 1;
+                }
             }
         }
-        return false;
+        return -1;
     }
+
+
+}

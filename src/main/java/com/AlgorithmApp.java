@@ -209,9 +209,9 @@ public class AlgorithmApp {
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-
-
     }
+
+
 
     static class User {
 

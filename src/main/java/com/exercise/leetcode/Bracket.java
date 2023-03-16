@@ -12,34 +12,40 @@ import java.util.Stack;
 class Bracket {
 
     // Hash table that takes care of the mappings.
-    private HashMap<Character, Character> mappings;
+    private static HashMap<Character, Character> mappings;
 
     // Initialize hash map with mappings. This simply makes the code easier to read.
-    public Bracket() {
-        this.mappings = new HashMap<>();
-        this.mappings.put(')', '(');
-        this.mappings.put('}', '{');
-        this.mappings.put(']', '[');
+    static {
+        mappings = new HashMap<>();
+        mappings.put(')', '(');
+        mappings.put('}', '{');
+        mappings.put(']', '[');
     }
 
-    public boolean isValid(String s) {
-
+    public static boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
 
         for (int i = 0; i < s.length(); i++) {
 
-            char c = s.charAt(i);
-            // 如果是闭合区间
-            if (this.mappings.containsKey(c)) {
-                char ele = stack.empty() ? '#' : stack.pop();
-                // 栈中元素 不等于 开括号
-                if (ele != this.mappings.get(c)) {
+            if (mappings.containsKey(s.charAt(i))) {
+
+                char ele = stack.isEmpty() ? '#' : stack.pop();
+
+                if (ele != mappings.get(s.charAt(i))) {
                     return false;
                 }
+
+
             } else {
-                stack.push(c);
+                stack.push(s.charAt(i));
             }
         }
-        return stack.empty();
+
+        return stack.isEmpty();
+    }
+
+
+    public static void main(String[] avg) {
+        System.out.println(isValid("(){}{{{}}}"));
     }
 }

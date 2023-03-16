@@ -1,5 +1,8 @@
 package com.exercise.leetcode;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 public class MergeKLinks {
     public static class ListNode {
         int val;
@@ -27,7 +30,8 @@ public class MergeKLinks {
     }
 
     /**
-     *  遍历每个节点 拼接链表，通过新建头节点 方便拼接链表。
+     * 遍历每个节点 拼接链表，通过新建头节点 方便拼接链表。
+     *
      * @param a
      * @param b
      * @return
@@ -51,5 +55,12 @@ public class MergeKLinks {
         tail.next = (aPtr != null ? aPtr : bPtr);
         return head.next;
     }
+
+//    public static void main(String[] avg) {
+//
+//        Deque<Integer> deque = new LinkedList<>();
+//
+//        deque.pop()
+//    }
 
 }
