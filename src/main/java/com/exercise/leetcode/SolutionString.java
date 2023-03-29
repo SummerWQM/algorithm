@@ -1,3 +1,8 @@
+package com.exercise.leetcode;
+
+import java.util.HashMap;
+
+class T {
     public static String fin(String s, String t) {
         if (t == null || t.length() == 0) {
             return "";
@@ -10,7 +15,7 @@
 
         String ans = "";
 
-        int min =Integer.MAX_VALUE, win = 0;
+        int min = Integer.MAX_VALUE, win = 0;
 
         for (int i = 0, j = 0; i < s.length(); i++) {
             hs.put(s.charAt(i), hs.getOrDefault(s.charAt(i), 0) + 1);
@@ -30,3 +35,5 @@
 
         return ans;
     }
+
+}

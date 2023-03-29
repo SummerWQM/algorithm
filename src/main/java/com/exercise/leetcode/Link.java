@@ -1,3 +1,6 @@
+package com.exercise.leetcode;
+
+class Link {
     public static class Node {
         Node next;
         int val;
@@ -5,6 +8,7 @@
         Node(int v) {
             val = v;
         }
+
     }
 
     public static Node buildLink(int n) {
@@ -81,4 +85,5 @@
         return pre;
     }
 
+}
 

@@ -3,10 +3,7 @@ package com.exercise.dancebyte;
 import com.helper.DoubleList;
 import com.helper.Node;
 
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
 
 // 使用 链表 主要是为了  删除 节点 (O)1 复杂度
 
@@ -59,39 +56,13 @@ class LRUCache {
         }
     }
 
-    public static int[] find(int[] nums) {
-
-        if (nums == null || nums.length == 0) {
-            return new int[0];
-        }
-
-        int[] re = new int[nums.length];
-
-        Deque<Integer> stack = new LinkedList<>();
-
-        int[] left = new int[nums.length];
-        int index = 0;
-
-        while (index < nums.length) {
-
-            if (!stack.isEmpty() && nums[stack.peek()] >= nums[index]) {
-                stack.pop();
-            } else {
-                left[index] = stack.isEmpty() ? -1 : nums[stack.peek()];
-                stack.push(index++);
-            }
-        }
-
-        return left;
-
+    public static <K, V> void main(String[] args) {
+        LinkedHashMap<K, V> map = new LinkedHashMap<>();
     }
 
 
-    public static void main(String[] avg) {
 
-        int[] nums = new int[]{1, 2, 3, 2, 3, 4};
 
-        System.out.println(Arrays.toString(find(nums)));
 
-    }
+
 }

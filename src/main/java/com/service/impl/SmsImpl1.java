@@ -1,15 +1,21 @@
 package com.service.impl;
 
 import com.service.SmsInterface;
+import org.springframework.context.annotation.Primary;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
+@Primary
 public class SmsImpl1 implements SmsInterface {
+
+
+    Person person;
 
 
     public void getT() {
@@ -86,5 +92,10 @@ public class SmsImpl1 implements SmsInterface {
             System.out.print("\r\n");
         }
 
+    }
+
+    @PostConstruct
+    public void init() {
+        this.person = new Person("wu", "qimeng");
     }
 }
