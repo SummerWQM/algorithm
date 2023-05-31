@@ -1,6 +1,5 @@
 package com.exercise.leetcode;
 
-
 /**
  * 检查二叉树是否平衡 （任意节点的两个子树高度相差不超过1）
  * https://leetcode-cn.com/problems/check-balance-lcci/submissions/
@@ -13,6 +12,7 @@ public class BalanceTree {
         int val;
         TreeNode left;
         TreeNode right;
+
 
         TreeNode(int x) {
             val = x;

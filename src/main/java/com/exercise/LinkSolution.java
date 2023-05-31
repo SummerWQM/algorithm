@@ -48,8 +48,6 @@ class LinkSolution {
             Node[] rev = doRevers(head, tail);
             pre.next = rev[0];
             pre = rev[1];
-
-
             head = next;
         }
         return hair.next;
