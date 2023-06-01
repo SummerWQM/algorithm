@@ -4,6 +4,9 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class ThreadNote {
 
@@ -33,7 +36,7 @@ public class ThreadNote {
 //
 //        ReentrantLock reentrantLock = new ReentrantLock();
 
-        t();
+        t2();
     }
 
 
@@ -45,6 +48,7 @@ public class ThreadNote {
 
 
         Object o = new Object();
+
 
         Thread t1 = new Thread(new Runnable() {
 
@@ -93,5 +97,71 @@ public class ThreadNote {
 
     }
 
+
+    public static void t2() {
+
+        char[] cha1 = "1234567".toCharArray();
+
+        char[] char2 = "abcedfg".toCharArray();
+
+
+        Lock lock = new ReentrantLock();
+
+
+        //= 一个队列
+        Condition condition = lock.newCondition();
+
+        // 队列2
+        Condition condition1 = lock.newCondition();
+
+
+        Thread t1 = new Thread(() -> {
+            lock.lock();
+            try {
+                for (char a : cha1) {
+                    System.out.print(a);
+                    try {
+
+                        condition1.signal(); // notify
+                        condition.await();// await
+                    } catch (InterruptedException e) {
+                        //ignore
+                    }
+
+                }
+                condition1.signal();
+            } finally {
+                lock.unlock();
+            }
+        }
+        );
+
+        t1.start();
+
+
+        Thread t2 = new Thread(() -> {
+            lock.lock();
+            try {
+                for (char a : char2) {
+                    System.out.print(a);
+                    try {
+                        condition.signal();
+                        condition1.await();
+                    } catch (InterruptedException e) {
+                        //ignore
+                    }
+                }
+                condition.signal();
+            } finally {
+
+                lock.unlock();
+            }
+        });
+
+
+        t2.start();
+
+
+    }
 
 }
