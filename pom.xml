@@ -39,6 +39,7 @@
         </dependency>
 
         <dependency>
+<<<<<<< HEAD
             <groupId>com.ctrip.framework.apollo</groupId>
             <artifactId>apollo-client</artifactId>
             <version>${apollo.version}</version>
@@ -71,6 +72,13 @@
             <groupId>com.weimob</groupId>
             <version>1.0.3.7-SNAPSHOT</version>
         </dependency>
+=======
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-core</artifactId>
+            <version>1.8.6</version>
+        </dependency>
+
+>>>>>>> 288f4f61a2e55209ab7d247794c1bd1101321127
     </dependencies>
     <build>
         <plugins>

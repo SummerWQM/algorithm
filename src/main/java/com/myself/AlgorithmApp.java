@@ -189,14 +189,28 @@
 
 package com.myself;
 
+<<<<<<< HEAD:src/main/java/com/myself/AlgorithmApp.java
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+=======
+import com.alibaba.csp.sentinel.Entry;
+import com.alibaba.csp.sentinel.SphU;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.alibaba.csp.sentinel.slots.block.RuleConstant;
+import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
+import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
+
+import java.util.ArrayList;
+import java.util.List;
+>>>>>>> 288f4f61a2e55209ab7d247794c1bd1101321127:src/main/java/com/AlgorithmApp.java
 
 import java.lang.instrument.Instrumentation;
 
 @SpringBootApplication
 public class AlgorithmApp {
+
+
 
     /*
      * Bean 加载过程
@@ -216,6 +230,7 @@ public class AlgorithmApp {
      */
 
 
+<<<<<<< HEAD:src/main/java/com/myself/AlgorithmApp.java
     public static void main(String[] args) throws ClassNotFoundException {
 
 
@@ -227,6 +242,29 @@ public class AlgorithmApp {
 //        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 //        OrderService orderService = (OrderService) context.getBean("orderService");
 //        orderService.init();
+=======
+    public static void main(String[] args) {
+
+        //AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+
+        List<FlowRule> rules = new ArrayList<>();
+        FlowRule rule = new FlowRule();
+        rule.setResource("HelloWorld");
+        // set limit qps to 20
+        rule.setCount(10);
+        rule.setGrade(RuleConstant.FLOW_GRADE_QPS);
+        rules.add(rule);
+        FlowRuleManager.loadRules(rules);
+        for (int i = 0; i < 10000; i++) {
+            try (Entry entry = SphU.entry("HelloWorld")) {
+                // Your business logic here.
+                System.out.println("hello world");
+            } catch (BlockException e) {
+                // Handle rejected request.
+                e.printStackTrace();
+            }
+        }
+>>>>>>> 288f4f61a2e55209ab7d247794c1bd1101321127:src/main/java/com/AlgorithmApp.java
 
     }
 
