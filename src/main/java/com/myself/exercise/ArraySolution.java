@@ -270,44 +270,16 @@ class ArraySolution {
         return re;
     }
 
-    /**
-     * 右边第一个， 小于自己的元素
-     * <p>
-     * 单调递减
-     *
-     * @param
-     */
 
-    public static int[] findRLow(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return new int[0];
-        }
-        int index = 0, size = nums.length;
-        Stack<Integer> stack = new Stack<>();
-        int[] re = new int[size];
-        Arrays.fill(re, -1);
-        while (index < size) {
-            // 比较栈顶 元素 是否大于当前值
-            if (!stack.isEmpty() && nums[stack.peek()] > nums[index]) {
-                re[stack.pop()] = nums[index];
-            } else {
-                stack.push(index++);
-            }
-        }
+//    public static void main(String[] avg) {
+//
+//        int[] nums = new int[]{2, 4};
+//
+//        System.out.println(Character.isLetter('*'));
+//    }
 
-
-        return re;
-    }
-
-
-    public static void main(String[] avg) {
-
-        int[] nums = new int[]{2, 4};
-
-        System.out.println(Character.isLetter('*'));
-    }
-// 核心是判断 值一定在mid 左右 或mid 右边 即可
- public static int find(int[] nums, int target) {
+    // 核心是判断 值一定在mid 左右 或mid 右边 即可
+    public static int find(int[] nums, int target) {
         int n = nums.length;
         if (n == 0) {
             return -1;
@@ -346,6 +318,7 @@ class ArraySolution {
 
     /**
      * 三数 和 双指针降维
+     *
      * @param nums
      * @param target
      * @return
@@ -393,6 +366,36 @@ class ArraySolution {
 
     }
 
+
+    public static void main(String[] args) {
+        int[] nums = new int[]{1, 2, 8, 9, 9, 9};
+        System.out.println(Arrays.toString(findLocation(nums, 9)));
+    }
+
+    public static int[] findLocation(int[] nums, int target) {
+        int left = findBetween(nums, target, true);
+        // 找第一高位
+        int right = findBetween(nums, target, false) - 1;
+        if (left <= right && right < nums.length && nums[left] == target && nums[right] == target) {
+            return new int[]{left, right};
+        }
+        return new int[]{-1, -1};
+    }
+
+    public static int findBetween(int[] nums, int target, boolean lower) {
+        int n = nums.length, ans = nums.length;
+        int left = 0, right = n - 1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (nums[mid] > target || (lower && nums[mid] >= target)) {
+                right = mid - 1;
+                ans = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return ans;
+    }
 
 }
 
