@@ -317,7 +317,7 @@ class ArraySolution {
     }
 
     /**
-     * 三数 和 双指针降维
+     * 三数和 双指针降维
      *
      * @param nums
      * @param target
@@ -367,11 +367,17 @@ class ArraySolution {
     }
 
 
-    public static void main(String[] args) {
-        int[] nums = new int[]{1, 2, 8, 9, 9, 9};
-        System.out.println(Arrays.toString(findLocation(nums, 9)));
-    }
-
+    /**
+     * 二分查找 重复元素的 首和尾部
+     * <p>
+     * 找第一高于目标值的位置
+     * <p>
+     * 找地位目标位置
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
     public static int[] findLocation(int[] nums, int target) {
         int left = findBetween(nums, target, true);
         // 找第一高位
@@ -395,6 +401,55 @@ class ArraySolution {
             }
         }
         return ans;
+    }
+
+    /**
+     * 旋转打印 二维数组  力扣 58 螺旋矩阵
+     * <p>
+     * 注意边界问题
+     * <p>
+     * 四个指针标记 边界， 模拟路径打印
+     *
+     * @param nums
+     * @return
+     */
+    public static List<Integer> cyclePrint(int[][] nums) {
+
+        int columns = nums[0].length, rows = nums.length;
+
+        int left = 0, right = columns - 1, top = 0, bottom = rows - 1;
+
+        List<Integer> re = new ArrayList<>();
+        while (left <= right && top <= bottom) {
+
+            for (int column = left; column <= right; column++) {
+                re.add(nums[top][column]);
+            }
+
+            for (int row = top + 1; row <= bottom; row++) {
+                re.add(nums[row][right]);
+            }
+            if (left < right && top < bottom) {
+                for (int column = right - 1; column > left; column--) {
+                    re.add(nums[bottom][column]);
+                }
+
+                for (int row = bottom; row > top; row--) {
+                    re.add(nums[row][left]);
+                }
+            }
+
+            right--;
+            left++;
+            bottom--;
+            top++;
+        }
+        return re;
+    }
+
+    public static void main(String[] args) {
+        int[][] nums = new int[][]{{1}, {3}};
+        System.out.println(Arrays.toString(cyclePrint(nums).toArray()));
     }
 
 }
