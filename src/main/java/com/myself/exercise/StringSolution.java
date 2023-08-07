@@ -113,5 +113,47 @@ class StringSolution {
 
     }
 
+ /** 224 , 利用栈，去括号，拆解符号计算
+     * Str = 1+2-(-3+4)
+     *
+     * @param str
+     */
+    public static int T(String str) {
+
+        int sign = 1;
+
+        Stack<Integer> stack = new Stack<>();
+        stack.add(1);
+        int ret = 0, n = str.length(), i = 0;
+        while (i < n) {
+            char c = str.charAt(i);
+            if (c == ' ') {
+                i++;
+            } else if (c == '+') {
+                sign = stack.peek();
+                i++;
+            } else if (c == '-') {
+                sign = -stack.peek();
+                i++;
+            } else if (c == '(') {
+                stack.add(sign);
+                i++;
+            } else if (c == ')') {
+                stack.pop();
+                i++;
+            } else {
+                int num = 0;
+                while (i < n && Character.isDigit(str.charAt(i))) {
+                    num = num * 10 + (str.charAt(i) - '0');
+                    i++;
+                }
+                ret += sign * num;
+            }
+
+        }
+
+        return ret;
+
+    }
 
 }
