@@ -1,6 +1,7 @@
 package com.myself.exercise;
 
-import java.util.Arrays;
+import com.myself.exercise.leetcode.MergeKLinks;
+
 import java.util.List;
 
 class LinkSolution {
@@ -64,7 +65,7 @@ class LinkSolution {
         }
         System.out.println(end.val);
         for (int i = 0; i < m; i++) {
-            if(i>0) {
+            if (i > 0) {
                 pre = pre.next;
             }
             start = start.next;
@@ -101,28 +102,6 @@ class LinkSolution {
         return new Node[]{tail, head};
     }
 
-    public static Node merge(Node l1, Node l2) {
-        Node dumy = new Node(-1);
-        Node pre = dumy;
-        while (l1 != null || l2 != null) {
-            if (l1 == null) {
-                pre.next = l2;
-                l2 = l2.next;
-            } else if (l2 == null) {
-                pre.next = l1;
-                l1 = l1.next;
-            } else if (l1.val > l2.val) {
-                pre.next = l1;
-                l1 = l1.next;
-            } else {
-                pre.next = l2;
-                l2 = l2.next;
-            }
-            pre = pre.next;
-        }
-        return dumy.next;
-    }
-
     public static Node add(Node l1, Node l2) {
         int carry = 0, sum = 0;
         Node hair = new Node(-1);
@@ -152,6 +131,10 @@ class LinkSolution {
     static class Node {
         Node next;
         int val;
+
+        Node() {
+
+        }
 
         public Node(int value) {
             val = value;
@@ -260,5 +243,123 @@ class LinkSolution {
         return newH;
     }
 
+    /**
+     * 合并
+     *
+     * @param lists
+     * @return
+     */
+    public Node mergeKLists(Node[] lists) {
+        Node ans = null;
+        for (int i = 0; i < lists.length; ++i) {
+            ans = mergeTwoLists(ans, lists[i]);
+        }
+        return ans;
+    }
+
+    /**
+     * 遍历每个节点 拼接链表，通过新建头节点 方便拼接链表。
+     *
+     * @param a
+     * @param b
+     * @return
+     */
+    public Node mergeTwoLists(Node a, Node b) {
+        if (a == null || b == null) {
+            return a != null ? a : b;
+        }
+        Node head = new Node(0);
+        Node tail = head, aPtr = a, bPtr = b;
+        while (aPtr != null && bPtr != null) {
+            if (aPtr.val < bPtr.val) {
+                tail.next = aPtr;
+                aPtr = aPtr.next;
+            } else {
+                tail.next = bPtr;
+                bPtr = bPtr.next;
+            }
+            tail = tail.next;
+        }
+        tail.next = (aPtr != null ? aPtr : bPtr);
+        return head.next;
+    }
+
+    // k 个一组反转
+    public static Node reverser(Node head, int k) {
+        if (head == null) {
+            return null;
+        }
+        Node hair = new Node(-1);
+        hair.next = head;
+        Node pre = hair, start = head, end = pre;
+        while (end != null) {
+            for (int i = 0; i < k; i++) {
+                if (end != null) {
+                    end = end.next;
+                }
+            }
+            if (end == null) {
+                return hair.next;
+            }
+            Node next = end.next;
+            end.next = null;
+            pre.next = reverse(start);
+            pre = start;
+            start.next = next;
+            start = pre.next;
+            end = pre;
+        }
+        return hair.next;
+    }
+
+    //
+    public static Node reverse(Node head) {
+        if (head == null) {
+            return null;
+        }
+        Node cur = head, pre = null;
+        while (cur != null) {
+            Node next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
+    }
+
+    //======== k 一个一组， 两两反转，指定区间反转，终极解法
+    public static Node reverseK(Node head, int k) {
+        Node hair = new Node();
+        hair.next = head;
+        Node pre = hair;
+        Node start = head, end = pre;
+        while (end != null && start != null) {
+            for (int i = 0; i < k; i++) {
+                if (end.next != null) {
+                    end = end.next;
+                }
+            }
+
+            pre.next = reverser(start, end);
+            pre = start;
+            end = pre;
+            start = pre.next;
+        }
+        return hair.next;
+    }
+
+    public static Node reverser(Node start, Node end) {
+        Node tail = end.next, pre = end.next;
+        Node cur = start;
+        while (tail != cur) {
+            Node next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+
+        return pre;
+
+    }
 
 }

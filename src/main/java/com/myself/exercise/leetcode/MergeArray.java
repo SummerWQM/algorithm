@@ -101,18 +101,14 @@ public class MergeArray {
 
         int i = 0, j = 0;
         int len1 = nums1.length, len2 = nums2.length;
-        int[] re = new int[len1 + len2];
-        int index = 0;
-        int pre = re[0];
+        int len = Math.min(len1, len2);
+        int[] re = new int[len];
+        int w = 0;
 
         while (i < len1 && j < len2) {
 
             if (nums1[i] == nums2[j]) {
-                // 不记录 pre 指针，就记录了 所有交集元素
-                if (index == 0 || pre != nums1[i]) {
-                    re[index++] = nums1[i];
-                    pre = nums1[i];
-                }
+                re[w++] = nums1[i];
                 i++;
                 j++;
             } else if (nums1[i] < nums2[j]) {
@@ -122,11 +118,7 @@ public class MergeArray {
             }
 
         }
-
-        StringBuffer buffer;
-
-
-        return Arrays.copyOfRange(re, 0, index);
+        return re;
 
 
     }
@@ -159,6 +151,10 @@ public class MergeArray {
 
         Queue<Integer> s = new ArrayDeque<>();
 
+        int[] nums1 = new int[]{-2, 1, 2, 2, 4};
+        int[] nums2 = new int[]{1, 2, 3, 4};
+
+        System.out.println(Arrays.toString(intersection(nums1, nums2)));
 //        s.offer();
 //        s.poll();
 //        s.isEmpty();
@@ -168,7 +164,7 @@ public class MergeArray {
 
         System.out.println(stack.peek());
 
-       // System.out.println(lengthOfLongestSubstring("abba"));
+        // System.out.println(lengthOfLongestSubstring("abba"));
     }
 }
 

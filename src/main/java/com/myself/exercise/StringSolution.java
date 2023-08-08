@@ -83,7 +83,7 @@ class StringSolution {
 
     /**
      * 最长公共子串
-     *
+     * <p>
      * 动态规划 拆分子问题
      *
      * @param str1
@@ -113,7 +113,8 @@ class StringSolution {
 
     }
 
- /** 224 , 利用栈，去括号，拆解符号计算
+    /**
+     * 224 , 利用栈，去括号，拆解符号计算
      * Str = 1+2-(-3+4)
      *
      * @param str
@@ -156,4 +157,45 @@ class StringSolution {
 
     }
 
+    public static void StringCalc() {
+
+        String s = "3 + 5 * 2";
+
+        char preSign = '+';
+        int num = 0, index = 0;
+        Stack<Integer> stack = new Stack<>();
+        while (index < s.length()) {
+
+            if (Character.isDigit(s.charAt(index))) {
+                num = num * 10 + (s.charAt(index) - '0');
+            }
+            if (!Character.isDigit(s.charAt(index)) && s.charAt(index) != ' ' || index == s.length() - 1) {
+
+                switch (preSign) {
+                    case '+':
+                        stack.push(num);
+                        break;
+                    case '-':
+                        stack.push(-num);
+                        break;
+                    case '*':
+                        stack.push(stack.pop() * num);
+                        break;
+                    default:
+                        stack.push(stack.pop() / num);
+                }
+                preSign = s.charAt(index);
+                num = 0;
+
+            }
+            index++;
+        }
+
+        int re = 0;
+        while (!stack.isEmpty()) {
+            re += stack.pop();
+        }
+        System.out.println(re);
+
+    }
 }

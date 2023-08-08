@@ -21,20 +21,25 @@ public class QuickSort {
     }
 
     private static int partition(int[] arr, int low, int high) {
-        int pivot = arr[low]; // 选定基准元素
+        int pivot = arr[low]; // 选定基准元素 nums[0]
         int i = low, j = high;
         while (i < j) {
             // 从右向左找第一个小于基准元素的位置
             while (i < j && arr[j] >= pivot) {
                 j--;
             }
+            // arr[j] < 基准 并且 不是  地位 i
+            // arr[i] = 第一个小于 基准  i++ =1
             if (i < j) {
                 arr[i++] = arr[j];
             }
             // 从左向右找第一个大于基准元素的位置
+            // 从 1 的位置 找到 第一个 大于或等于 基准 5 的 并且不是 基准下标
             while (i < j && arr[i] < pivot) {
                 i++;
             }
+            // i= 2 = 8
+            // 把 j = 6  和 2 =8 互换。
             if (i < j) {
                 arr[j--] = arr[i];
             }
