@@ -1,7 +1,5 @@
 package com.myself.exercise;
 
-import com.myself.exercise.leetcode.MergeKLinks;
-
 import java.util.List;
 
 class LinkSolution {
@@ -327,7 +325,9 @@ class LinkSolution {
         return pre;
     }
 
-    //======== k 一个一组， 两两反转，指定区间反转，终极解法
+    /**
+     * k 一个一组， 两两反转，指定区间反转，终极解法
+     */
     public static Node reverseK(Node head, int k) {
         Node hair = new Node();
         hair.next = head;
@@ -348,6 +348,7 @@ class LinkSolution {
         return hair.next;
     }
 
+
     public static Node reverser(Node start, Node end) {
         Node tail = end.next, pre = end.next;
         Node cur = start;
@@ -361,5 +362,34 @@ class LinkSolution {
         return pre;
 
     }
+
+    public static Node revertMToN(Node head, int m, int n) {
+
+        Node hair = new Node(-1);
+        hair.next = head;
+        Node pre = hair;
+        Node start = pre, end = pre;
+        for (int i = 0; i < m; i++) {
+            if (start == null) {
+                break;
+            }
+            if (i > 0) {
+                pre = pre.next;
+            }
+            start = start.next;
+        }
+        for (int i = 0; i < n; i++) {
+            if (end == null) {
+                break;
+            }
+            end = end.next;
+        }
+        if (start == null || end == null) {
+            return head;
+        }
+        pre.next = reverser(start, end);
+        return hair.next;
+    }
+    //====================================== 以上是 反正======
 
 }
