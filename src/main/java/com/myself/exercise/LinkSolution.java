@@ -19,7 +19,13 @@ class LinkSolution {
         return fast;
     }
 
-
+    /**
+     * 返回相交链表的的节点
+     *
+     * @param headA
+     * @param headB
+     * @return
+     */
     public Node getIntersectionNode(Node headA, Node headB) {
         Node A = headA, B = headB;
 
@@ -31,28 +37,6 @@ class LinkSolution {
     }
 
 
-    public static Node reversK(Node head, int k) {
-        Node hair = new Node(0);
-        hair.next = head;
-        Node pre = hair;
-        while (head != null) {
-            Node tail = pre;
-            for (int i = 0; i < k && tail != null; i++) {
-                tail = tail.next;
-            }
-            if (tail == null) {
-                break;
-            }
-            Node next = tail.next;
-            Node[] rev = doRevers(head, tail);
-            pre.next = rev[0];
-            pre = rev[1];
-            head = next;
-        }
-        return hair.next;
-    }
-
-
     public static Node reversK(Node head, int m, int n) {
         Node hair = new Node(0);
         hair.next = head;
@@ -61,19 +45,13 @@ class LinkSolution {
         for (int i = 0; i < n; i++) {
             end = end.next;
         }
-        System.out.println(end.val);
         for (int i = 0; i < m; i++) {
             if (i > 0) {
                 pre = pre.next;
             }
             start = start.next;
         }
-        System.out.println(start.val);
-        System.out.println(pre.val);
-        Node[] rev = doRevers(start, end);
-
-        pre.next = rev[0];
-
+        pre.next = reverser(start, end);
         return hair.next;
     }
 
@@ -282,48 +260,6 @@ class LinkSolution {
         return head.next;
     }
 
-    // k 个一组反转
-    public static Node reverser(Node head, int k) {
-        if (head == null) {
-            return null;
-        }
-        Node hair = new Node(-1);
-        hair.next = head;
-        Node pre = hair, start = head, end = pre;
-        while (end != null) {
-            for (int i = 0; i < k; i++) {
-                if (end != null) {
-                    end = end.next;
-                }
-            }
-            if (end == null) {
-                return hair.next;
-            }
-            Node next = end.next;
-            end.next = null;
-            pre.next = reverse(start);
-            pre = start;
-            start.next = next;
-            start = pre.next;
-            end = pre;
-        }
-        return hair.next;
-    }
-
-    //
-    public static Node reverse(Node head) {
-        if (head == null) {
-            return null;
-        }
-        Node cur = head, pre = null;
-        while (cur != null) {
-            Node next = cur.next;
-            cur.next = pre;
-            pre = cur;
-            cur = next;
-        }
-        return pre;
-    }
 
     /**
      * k 一个一组， 两两反转，指定区间反转，终极解法
@@ -347,7 +283,6 @@ class LinkSolution {
         }
         return hair.next;
     }
-
 
     public static Node reverser(Node start, Node end) {
         Node tail = end.next, pre = end.next;
@@ -390,6 +325,6 @@ class LinkSolution {
         pre.next = reverser(start, end);
         return hair.next;
     }
-    //====================================== 以上是 反正======
+    //====================================== 以上是 各种反转链表======
 
 }

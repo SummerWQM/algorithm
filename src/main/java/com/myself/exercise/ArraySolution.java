@@ -447,9 +447,76 @@ class ArraySolution {
         return re;
     }
 
+    /**
+     * O(1) 空间消耗， 保持相对顺序不变， 将 0 移动到末尾
+     * <p>
+     * 快慢双指针
+     *
+     * @param nums
+     */
+    public static void removeZero(int[] nums) {
+        int n = nums.length;
+        int i = 0, j = i + 1;
+        while (j < n) {
+            if (nums[i] == 0) {
+                if (nums[j] == 0) {
+                    j++;
+                } else {
+                    swap(nums, i, j);
+                }
+            } else {
+                i++;
+                j++;
+            }
+        }
+    }
+
+    /**
+     * 重复元素中， 出现一次的数据
+     * 想同值 2次异或等于0
+     *
+     * @param nums
+     * @return
+     */
+    public static int calc(int[] nums) {
+        int r = 0;
+        for (int num : nums) {
+            r = r ^ num;
+        }
+        return r;
+    }
+
+    /**
+     * 类似 循环俩表的思想，
+     * 找存在环的数组， 数组前提是 [1,n] 的n+1个元素的数组
+     *
+     * @param nums
+     * @return
+     */
+    public static int findDuplicate(int[] nums) {
+        int slow = 0, fast = 0;
+        while (true) {
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+            if (slow == fast) {
+                fast = 0;
+                while (nums[slow] != nums[fast]) {
+                    slow = nums[slow];
+                    fast = nums[fast];
+                }
+                return nums[slow];
+
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        int[][] nums = new int[][]{{1}, {3}};
-        System.out.println(Arrays.toString(cyclePrint(nums).toArray()));
+//        int[][] nums = new int[][]{{1}, {3}};
+//        System.out.println(Arrays.toString(cyclePrint(nums).toArray()));
+
+        int[] nums = new int[]{1, 2, 3, 0, 3, 0, 1, 0, 1, 8};
+        removeZero(nums);
+        System.out.println(Arrays.toString(nums));
     }
 
 }

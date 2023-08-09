@@ -59,21 +59,6 @@ class StringSolution {
         return ans;
     }
 
-    public static void main(String[] avg) {
-        System.out.println(Arrays.toString(findAnagrams("abcabce", "abc").toArray()));
-
-        PriorityQueue<Integer> que = new PriorityQueue<>((o1, o2) -> o1 - o2);
-
-        que.add(3);
-        que.add(2);
-        que.add(5);
-
-
-        System.out.println(que.remove());
-
-
-    }
-
 
 //    public static void main(String[] args) {
 //
@@ -157,6 +142,10 @@ class StringSolution {
 
     }
 
+    /**
+     * 字符串加减乘除
+     * 前置默认一个符号
+     */
     public static void StringCalc() {
 
         String s = "3 + 5 * 2";
@@ -170,7 +159,7 @@ class StringSolution {
                 num = num * 10 + (s.charAt(index) - '0');
             }
             if (!Character.isDigit(s.charAt(index)) && s.charAt(index) != ' ' || index == s.length() - 1) {
-
+                //遇到了下一个符号是，处理上一个符号
                 switch (preSign) {
                     case '+':
                         stack.push(num);
@@ -184,7 +173,9 @@ class StringSolution {
                     default:
                         stack.push(stack.pop() / num);
                 }
+                // 更新当前符号
                 preSign = s.charAt(index);
+                //重置数据
                 num = 0;
 
             }
@@ -198,4 +189,20 @@ class StringSolution {
         System.out.println(re);
 
     }
+
+
+    public static void main(String[] avg) {
+        System.out.println(Arrays.toString(findAnagrams("abcabce", "abc").toArray()));
+
+        PriorityQueue<Integer> que = new PriorityQueue<>((o1, o2) -> o1 - o2);
+
+        que.add(3);
+        que.add(2);
+        que.add(5);
+
+        StringCalc();
+
+
+    }
+
 }

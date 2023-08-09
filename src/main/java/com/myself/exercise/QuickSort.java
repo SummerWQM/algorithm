@@ -48,9 +48,102 @@ public class QuickSort {
         return i; // 返回分割位置
     }
 
-    public static void main(String[] args) {
-        int[] arr = {5, 3, 8, 4, 2, 7, 1, 6};
-        quickSort(arr, 0, arr.length - 1);
-        System.out.println(Arrays.toString(arr));
+
+    public static void heapSort(int[] array) {
+
     }
+
+
+    /**
+     * 维护堆的性质
+     * 父节点 大于 左右 孩子
+     * <p>
+     * 下标为i的节点父节点下标: (i-1)/2
+     * 下标为i的节点左节点下标: i * 2 + 1
+     * 下标为i的节点又节点下标: i * 2 +2
+     * 复杂度 O(logN)
+     * n 数组长度， i 是维护的位置
+     *
+     * @param nums
+     * @param n
+     * @param i
+     */
+    public static void heapify(int[] nums, int n, int i) {
+        int largest = i;
+        int lson = i * 2 + 1, rson = i * 2 + 2;
+
+        if (lson < n && nums[largest] < nums[lson]) {
+            largest = lson;
+        }
+        if (rson < n && nums[largest] < nums[rson]) {
+            largest = rson;
+        }
+        // 如果最大的值 不是i 就交换节点 （是做或是右）
+        if (largest != i) {
+            swap(nums, largest, i);
+
+            heapify(nums, n, largest);
+        }
+    }
+
+    public static void swap(int[] nums, int i, int j) {
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+    }
+
+    /**
+     * 堆排序
+     * 1、第一步 建堆， 复杂度O(N)
+     * * 下标为i的节点父节点下标: (i-1)/2
+     * * 下标为i的节点左节点下标: i * 2 + 1
+     * * 下标为i的节点又节点下标: i * 2 +2
+     * 复杂度 N * log(N)
+     */
+
+    public static void heapSort(int[] nums, int n) {
+
+        buildHeap(nums, n);
+        int i;
+        for (i = n - 1; i > 0; i--) {
+            // 取出最堆，最后一个， 维护 i个堆性质， 再继续取一个
+            // 解决 top N 问题，类似
+            swap(nums, 0, i);
+            heapify(nums, i, 0);
+        }
+    }
+
+    public static void buildHeap(int[] nums, int n) {
+
+        int i;
+        // 从最后一个值建堆，(i-1)/2 <=> (n-1-1)/2 =  n/2 -1
+        for (i = n / 2 - 1; i >= 0; i--) {
+            heapify(nums, n, i);
+        }
+    }
+
+    /**
+     * TOP N 问题
+     *
+     * @param
+     */
+    public static int topN(int[] nums, int k) {
+        int len = nums.length;
+        buildHeap(nums, len);
+        int i;
+        for (i = len - 1; i >= len - k + 1; i--) {
+            swap(nums, 0, i);
+            heapify(nums, i, 0);
+        }
+        return nums[0];
+    }
+
+    public static void main(String[] args) {
+        int[] nums = new int[]{1, 4, 2, 4, 1, 3, 9};
+
+        //heapSort(nums, nums.length);
+
+        System.out.println(topN(nums, 4));
+    }
+
 }
