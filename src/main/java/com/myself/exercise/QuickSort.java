@@ -48,12 +48,6 @@ public class QuickSort {
         return i; // 返回分割位置
     }
 
-
-    public static void heapSort(int[] array) {
-
-    }
-
-
     /**
      * 维护堆的性质
      * 父节点 大于 左右 孩子
@@ -117,6 +111,7 @@ public class QuickSort {
 
         int i;
         // 从最后一个值建堆，(i-1)/2 <=> (n-1-1)/2 =  n/2 -1
+        // 从数组最优一个元素的 父节点开始，计算堆性质。 i-- ，继续判断上一个父节点，，直到对顶元素
         for (i = n / 2 - 1; i >= 0; i--) {
             heapify(nums, n, i);
         }
