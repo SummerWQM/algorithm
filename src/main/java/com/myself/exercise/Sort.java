@@ -10,7 +10,7 @@ package com.myself.exercise;
  * 堆排序、TapN 问题
  */
 
-public class QuickSort {
+public class Sort {
 
     public static void quickSort(int[] arr, int low, int high) {
         if (low < high) {
