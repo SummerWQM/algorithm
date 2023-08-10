@@ -47,12 +47,57 @@ public class DFS {
         return r;
     }
 
+    /**
+     * 岛屿数量
+     * nums = {
+     * {'1','0','1','0','0'},
+     * {'1','0','1','0','0'},
+     * {'1','0','1','0','0'},
+     * }
+     */
+    // 深度标记
+    public static void dfsMark(char[][] grid, int r, int c) {
+        int rn = grid.length, cn = grid[0].length;
+        // 递归出口
+        if (r < 0 || c < 0 || r >= rn || c >= cn || grid[r][c] == '0') {
+            return;
+        }
+        grid[r][c] = '0';
+        //上
+        dfsMark(grid, r - 1, c);
+        // 下
+        dfsMark(grid, r + 1, c);
+        // 左
+        dfsMark(grid, r, c - 1);
+        dfsMark(grid, r, c + 1);
+    }
+
+    public static int searchIsland(char[][] grid) {
+        int r = grid.length, c = grid[0].length;
+        int count = 0;
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                if (grid[i][j] == '1') {
+                    count++;
+                    dfsMark(grid, i, j);
+                }
+            }
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
-        int[] nums = new int[]{1, 2, 4, 9};
-        int target = 2533;
-        List<Integer> path = new ArrayList<>();
-        Arrays.sort(nums);
-        maxNum(nums, path, target);
-        System.out.println(result);
+//        int[] nums = new int[]{1, 2, 4, 9};
+//        int target = 2533;
+//        List<Integer> path = new ArrayList<>();
+//        Arrays.sort(nums);
+//        maxNum(nums, path, target);
+//        System.out.println(result);
+        char[][] islands = new char[][]{
+                {'1', '0', '1'},
+                {'1', '1', '0'},
+                {'1', '0', '1'},
+        };
+        System.out.println(searchIsland(islands));
     }
 }
