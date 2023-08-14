@@ -4,14 +4,26 @@ import java.util.*;
 
 class ArraySolution {
 
-    public static void fns(int[] nums) {
+    /**
+     * {1, 0, 1, 2, 2, 0};
+     * 力扣 颜色排序
+     * 双指针
+     * {1}
+     * p1 = 1
+     * p0 = {0,1}
+     *
+     * @param nums
+     */
+    public static void colorSort(int[] nums) {
         int n = nums.length;
         int p0 = 0, p1 = 0;
         for (int i = 0; i < n; i++) {
             if (nums[i] == 1) {
                 swap(nums, i, p1);
+                p1++;
             } else if (nums[i] == 0) {
                 swap(nums, i, p0);
+                // 如果 0 在 1 前，将 1 移动到 0的位置
                 if (p0 < p1) {
                     swap(nums, i, p1);
                 }
@@ -28,7 +40,9 @@ class ArraySolution {
     }
 
 
-    // 递增数组 和为K
+    /**
+     * 递增数组 和为K ， 类似三数和 移动左右指针即可
+     */
     public static ArrayList<Integer> findPair(int[] nums, int k) {
         int n = nums.length;
         int i = 0;
@@ -47,11 +61,12 @@ class ArraySolution {
         return list;
     }
 
-// 先递增再递减 不重复的元素个数
-
+    /**
+     * 先递增再递减(等价于两个有序数组) 不重复的元素个数
+     */
     public int diffnum(int[] nums) {
         int n = nums.length;
-        if (n == 0 || nums == null) {
+        if (n == 0l) {
             return 0;
         }
         int left = 0;
@@ -61,6 +76,7 @@ class ArraySolution {
             if (nums[left] == nums[right]) {
                 sum++;
                 int temp = nums[left];
+                // 移除两边 各自都相同的 元素
                 while (left <= right && nums[right] == temp)
                     right--;
                 while (left <= right && nums[left] == temp)
@@ -68,43 +84,18 @@ class ArraySolution {
             } else if (nums[left] < nums[right]) {
                 sum++;
                 int temp = nums[left];
+                // 右边大， 右边不动， 移动 左指针
                 while (left <= right && nums[left] == temp)
                     left++;
             } else {
                 sum++;
+                // 左边大， 左边不动， 移动右指针 想通的数据
                 int temp = nums[right];
                 while (left <= right && nums[right] == temp)
                     right--;
             }
         }
         return sum;
-    }
-
-
-    // 找出数组 右边第一个 大于自己的数
-    public static int[] find(int[] nums) {
-
-        int[] re = new int[nums.length];
-
-        int index = 0, size = nums.length;
-
-        Stack<Integer> stack = new Stack<>();
-        while (index < size) {
-            // 如索引果入栈的元素  大于栈顶， 就 自选把栈 里的小于自己的 都压入栈
-            if (!stack.isEmpty() && nums[index] > nums[stack.peek()]) {
-                re[stack.pop()] = nums[index];
-            } else {
-                stack.push(index++);
-            }
-
-        }
-        // 最后都没 出栈的 说明后边没有大于自己的。
-        while (!stack.isEmpty()) {
-            re[stack.pop()] = -1;
-        }
-
-        return re;
-
     }
 
 
@@ -335,10 +326,12 @@ class ArraySolution {
             int second = first + 1, third = n - 1;
 
             while (second < third) {
+                // 去重第二个值，下一个开始
                 if (second > first + 1 && nums[second] == nums[second - 1]) {
                     second++;
                     continue;
                 }
+                // 去重第三个值，从最后一个开始
                 if (third < n - 2 && nums[third] == nums[third + 1]) {
                     third--;
                     continue;
@@ -510,14 +503,66 @@ class ArraySolution {
         }
     }
 
+    public static int[] mergeSortArr(int[] nums1, int[] nums2) {
+        int l1 = nums1.length, l2 = nums2.length;
+        int[] re = new int[l1 + l2];
+        int r1 = 0, r2 = 0, w = 0;
+        while (r1 < l1 || r2 < l2) {
+            if (r1 >= l1) {
+                re[w++] = nums2[r2++];
+            } else if (r2 >= l2) {
+                re[w++] = nums1[r1++];
+            } else if (nums1[r1] < nums2[r2]) {
+                re[w++] = nums1[r1++];
+            } else {
+                re[w++] = nums2[r2++];
+            }
+        }
+        return re;
+    }
+
+    /**
+     * 跳跃游戏
+     * 判断 能走到右边的最大位置
+     * 不断取 下标 + 值 的最大值， 看能否到达最后
+     * 如果i > most 说明 不会到达 i的位置
+     *
+     * @param
+     */
+    public static boolean jump(int[] nums) {
+        int rightMost = 0, n = nums.length;
+        for (int i = 0; i < n; i++) {
+            if (i <= rightMost) {
+                rightMost = Math.max(rightMost, i + nums[i]);
+            }
+            if (rightMost >= n - 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 合并二维数组区间
+     *
+     * @param
+     */
+
+    public static int[][] merged(int[][] intervals) {
+
+        return new int[][]{};
+    }
+
     public static void main(String[] args) {
 //        int[][] nums = new int[][]{{1}, {3}};
 //        System.out.println(Arrays.toString(cyclePrint(nums).toArray()));
+        int[][] nums = new int[][]{{3, 4}, {2, 3}};
 
-        int[] nums = new int[]{1, 2, 3, 0, 3, 0, 1, 0, 1, 8};
-        removeZero(nums);
+        //int[] nums1 = new int[]{4, 5, 6};
+        // colorSort(nums);
         System.out.println(Arrays.toString(nums));
     }
+
 
 }
 

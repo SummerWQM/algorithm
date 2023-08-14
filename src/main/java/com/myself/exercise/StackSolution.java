@@ -1,8 +1,6 @@
 package com.myself.exercise;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * 使用堆栈解决的问题
@@ -42,6 +40,35 @@ public class StackSolution {
         //有效括号， 栈为空
         return stack.isEmpty();
     }
+
+    /**
+     * 最小栈，
+     * 用一个两个 栈，其中一个栈 是最小值，push 一个元素时，同时 计算一个  最小值 压入最小栈
+     *
+     * @param
+     */
+    public static void minStack() {
+        int x = 1;
+        Deque<Integer>  xStack = new LinkedList<>();
+
+        Deque<Integer>  minStack = new LinkedList<>();
+
+        xStack.push(x);
+        minStack.push(Math.min(minStack.peek(), x));
+
+        xStack.pop();
+        minStack.pop();
+
+
+    }
+
+    /**
+     *
+     * @param args
+     */
+
+
+
 
     public static void main(String[] args) {
         System.out.println(logicStr("(){}{{{}}}}"));

@@ -14,11 +14,13 @@ public class QueueToStack<E> {
 
     public void push(E e) {
 
+        // 加入新的 ，把老的数据， 倒回来， 保证 先进的后出去。
         queue2.offer(e);
         while (!queue1.isEmpty()) {
             queue2.offer(queue1.poll());
         }
         // 交换，保证后进来的 放在心的对列之前。
+        // 读取 从Q1, 交换 倒过来的 到Q1
         Queue<E> tmp = queue1;
         queue1 = queue2;
         queue2 = tmp;

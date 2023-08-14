@@ -1,9 +1,11 @@
 package com.myself.exercise;
 
+import java.util.ArrayList;
 import java.util.List;
 
 class LinkSolution {
 
+    // 环连链表 入口
     public Node hasCycle(Node head) {
         Node fast = head, slow = head;
         do {
@@ -143,15 +145,6 @@ class LinkSolution {
     }
 
 
-    public static void main(String[] avg) {
-        Node l1 = buildLink(5);
-
-        System.out.println(printLink(l1));
-
-        System.out.println(printLink(reversK(l1, 2, 4)));
-
-    }
-
     public static Node mergeNLink(List<Node> list) {
 
         Node hair = null;
@@ -220,7 +213,7 @@ class LinkSolution {
     }
 
     /**
-     * 合并
+     * 合并K 个链表
      *
      * @param lists
      * @return
@@ -326,5 +319,81 @@ class LinkSolution {
         return hair.next;
     }
     //====================================== 以上是 各种反转链表======
+
+    // 链表重排 143 力扣
+    public void reorderList(Node head) {
+        if (head == null) {
+            return;
+        }
+        // 将链表三列到数组，让数组引用，并通过下标访问
+        List<Node> list = new ArrayList<Node>();
+        Node cur = head;
+        while (cur != null) {
+            list.add(cur);
+            cur = cur.next;
+        }
+        // l0 - ln -> l1 -> ln-1
+        int i = 0, j = list.size() - 1;
+        while (i < j) {
+            list.get(i).next = list.get(j);
+            i++;
+            if (i == j) {
+                break;
+            }
+            list.get(j).next = list.get(i);
+            j--;
+        }
+
+        list.get(i).next = null;
+    }
+
+
+    //===
+    public static void main(String[] avg) {
+        Node l1 = buildLink(5);
+
+        Node l2 = build(3);
+
+        Node l3 = build(3);
+
+        l1.next = l3;
+
+        l2.next = l3;
+
+        System.out.println(l3.val);
+        Node A = l1, B = l2;
+        while (A != B) {
+            A = A == null ? B : A.next;
+            B = B == null ? A : B.next;
+        }
+        System.out.println(A.val);
+
+    }
+
+    /**
+     * 1、回文链表的 递归写法, 空间复杂度O(1)
+     * <p>
+     * 2、O(N)复杂度 三列到数组 双指针
+     */
+    private Node frontPointer;
+
+    private boolean recursivelyCheck(Node currentNode) {
+        if (currentNode != null) {
+            if (!recursivelyCheck(currentNode.next)) {
+                return false;
+            }
+            if (currentNode.val != frontPointer.val) {
+                return false;
+            }
+            frontPointer = frontPointer.next;
+        }
+        return true;
+    }
+
+    public boolean isPalindrome(Node head) {
+        frontPointer = head;
+        return recursivelyCheck(head);
+    }
+
 
 }

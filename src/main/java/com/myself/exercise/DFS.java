@@ -1,7 +1,5 @@
 package com.myself.exercise;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -85,6 +83,17 @@ public class DFS {
         }
         return count;
     }
+
+    /**
+     * 组成最大数
+     *
+     * @param nums
+     * @return
+     */
+    public static String mergeBigNum(int[] nums) {
+        return "";
+    }
+
 
     public static void main(String[] args) {
 //        int[] nums = new int[]{1, 2, 4, 9};
