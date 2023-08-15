@@ -144,6 +144,18 @@ class LinkSolution {
         return head.next;
     }
 
+    public static Node buildLinkRandom(int n) {
+        Node head = new Node(0);
+        Node pre = head;
+        int i = n;
+        while (i > 0) {
+            pre.next = new Node((int) Math.ceil(Math.random() * n));
+            pre = pre.next;
+            i--;
+        }
+        return head.next;
+    }
+
 
     public static Node mergeNLink(List<Node> list) {
 
@@ -347,29 +359,6 @@ class LinkSolution {
         list.get(i).next = null;
     }
 
-
-    //===
-    public static void main(String[] avg) {
-        Node l1 = buildLink(5);
-
-        Node l2 = build(3);
-
-        Node l3 = build(3);
-
-        l1.next = l3;
-
-        l2.next = l3;
-
-        System.out.println(l3.val);
-        Node A = l1, B = l2;
-        while (A != B) {
-            A = A == null ? B : A.next;
-            B = B == null ? A : B.next;
-        }
-        System.out.println(A.val);
-
-    }
-
     /**
      * 1、回文链表的 递归写法, 空间复杂度O(1)
      * <p>
@@ -395,5 +384,68 @@ class LinkSolution {
         return recursivelyCheck(head);
     }
 
+    /**
+     * 链表排序
+     *
+     * @param
+     */
+    public static Node sortLink(Node head) {
+        return doSortLink(head, null);
+    }
+
+    // 递归分割链表， 再有序合并, 时间复杂度  O(NlogN) ,空间复杂度O(logN)
+    public static Node doSortLink(Node head, Node tail) {
+        if (head == null) {
+            return null;
+        }
+        // 分割到相临的节点
+        if (head.next == tail) {
+            head.next = null;
+            return head;
+        }
+        Node slow = head, fast = head;
+        // 到达尾指针便利结束
+        while (fast != tail) {
+            slow = slow.next;
+            fast = fast.next;
+            if (fast != tail) {
+                fast = fast.next;
+            }
+        }
+        Node mid = slow;
+        Node list1 = doSortLink(head, mid);
+        Node list2 = doSortLink(mid, tail);
+        // 分割节点合并
+        return merge(list1, list2);
+    }
+
+    public static Node merge(Node head1, Node head2) {
+        Node dummyHead = new Node(0);
+        Node temp = dummyHead, temp1 = head1, temp2 = head2;
+        while (temp1 != null && temp2 != null) {
+            if (temp1.val <= temp2.val) {
+                temp.next = temp1;
+                temp1 = temp1.next;
+            } else {
+                temp.next = temp2;
+                temp2 = temp2.next;
+            }
+            temp = temp.next;
+        }
+        if (temp1 != null) {
+            temp.next = temp1;
+        } else if (temp2 != null) {
+            temp.next = temp2;
+        }
+        return dummyHead.next;
+    }
+
+
+    //===
+    public static void main(String[] avg) {
+        Node head = buildLinkRandom(10);
+        System.out.println(printLink(head));
+        System.out.println(printLink(sortLink(head)));
+    }
 
 }

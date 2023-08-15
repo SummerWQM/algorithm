@@ -39,6 +39,16 @@ class ArraySolution {
         nums[j] = tmp;
     }
 
+    // 从 i 的位置开始 和最后的交换
+    public static void swap(int[] nums, int i) {
+        int left = i, right = nums.length - 1;
+        while (left < right) {
+            int tmp = nums[left];
+            nums[left++] = nums[right];
+            nums[right--] = tmp;
+        }
+    }
+
 
     /**
      * 递增数组 和为K ， 类似三数和 移动左右指针即可
@@ -553,6 +563,35 @@ class ArraySolution {
         return new int[][]{};
     }
 
+
+    /**
+     * 37 下一个排列， 按递增递减序列处理
+     *
+     * @param args
+     */
+    public static void nextOrder(int[] nums) {
+        if (nums.length < 2) {
+            return;
+        }
+        int i = nums.length - 2;
+        //从后找递减区间 最后一个值
+        while (i >= 0 && nums[i] >= nums[i + 1]) {
+            i--;
+        }
+        //找到了
+        if (i >= 0) {
+            int j = nums.length - 1;
+            //找到  第一个 大于 i 的值
+            while (j >= 0 && nums[i] >= nums[j]) {
+                j--;
+            }
+            swap(nums, i, j);
+        }
+        // 反转 i 以后得为小区间
+        swap(nums, i + 1);
+    }
+
+
     public static void main(String[] args) {
 //        int[][] nums = new int[][]{{1}, {3}};
 //        System.out.println(Arrays.toString(cyclePrint(nums).toArray()));
@@ -560,7 +599,9 @@ class ArraySolution {
 
         //int[] nums1 = new int[]{4, 5, 6};
         // colorSort(nums);
-        System.out.println(Arrays.toString(nums));
+        int[] nums1 = new int[]{1, 5, 2, 4, 5};
+        nextOrder(nums1);
+        System.out.println(Arrays.toString(nums1));
     }
 
 
