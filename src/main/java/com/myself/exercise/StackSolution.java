@@ -77,20 +77,21 @@ public class StackSolution {
         int[] ans = new int[n - k + 1];
         int r = 0;
         while (i < n) {
-            // 维护递增序列
-            while (!deque.isEmpty() && nums[deque.peekLast()] <= nums[i]) {
+            // 维护递增序列, while 改成 if 写法 ，看起来是O(N) 写法
+            if (!deque.isEmpty() && nums[deque.peekLast()] <= nums[i]) {
                 deque.removeLast();
+            } else {
+                // 移除最大的 窗口外的，超过窗口就一处， 后续 取下一个窗口
+                if (!deque.isEmpty() && deque.peek() <= i - k) {
+                    deque.pop();
+                }
+                // 不要使用push  双端队列 push 是放在头
+                deque.addLast(i);
+                if (!deque.isEmpty() && i >= k - 1) {
+                    ans[r++] = nums[deque.peek()];
+                }
+                i++;
             }
-            // 移除最大的 窗口外的，超过窗口就一处， 后续 取下一个窗口
-            if (!deque.isEmpty() && deque.peek() <= i - k) {
-                deque.pop();
-            }
-            // 不要使用push  双端队列 push 是放在头
-            deque.addLast(i);
-            if (!deque.isEmpty() && i >= k - 1) {
-                ans[r++] = nums[deque.peek()];
-            }
-            i++;
         }
 
         return ans;
