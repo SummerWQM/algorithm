@@ -72,7 +72,6 @@ public class StackSolution {
     public static int[] slidMax(int[] nums, int k) {
 
         Deque<Integer> deque = new LinkedList<>();
-
         int n = nums.length, i = 0;
         int[] ans = new int[n - k + 1];
         int r = 0;

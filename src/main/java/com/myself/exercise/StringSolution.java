@@ -1,6 +1,7 @@
 package com.myself.exercise;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 class StringSolution {
 //    public static void main(String[] avg) {
@@ -37,6 +38,7 @@ class StringSolution {
 
         int[] sCount = new int[26];
         int[] pCount = new int[26];
+
         for (int i = 0; i < pLen; ++i) {
             ++sCount[s.charAt(i) - 'a'];
             ++pCount[p.charAt(i) - 'a'];
@@ -190,18 +192,110 @@ class StringSolution {
 
     }
 
+    public static String reverseWords(String s) {
+        StringBuilder sb = trimSpaces(s);
+        // "abc  jack" => "cba kcaj" =>  kacj abc
+        // 翻转字符串
+        reverse(sb, 0, sb.length() - 1);
 
-    public static void main(String[] avg) {
-        System.out.println(Arrays.toString(findAnagrams("abcabce", "abc").toArray()));
+        // 翻转每个单词
+        reverseEachWord(sb);
 
-        PriorityQueue<Integer> que = new PriorityQueue<>((o1, o2) -> o1 - o2);
+        return sb.toString();
+    }
 
-        que.add(3);
-        que.add(2);
-        que.add(5);
+    public static StringBuilder trimSpaces(String s) {
+        int left = 0, right = s.length() - 1;
+        // 去掉字符串开头的空白字符
+        while (left <= right && s.charAt(left) == ' ') {
+            ++left;
+        }
 
-        StringCalc();
+        // 去掉字符串末尾的空白字符
+        while (left <= right && s.charAt(right) == ' ') {
+            --right;
+        }
 
+        // 将字符串间多余的空白字符去除
+        StringBuilder sb = new StringBuilder();
+        while (left <= right) {
+            char c = s.charAt(left);
+
+            if (c != ' ') {
+                sb.append(c);
+                // 最后一个部位空，就追加一个空进去，保留单词之间一个空格
+            } else if (sb.charAt(sb.length() - 1) != ' ') {
+                sb.append(c);
+            }
+
+            ++left;
+        }
+        return sb;
+    }
+
+    public static void reverse(StringBuilder sb, int left, int right) {
+        while (left < right) {
+            char tmp = sb.charAt(left);
+            sb.setCharAt(left++, sb.charAt(right));
+            sb.setCharAt(right--, tmp);
+        }
+    }
+
+    public static void reverseEachWord(StringBuilder sb) {
+        int n = sb.length();
+        int start = 0, end = 0;
+
+        while (start < n) {
+            // 循环至单词的末尾
+            while (end < n && sb.charAt(end) != ' ') {
+                ++end;
+            }
+            // 反转字符从 start 到 end, 此时end 指向 空格 ' '
+            reverse(sb, start, end - 1);
+            // 更新start，去找下一个单词
+            start = end + 1;
+            // 指向下一个单词
+            ++end;
+        }
+    }
+
+    /**
+     * 76. 最小覆盖子串 - 滑动窗口
+     */
+
+    public static String minWindow(String s, String t) {
+        int[] hash = new int[128];
+
+        for (char ch : t.toCharArray()) {
+            hash[ch]--;
+        }
+        String res = "";
+        int cnt = 0, len = s.length() + 1;
+        char ch;
+        for (int r = 0, l = 0; r < s.length(); r++) {
+            ch = s.charAt(r);
+            // 不存在字符将大于 0
+            hash[ch]++;
+            // 存在字符时 移动 右边指针
+            if (hash[ch] <= 0) cnt++;
+            // 缩小左边指针, 左边指针超过 0 时有超过区间
+            // 左边大于 0，不存在字符，或者 重复字符 缩减 左边指针
+            while (l < r && hash[s.charAt(l)] > 0) {
+                hash[s.charAt(l++)]--;
+            }
+            // cnt == t 字符大小时 更新最小值
+            if (cnt == t.length() && len > r - l + 1) {
+                len = r - l + 1;
+                res = s.substring(l, r + 1);
+            }
+        }
+        return res;
+    }
+
+
+    public static void main(String[] avg) throws InterruptedException {
+
+        System.out.println(minWindow("ADOBECODEBANC", "ABC"));
 
     }
 

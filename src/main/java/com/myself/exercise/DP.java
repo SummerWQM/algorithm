@@ -1,5 +1,7 @@
 package com.myself.exercise;
 
+import java.util.Arrays;
+
 /**
  * DP 动态规划类
  * <p>
@@ -26,14 +28,14 @@ public class DP {
     }
 
     /**
+     * !!!
      * 数组最长上升子序列长度
+     *
+     * @param nums
+     * @return
      */
-    public static int findUp(int[] nums) {
-        int ans = 0;
-        return 0;
-    }
-
-    // [10,9,2,5,3,7,101,18]  //贪心 + 二分搜索， 不断更新 d[] 数组 ，大于 末尾才 ++ , 否则 不断更新最小值，
+    //[10,9,2,5,3,7,101,18]  //贪心 + 二分搜索， 不断更新 d[] 数组 ，大于 末尾才 ++ , 否则 不断更新最小值，
+    // 最长上升子序列
     // 知道更新完最后一个， 再递增数组d 长度len， 略微向 摩尔投票的思想
     public static int lengthOfLIS(int[] nums) {
         int len = 1, n = nums.length;
@@ -87,6 +89,33 @@ public class DP {
         return maxLen;
     }
 
+    /**
+     * 零钱兑换 322
+     *
+     * @param coins
+     * @param amount
+     * @return
+     */
+    public static int coinChange(int[] coins, int amount) {
+        int max = amount + 1;
+        int[] dp = new int[max];
+
+        Arrays.fill(dp, max);
+        dp[0] = 0;
+        for (int i = 1; i <= amount; i++) {
+            // 便利 面值
+
+            for (int coin : coins) {
+                if (coin <= i) {
+                    // 取 i 个面值，或者 i 减 （1、2、5） 减一个 面值的最小个数 + 1
+
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                }
+            }
+        }
+        return dp[amount] > amount ? -1 : dp[amount];
+    }
+
     // 72. 最小编辑距离
     public int minDistance(String word1, String word2) {
         int n1 = word1.length();
@@ -114,10 +143,10 @@ public class DP {
 
     public static void main(String[] args) {
 
-        int[] nums = new int[]{0, 8, 4, 12, 2, 1, 2, 3, 4, 5};
+        int[] nums = new int[]{1, 2, 5};
 
         System.out.println(lengthOfLIS(nums));
-        System.out.println(dpFindUp(nums));
+        System.out.println(coinChange(nums, 11));
 
     }
 
