@@ -98,8 +98,8 @@ public class DFS {
 
 
     static final int SEG_COUNT = 4;
-   static List<String> ans = new ArrayList<String>();
-   static int[] segments = new int[SEG_COUNT];
+    static List<String> ans = new ArrayList<String>();
+    static int[] segments = new int[SEG_COUNT];
 
     public static List<String> restoreIpAddresses(String s) {
         segments = new int[SEG_COUNT];
@@ -148,6 +148,36 @@ public class DFS {
         }
     }
 
+    /**
+     * 22. 括号对生成, 回溯法, 类似 全排列写法， 添加不同递归条件
+     *
+     * @param
+     */
+
+    public static List<String> dfsBracket(int n) {
+        StringBuilder depth = new StringBuilder();
+        ArrayList<String> ans = new ArrayList<>();
+        doBracket(ans, depth, 0, 0, n);
+        return ans;
+    }
+
+    public static void doBracket(List<String> ans, StringBuilder depth, int open, int close, int max) {
+        if (depth.length() == max * 2) {
+            ans.add(depth.toString());
+            return;
+        }
+        if (open < max) {
+            depth.append("(");
+            doBracket(ans, depth, open + 1, close, max);
+            depth.deleteCharAt(depth.length() - 1);
+        }
+        if (close < open) {
+            depth.append(")");
+            doBracket(ans, depth, open, close + 1, max);
+            depth.deleteCharAt(depth.length() - 1);
+        }
+    }
+
 
     public static void main(String[] args) {
 //        int[] nums = new int[]{1, 2, 4, 9};
@@ -161,10 +191,12 @@ public class DFS {
                 {'1', '1', '0'},
                 {'1', '0', '1'},
         };
-        List<String> re= restoreIpAddresses("15525511135");
+        List<String> re = restoreIpAddresses("15525511135");
 
         System.out.println(Arrays.toString(re.toArray()));
 
         System.out.println(searchIsland(islands));
+
+        System.out.println(dfsBracket(5));
     }
 }
