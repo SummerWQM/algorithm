@@ -591,6 +591,38 @@ class ArraySolution {
         swap(nums, i + 1);
     }
 
+    /**
+     * 41、缺失的正数
+     * <p>
+     * # 缺失的一定是[1->N+1] 的数。 如果出现负号 一定有确实
+     *
+     * @param nums
+     */
+    public static int firstMissingPositive(int[] nums) {
+        int n = nums.length;
+        // 将负数 标记为正数, 不考虑 大于n 的数
+        for (int i = 0; i < n; ++i) {
+            if (nums[i] <= 0) {
+                nums[i] = n + 1;
+            }
+        }
+        //
+        for (int i = 0; i < n; ++i) {
+            int num = Math.abs(nums[i]);
+            // 将存在的位置的下标，一次标记为负数
+            if (num <= n) {
+                nums[num - 1] = -Math.abs(nums[num - 1]);
+            }
+        }
+        // 便利大于 0 的数，缺失的索引 i +1 即为缺失的正数
+        for (int i = 0; i < n; ++i) {
+            if (nums[i] > 0) {
+                return i + 1;
+            }
+        }
+        return n + 1;
+    }
+
 
     public static void main(String[] args) {
 //        int[][] nums = new int[][]{{1}, {3}};
@@ -599,9 +631,9 @@ class ArraySolution {
 
         //int[] nums1 = new int[]{4, 5, 6};
         // colorSort(nums);
-        int[] nums1 = new int[]{1, 5, 2, 4, 5};
-        nextOrder(nums1);
-        System.out.println(Arrays.toString(nums1));
+        int[] nums1 = new int[]{1, -10, 2};
+        //nextOrder(nums1);
+        System.out.println(firstMissingPositive(nums1));
     }
 
 
