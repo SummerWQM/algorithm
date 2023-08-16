@@ -1,8 +1,6 @@
 package com.myself.exercise;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * 深度搜索
@@ -178,6 +176,39 @@ public class DFS {
         }
     }
 
+    /**
+     * 子集 && 全排列
+     *
+     * @param
+     */
+    public static List<List<Integer>> subset(int[] nums) {
+
+        List<List<Integer>> ans = new LinkedList<>();
+        doSubset(nums, new LinkedList<>(), nums.length, new boolean[nums.length], ans);
+        return ans;
+    }
+
+    public static void doSubset(int[] nums, Deque<Integer> depth, int len, boolean[] used, List<List<Integer>> ans) {
+        // 入口就 添加，是自己
+        ans.add(new ArrayList<>(depth));
+        if (depth.size() == len) {
+            //递归到结束才保存记录，是全排列¬
+            //ans.add(new ArrayList<>(depth));
+            return;
+        }
+
+        for (int i = 0; i < len; i++) {
+            if (used[i]) {
+                continue;
+            }
+            used[i] = true;
+            depth.addLast(nums[i]);
+            doSubset(nums, depth, len, used, ans);
+            used[i] = false;
+            depth.removeLast();
+        }
+
+    }
 
     public static void main(String[] args) {
 //        int[] nums = new int[]{1, 2, 4, 9};
@@ -192,11 +223,11 @@ public class DFS {
                 {'1', '0', '1'},
         };
         List<String> re = restoreIpAddresses("15525511135");
+        int[] nums = new int[]{1, 2, 3};
+        System.out.println(Arrays.toString(subset(nums).toArray()));
 
-        System.out.println(Arrays.toString(re.toArray()));
+        //System.out.println(searchIsland(islands));
 
-        System.out.println(searchIsland(islands));
-
-        System.out.println(dfsBracket(5));
+        //System.out.println(dfsBracket(5));
     }
 }

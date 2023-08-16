@@ -49,9 +49,9 @@ public class StackSolution {
      */
     public static void minStack() {
         int x = 1;
-        Deque<Integer>  xStack = new LinkedList<>();
+        Deque<Integer> xStack = new LinkedList<>();
 
-        Deque<Integer>  minStack = new LinkedList<>();
+        Deque<Integer> minStack = new LinkedList<>();
 
         xStack.push(x);
         minStack.push(Math.min(minStack.peek(), x));
@@ -63,14 +63,41 @@ public class StackSolution {
     }
 
     /**
+     * 239 滑动窗口最大值
+     * 使用栈，维护一个递增区间， 并累计窗口K 当为k 时，存储最大值
      *
-     * @param args
+     * @param nums k
      */
 
+    public static int[] slidMax(int[] nums, int k) {
 
+        Deque<Integer> deque = new LinkedList<>();
 
+        int n = nums.length, i = 0;
+        int[] ans = new int[n - k + 1];
+        int r = 0;
+        while (i < n) {
+            // 维护递增序列
+            while (!deque.isEmpty() && nums[deque.peekLast()] <= nums[i]) {
+                deque.removeLast();
+            }
+            // 移除最大的 窗口外的，超过窗口就一处， 后续 取下一个窗口
+            if (!deque.isEmpty() && deque.peek() <= i - k) {
+                deque.pop();
+            }
+            // 不要使用push  双端队列 push 是放在头
+            deque.addLast(i);
+            if (!deque.isEmpty() && i >= k - 1) {
+                ans[r++] = nums[deque.peek()];
+            }
+            i++;
+        }
+
+        return ans;
+    }
 
     public static void main(String[] args) {
-        System.out.println(logicStr("(){}{{{}}}}"));
+        int[] re = new int[]{1, 3, -1, -3, 5, 3, 6, 7};
+        System.out.println(Arrays.toString(slidMax(re, 3)));
     }
 }

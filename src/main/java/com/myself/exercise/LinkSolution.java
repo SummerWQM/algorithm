@@ -440,12 +440,22 @@ class LinkSolution {
         return dummyHead.next;
     }
 
+    // 递归反转
+    public static Node reverse(Node node) {
+        if (node.next == null) {
+            return node;
+        }
+        Node head = reverse(node.next);
+        node.next.next = node;
+        node.next = null;
+        return head;
+    }
 
     //===
     public static void main(String[] avg) {
         Node head = buildLinkRandom(10);
         System.out.println(printLink(head));
-        System.out.println(printLink(sortLink(head)));
+        System.out.println(printLink(reverse(head)));
     }
 
 }
