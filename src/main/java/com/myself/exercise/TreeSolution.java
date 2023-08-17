@@ -18,23 +18,29 @@ public class TreeSolution {
     private Map<Integer, Integer> indexMap;
 
     public TreeNode myBuildTree(int[] preorder, int[] inorder, int preorder_left, int preorder_right, int inorder_left, int inorder_right) {
+        // 左指针大于右指针 越界 返回空
         if (preorder_left > preorder_right) {
             return null;
         }
         // 前序遍历中的第一个节点就是根节点
-        // 在中序遍历中定位根节点
+        // 前序遍历 第一个节点 获取根节点值
         int inorder_root = indexMap.get(preorder[preorder_left]);
 
         // 先把根节点建立出来
         TreeNode root = new TreeNode(preorder[preorder_left]);
-        // 得到左子树中的节点数目
+
+        // 得到左子树中的节点数目 （中序遍历 左边 就是左子树）
         int size_left_subtree = inorder_root - inorder_left;
+
         // 递归地构造左子树，并连接到根节点
         // 先序遍历中「从 左边界+1 开始的 size_left_subtree」个元素就对应了中序遍历中「从 左边界 开始到 根节点定位-1」的元素
-        root.left = myBuildTree(preorder, inorder, preorder_left + 1, preorder_left + size_left_subtree, inorder_left, inorder_root - 1);
+        root.left = myBuildTree(preorder, inorder, preorder_left + 1, preorder_left + size_left_subtree,
+                inorder_left, inorder_root - 1);
         // 递归地构造右子树，并连接到根节点
         // 先序遍历中「从 左边界+1+左子树节点数目 开始到 右边界」的元素就对应了中序遍历中「从 根节点定位+1 到 右边界」的元素
-        root.right = myBuildTree(preorder, inorder, preorder_left + size_left_subtree + 1, preorder_right, inorder_root + 1, inorder_right);
+        root.right = myBuildTree(preorder, inorder, preorder_left + size_left_subtree + 1, preorder_right,
+                inorder_root + 1, inorder_right);
+
         return root;
     }
 
@@ -113,7 +119,7 @@ public class TreeSolution {
     }
 
     /**
-     * 路径最大和  124
+     * 124 路径最大和
      *
      * @param args
      */
@@ -132,6 +138,27 @@ public class TreeSolution {
         return root.val + Math.max(left, right);
 
     }
+
+    /**
+     * 110 平衡二叉树
+     *
+     * @param args
+     */
+    public boolean isBalanced(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        return Math.abs(height(root.left) - height(root.right)) <= 1
+                && isBalanced(root.left) && isBalanced(root.right);
+    }
+
+    public int height(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return Math.max(height(root.left), height(root.right)) + 1;
+    }
+
 
     public static void main(String[] args) {
         int[] arr = new int[]{1, 2, 3, 4, 5, 6};

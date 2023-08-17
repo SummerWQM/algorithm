@@ -623,6 +623,32 @@ class ArraySolution {
         return n + 1;
     }
 
+    /**
+     * 双指针发 i 是奇数位置  j 是偶数位置
+     *
+     * @param A
+     * @return
+     */
+    public int[] sortArrayByParityII(int[] A) {
+        // 偶数位置
+        int j = 1;
+        // 扫描 奇数位置，
+        for (int i = 0; i < A.length - 1; i = i + 2) {
+            // 如果不是奇数
+            if ((A[i] & 1) != 0) {
+                // 那么 偶数位置一定 有奇数， loop 找偶数位置，然后 交换。  奇数和偶数位置的值。
+                // 继续扫描 下一个 奇数位置
+                while ((A[j] & 1) != 0) {
+                    j = j + 2;
+                }
+
+                int tmp = A[i];
+                A[i] = A[j];
+                A[j] = tmp;
+            }
+        }
+        return A;
+    }
 
     public static void main(String[] args) {
 //        int[][] nums = new int[][]{{1}, {3}};
