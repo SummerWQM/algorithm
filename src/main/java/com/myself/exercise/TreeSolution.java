@@ -142,7 +142,7 @@ public class TreeSolution {
     /**
      * 110 平衡二叉树
      *
-     * @param args
+     * @param
      */
     public boolean isBalanced(TreeNode root) {
         if (root == null) {
@@ -174,15 +174,36 @@ public class TreeSolution {
                 && isSymmetric(tree1.right, tree2.left);
     }
 
+    /**
+     * 129 根到叶子节点的和
+     *
+     * @param root
+     */
+    public static int sumLeafToRoot(TreeNode root) {
+        return dfsRoot(root, 0);
+    }
+
+    private static int dfsRoot(TreeNode node, int preSum) {
+        if (node == null) {
+            return 0;
+        }
+        int sum = preSum * 10 + node.val;
+        if (node.left == null && node.right == null) {
+            return sum;
+        } else {
+            return dfsRoot(node.left, sum) + dfsRoot(node.right, sum);
+        }
+    }
+
+    /**
+     *
+     * @param args
+     */
+
     public static void main(String[] args) {
-        int[] arr = new int[]{1, 2, 3, 4, 5, 6};
+        int[] arr = new int[]{1, 2, 3};
         TreeNode root = buildTree(arr, 0, arr.length - 1);
-
-        List<List<Integer>> re = loopLevel(root);
-
-        System.out.println(Arrays.toString(re.toArray()));
-        System.out.println(maxRoad(root));
-        System.out.println(maxRoad);
+        System.out.println(sumLeafToRoot(root));
     }
 
 }
