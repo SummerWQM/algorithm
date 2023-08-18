@@ -207,7 +207,29 @@ public class DFS {
             used[i] = false;
             depth.removeLast();
         }
+    }
 
+    /**
+     * 32. 组合总和为目标值
+     *
+     * @param combine list
+     */
+    public static void dfsSumTarget(int[] nums, int target, List<List<Integer>> ans, Deque<Integer> combine, int depth) {
+        if (depth == nums.length) {
+            return;
+        }
+        if (target == 0) {
+            ans.add(new ArrayList<>(combine));
+            return;
+        }
+        // 直接走到最后, 非 循环写法
+        dfsSumTarget(nums, target, ans, combine, depth + 1);
+        if (target - nums[depth] >= 0) {
+            combine.addLast(nums[depth]);
+            // 这里注意 depth 不迭代，代表一直减当前数
+            dfsSumTarget(nums, target - nums[depth], ans, combine, depth);
+            combine.removeLast();
+        }
     }
 
     public static void main(String[] args) {
@@ -217,17 +239,18 @@ public class DFS {
 //        Arrays.sort(nums);
 //        maxNum(nums, path, target);
 //        System.out.println(result);
-        char[][] islands = new char[][]{
-                {'1', '0', '1'},
-                {'1', '1', '0'},
-                {'1', '0', '1'},
-        };
-        List<String> re = restoreIpAddresses("15525511135");
-        int[] nums = new int[]{1, 2, 3};
-        System.out.println(Arrays.toString(subset(nums).toArray()));
+//        char[][] islands = new char[][]{
+//                {'1', '0', '1'},
+//                {'1', '1', '0'},
+//                {'1', '0', '1'},
+//        };
+        //List<String> re = restoreIpAddresses("15525511135");
+        int[] nums = new int[]{2, 3, 6, 7};
 
+        List<List<Integer>> ans = new LinkedList<>();
+        dfsSumTarget(nums, 7, ans, new LinkedList<>(), 0);
         //System.out.println(searchIsland(islands));
-
+        System.out.println(Arrays.toString(ans.toArray()));
         //System.out.println(dfsBracket(5));
     }
 }
