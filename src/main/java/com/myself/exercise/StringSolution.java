@@ -334,7 +334,6 @@ class StringSolution {
         return sum;
     }
 
-
     public static void main(String[] avg) throws InterruptedException {
 
         //System.out.println(minWindow("ADOBECODEBANC", "ABC"));

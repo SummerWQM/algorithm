@@ -393,7 +393,10 @@ class LinkSolution {
         return doSortLink(head, null);
     }
 
-    // 递归分割链表， 再有序合并, 时间复杂度  O(NlogN) ,空间复杂度O(logN)
+    /**
+     * 链表排序
+     * 递归分割链表， 再有序合并, 时间复杂度  O(NlogN) ,空间复杂度O(logN)
+     */
     public static Node doSortLink(Node head, Node tail) {
         if (head == null) {
             return null;
