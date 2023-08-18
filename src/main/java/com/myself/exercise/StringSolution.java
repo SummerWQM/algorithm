@@ -292,10 +292,53 @@ class StringSolution {
         return res;
     }
 
+    /**
+     * 394 字符串解压
+     * 输入：s = "3[a]2[bc]"
+     * 输出："aaabcbc"
+     *
+     * @param a
+     */
+    static int ptr = 0;
+
+    public static String getString(String s) {
+        if (ptr == s.length() || s.charAt(ptr) == ']') {
+            return "";
+        }
+        char cur = s.charAt(ptr);
+        int repTime;
+        String ret = "";
+        if (Character.isDigit(cur)) {
+
+            repTime = getDigit(s);
+            // 过滤左括号
+            ++ptr;
+            String str = getString(s);
+            // 过滤右括号
+            ++ptr;
+            while (repTime-- > 0) {
+                ret += str;
+            }
+
+        } else if (Character.isLetter(cur)) {
+            ret = String.valueOf(s.charAt(ptr++));
+        }
+        return ret + getString(s);
+    }
+
+    public static int getDigit(String s) {
+        int sum = 0;
+        while (ptr < s.length() && Character.isDigit(s.charAt(ptr))) {
+            sum = sum * 10 + (s.charAt(ptr++) - '0');
+        }
+        return sum;
+    }
+
 
     public static void main(String[] avg) throws InterruptedException {
 
-        System.out.println(minWindow("ADOBECODEBANC", "ABC"));
+        //System.out.println(minWindow("ADOBECODEBANC", "ABC"));
+        System.out.println(getString("3[a]2[bc]"));
 
     }
 
