@@ -180,6 +180,7 @@ public class TreeSolution {
      * @param root
      */
     public static int sumLeafToRoot(TreeNode root) {
+        List<Integer> ans = new LinkedList<>();
         return dfsRoot(root, 0);
     }
 
@@ -190,9 +191,9 @@ public class TreeSolution {
         int sum = preSum * 10 + node.val;
         if (node.left == null && node.right == null) {
             return sum;
-        } else {
-            return dfsRoot(node.left, sum) + dfsRoot(node.right, sum);
         }
+        return dfsRoot(node.left, sum) + dfsRoot(node.right, sum);
+
     }
 
     /**
@@ -219,11 +220,38 @@ public class TreeSolution {
         return Math.max(L, R) + 1; // 返回该节点为根的子树的深度
     }
 
+    /**
+     * 113 到叶子节点等于目标值
+     *
+     * @param node
+     * @param
+     * @param target
+     * @param ans
+     * @param path
+     */
+    private static void dfsRoot(TreeNode node, int target, List<List<Integer>> ans, Deque<Integer> path) {
+        if (node == null) {
+            return;
+        }
+        path.addLast(node.val);
+        target -= +node.val;
+        if (node.left == null && node.right == null && target == 0) {
+            ans.add(new ArrayList<>(path));
+        }
+        dfsRoot(node.left, target, ans, path);
+        dfsRoot(node.right, target, ans, path);
+        path.removeLast();
+    }
+
 
     public static void main(String[] args) {
-        int[] arr = new int[]{1, 2, 3};
+        //22
+        int[] arr = new int[]{5, 4, 8, 11, 0, 13, 4, 7, 2, 0, 0, 5, 1};
         TreeNode root = buildTree(arr, 0, arr.length - 1);
-        System.out.println(sumLeafToRoot(root));
+//        Deque<Integer> path = new LinkedList<>();
+//        List<List<Integer>> ans = new ArrayList<>();
+//        dfsRoot(root, 0, 14, ans, path); 5,4,11,2
+        System.out.println(Arrays.toString(loopLevel(root).toArray()));
     }
 
 }
