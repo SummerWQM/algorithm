@@ -650,16 +650,62 @@ class ArraySolution {
         return A;
     }
 
+    /**
+     * 48 数组 旋转图像
+     *
+     * @param
+     */
+    public static void rotate(int[][] matrix) {
+        int n = matrix.length;
+        // 水平翻转
+        for (int i = 0; i < n / 2; ++i) {
+            for (int j = 0; j < n; ++j) {
+                int temp = matrix[i][j];
+                // 从上
+                matrix[i][j] = matrix[n - i - 1][j];
+                matrix[n - i - 1][j] = temp;
+            }
+        }
+        // 主对角线翻转 (++i) ==》 从第二行 开放翻对角，j<i
+        for (int i = 0; i < n; ++i) {
+            // j< i;
+            for (int j = 0; j < i; ++j) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+    }
+
     public static void main(String[] args) {
 //        int[][] nums = new int[][]{{1}, {3}};
 //        System.out.println(Arrays.toString(cyclePrint(nums).toArray()));
-        int[][] nums = new int[][]{{3, 4}, {2, 3}};
+        // 输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]
+        //输出：[[7,4,1],[8,5,2],[9,6,3]]
+        int[][] nums = new int[][]{
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+
+        int[][] num2 = new int[][]{
+                {7, 8, 9},
+                {4, 5, 6},
+                {1, 2, 3}
+        };
+
+        int[][] num3 = new int[][]{
+                {7, 4, 1},
+                {8, 5, 2},
+                {9, 6, 3}
+        };
 
         //int[] nums1 = new int[]{4, 5, 6};
         // colorSort(nums);
         int[] nums1 = new int[]{1, -10, 2};
         //nextOrder(nums1);
-        System.out.println(firstMissingPositive(nums1));
+        rotate(nums);
+
     }
 
 

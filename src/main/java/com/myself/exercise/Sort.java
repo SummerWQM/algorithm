@@ -103,6 +103,7 @@ public class Sort {
             // 取出最堆，最后一个， 维护 i个堆性质， 再继续取一个
             // 解决 top N 问题，类似
             swap(nums, 0, i);
+            // 从 0 开始 维护堆性质
             heapify(nums, i, 0);
         }
     }
@@ -132,6 +133,7 @@ public class Sort {
         }
         return nums[0];
     }
+    
 
     public static void main(String[] args) {
         int[] nums = new int[]{1, 4, 2, 4, 1, 3, 9};
