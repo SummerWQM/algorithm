@@ -76,7 +76,7 @@ class ArraySolution {
      */
     public int diffnum(int[] nums) {
         int n = nums.length;
-        if (n == 0l) {
+        if (n == 0) {
             return 0;
         }
         int left = 0;
@@ -85,6 +85,7 @@ class ArraySolution {
         while (left <= right) {
             if (nums[left] == nums[right]) {
                 sum++;
+
                 int temp = nums[left];
                 // 移除两边 各自都相同的 元素
                 while (left <= right && nums[right] == temp)
@@ -592,9 +593,10 @@ class ArraySolution {
     }
 
     /**
+     * △△△△△△△△△△△△△△△△△△△△△△△△
      * 41、缺失的正数
      * <p>
-     * # 缺失的一定是[1->N+1] 的数。 如果出现负号 一定有确实
+     * # 缺失的一定是[1->N+1] 的数。 如果出现负号 一定有缺失
      *
      * @param nums
      */
@@ -606,10 +608,11 @@ class ArraySolution {
                 nums[i] = n + 1;
             }
         }
-        //
+
         for (int i = 0; i < n; ++i) {
             int num = Math.abs(nums[i]);
-            // 将存在的位置的下标，一次标记为负数
+            // 将存在的位置的下标，一次标记为负数， 缺失的数 一定是 1-N ,小于
+            // 标记小于N 的数
             if (num <= n) {
                 nums[num - 1] = -Math.abs(nums[num - 1]);
             }
@@ -652,6 +655,8 @@ class ArraySolution {
 
     /**
      * 48 数组 旋转图像
+     * <p>
+     * 上下翻转，对角翻转
      *
      * @param
      */
