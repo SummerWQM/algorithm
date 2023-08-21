@@ -145,7 +145,7 @@ class StringSolution {
     }
 
     /**
-     * 字符串加减乘除
+     * 227 字符串加减乘除
      * 前置默认一个符号
      */
     public static void StringCalc() {
@@ -333,6 +333,74 @@ class StringSolution {
         }
         return sum;
     }
+
+    /**
+     * 14 最长公共前缀
+     *
+     * @param avg
+     * @throws InterruptedException
+     */
+    public String longestCommonPrefix(String[] strs) {
+        if (strs == null || strs.length == 0) {
+            return "";
+        }
+        String prefix = strs[0];
+        if (prefix == "") {
+            return "";
+        }
+        for (String s : strs) {
+
+            while (!s.startsWith(prefix)) {
+                if (s.equals("")) return "";
+                prefix = prefix.substring(0, prefix.length() - 1);
+            }
+        }
+
+        return prefix;
+    }
+
+    /**
+     * 162. 寻找峰值
+     * 限制时间复杂度 O(logN)
+     *
+     * @param
+     */
+    public static int findPeakElement(int[] nums) {
+
+        return 0;
+    }
+
+    /**
+     * 128  连续序列的长度
+     *
+     * @param nums
+     * @return
+     */
+    public int longestConsecutive(int[] nums) {
+
+        Set<Integer> numsSet = new HashSet<>();
+        for (int num : nums) {
+            numsSet.add(num);
+        }
+        int longest = 0;
+
+        for (int num : nums) {
+            // 不包含 num - 1 ，即 num 是连续 序列的开头。
+            //从每一个开头的元素去找
+            if (!numsSet.contains(num - 1)) {
+                int currentNum = num;
+                int curLen = 1;
+                while (numsSet.contains(currentNum + 1)) {
+                    currentNum++;
+                    curLen++;
+                }
+
+                longest = Math.max(longest, curLen);
+            }
+        }
+        return longest;
+    }
+
 
     public static void main(String[] avg) throws InterruptedException {
 

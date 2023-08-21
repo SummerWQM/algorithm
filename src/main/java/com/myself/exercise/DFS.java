@@ -46,7 +46,7 @@ public class DFS {
     }
 
     /**
-     * 岛屿数量
+     * 岛屿数量  695. 岛屿的最大面积 类似解答
      * nums = {
      * {'1','0','1','0','0'},
      * {'1','0','1','0','0'},
@@ -68,6 +68,16 @@ public class DFS {
         // 左
         dfsMark(grid, r, c - 1);
         dfsMark(grid, r, c + 1);
+//        //将陆地改为海洋，防止重复陆地重复遍历。
+//        grid[i][j] =0;
+//        //遍历上方元素，每遍历一次陆地就加一
+//        sum += dfs(grid,i+1,j);
+//        //遍历下方元素
+//        sum +=dfs(grid,i-1,j);
+//        //遍历右边元素
+//        sum +=dfs(grid,i,j+1);
+//        //遍历左边元素
+//        sum += dfs(grid,i,j-1);
     }
 
     public static int searchIsland(char[][] grid) {
@@ -245,12 +255,12 @@ public class DFS {
 //                {'1', '0', '1'},
 //        };
         //List<String> re = restoreIpAddresses("15525511135");
-        int[] nums = new int[]{2, 3, 6, 7};
+        int[] nums = new int[]{1,2,3};
 
         List<List<Integer>> ans = new LinkedList<>();
-        dfsSumTarget(nums, 7, ans, new LinkedList<>(), 0);
+        //dfsSumTarget(nums, 7, ans, new LinkedList<>(), 0);
         //System.out.println(searchIsland(islands));
-        System.out.println(Arrays.toString(ans.toArray()));
+        System.out.println(Arrays.toString(subset(nums).toArray()));
         //System.out.println(dfsBracket(5));
     }
 }

@@ -677,6 +677,117 @@ class ArraySolution {
         }
     }
 
+    /**
+     * 240 ，有序二维数组搜索 目标值 target
+     * 方法一、从右往左，从上到下
+     * 方法二、逐层向下 二分搜索
+     *
+     * @param
+     */
+    public static boolean maximalSquare(int[][] matrix, int target) {
+        int rows = matrix.length, columns = matrix[0].length;
+        int row = 0, column = columns - 1;
+        while (row < rows && column >= 0) {
+            if (matrix[row][column] == target) {
+                return true;
+            }
+            if (matrix[row][column] > target) {
+                column--;
+            } else {
+                row++;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 169 多数元素 ==》 莫尔投票
+     * 出现次数 大于 n/2 的元素
+     *
+     * @param
+     */
+    public int major(int[] nums) {
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        int target = nums[0], count = 1;
+        for (int i = 1; i < nums.length; i++) {
+
+            if (nums[i] != target) {
+                --count;
+                if (count == 0) {
+                    target = nums[i];
+                    count++;
+                }
+            } else {
+                count++;
+            }
+        }
+        return target;
+    }
+
+    /**
+     * 718. 最长重复子数组
+     * 等价于 <==> 数组最长的连续交集
+     * A | B 数组 起点位置对齐，不断对齐，找最长交集。
+     * 1、 A 不动，移动B，从对齐位置看相同个数
+     * 2、 B 不动，移动A，从对齐位置看相同个数
+     * T = O(M+N)   S = O(1)
+     *
+     * @param
+     */
+    public static int findLength(int[] nums1, int[] nums2) {
+        int n = nums1.length, m = nums2.length;
+        int ret = 0;
+
+        for (int i = 0; i < n; i++) {
+            int len = Math.min(m, n - i);
+            int max = getLength(nums1, nums2, i, 0, len);
+            ret = Math.max(ret, max);
+        }
+
+        for (int i = 0; i < m; i++) {
+            int len = Math.min(n, m - i);
+            int max = getLength(nums1, nums2, 0, i, len);
+            ret = Math.max(ret, max);
+        }
+        return ret;
+    }
+
+    // 从对齐点开始，找相同的子序列长度
+    public static int getLength(int[] nums1, int[] nums2, int addA, int addB, int len) {
+        int ret = 0, k = 0;
+        for (int i = 0; i < len; i++) {
+            if (nums1[addA + i] == nums2[addB + i]) {
+                k++;
+            } else {
+                k = 0;
+            }
+            ret = Math.max(ret, k);
+        }
+        return ret;
+    }
+
+    /**
+     * 153 搜索旋转排序数组最小值
+     *
+     * @param nums
+     * @return
+     */
+    public int findMin(int[] nums) {
+        int low = 0;
+        int high = nums.length - 1;
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            if (nums[mid] < nums[high]) {
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return nums[low];
+    }
+
     public static void main(String[] args) {
 //        int[][] nums = new int[][]{{1}, {3}};
 //        System.out.println(Arrays.toString(cyclePrint(nums).toArray()));

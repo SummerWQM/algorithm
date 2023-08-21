@@ -1,6 +1,9 @@
 package com.myself.exercise;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * DP 动态规划类
@@ -160,6 +163,83 @@ public class DP {
             }
         }
         return dp[row - 1][column - 1];
+    }
+
+    /**
+     * 139 单词拆分
+     * <p>
+     * dp 思路 判断s 中的每个字符组成的单词是否在 字典中
+     */
+    public static boolean workBreak(String s, List<String> wordDict) {
+        Set<String> wordDictSet = new HashSet<>(wordDict);
+        boolean[] dp = new boolean[s.length() + 1];
+        dp[0] = true;
+        for (int i = 1; i <= s.length(); i++) {
+            for (int j = 0; j < i; j++) {
+                if (dp[j] && wordDictSet.contains(s.substring(j, i))) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[s.length()];
+    }
+
+    /**
+     * 122  买卖股票，多次交易
+     *
+     * @param prices
+     * @return
+     */
+    public int maxProfit(int[] prices) {
+        int len = prices.length;
+        if (len < 2) {
+            return 0;
+        }
+
+        // 0：持有现金
+        // 1：持有股票
+        // 状态转移：0 → 1 → 0 → 1 → 0 → 1 → 0
+        int[][] dp = new int[len][2];
+        // 持有现金
+        dp[0][0] = 0;
+        // 持有股票
+        dp[0][1] = -prices[0];
+
+        for (int i = 1; i < len; i++) {
+            // 这两行调换顺序也是可以的
+            // 今天持有现金 = 昨天持有现金  昨天持有股票 + 今天卖出价格
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+            // 今天持有股票
+            //昨天持有现金  与 昨天持有现金 - 今天持有股票的价格
+            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i]);
+        }
+        return dp[len - 1][0];
+    }
+
+    /**
+     * 198 打家劫舍 相邻不能偷
+     *
+     * @param
+     */
+    public static int rob(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int len = nums.length;
+        if (len == 1) {
+            return nums[0];
+        }
+        int[] dp = new int[len];
+
+        dp[0] = nums[0];
+        dp[1] = Math.max(dp[0], nums[1]);
+
+        for (int i = 2; i < len; i++) {
+            dp[i] = Math.max(dp[i - 2] + nums[i], dp[i - 1]);
+        }
+        return dp[len - 1];
+
     }
 
     public static void main(String[] args) {
