@@ -1,7 +1,9 @@
 package com.myself.exercise;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 class LinkSolution {
 
@@ -109,6 +111,7 @@ class LinkSolution {
     static class Node {
         Node next;
         int val;
+        Node random;
 
         Node() {
 
@@ -459,6 +462,26 @@ class LinkSolution {
         node.next.next = node;
         node.next = null;
         return head;
+    }
+
+    /**
+     * 138 赋值待 随机指针链表
+     * Hash 表保存节点， hash 表用来去重 random 的指向
+     */
+    static Map<Node, Node> cachedNode = new HashMap<Node, Node>();
+
+    public static Node copyRandomList(Node head) {
+        if (head == null) {
+            return null;
+        }
+        // 已经赋值了的节点， 放入hash 表，防止 random 节点 重复创建
+        if (!cachedNode.containsKey(head)) {
+            Node headNew = new Node(head.val);
+            cachedNode.put(head, headNew);
+            headNew.next = copyRandomList(head.next);
+            headNew.random = copyRandomList(head.random);
+        }
+        return cachedNode.get(head);
     }
 
     //===
