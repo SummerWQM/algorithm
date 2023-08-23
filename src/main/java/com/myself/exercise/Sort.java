@@ -64,15 +64,18 @@ public class Sort {
      */
     public static void heapify(int[] nums, int n, int i) {
         int largest = i;
+
+        // 重要******* 任何一个位置i  左右孩纸在数组中的下标计算。
         int lson = i * 2 + 1, rson = i * 2 + 2;
 
+        // 大堆 ，还是小堆，取决于这里 找最小值， 还是堆中最大值
         if (lson < n && nums[largest] < nums[lson]) {
             largest = lson;
         }
         if (rson < n && nums[largest] < nums[rson]) {
             largest = rson;
         }
-        // 如果最大的值 不是i 就交换节点 （是做或是右）
+        // 如果最大的值 不是i 就交换节点 （是左或是右）
         if (largest != i) {
             swap(nums, largest, i);
 
@@ -112,7 +115,8 @@ public class Sort {
 
         int i;
         // 从最后一个值建堆，(i-1)/2 <=> (n-1-1)/2 =  n/2 -1
-        // 从数组最优一个元素的 父节点开始，计算堆性质。 i-- ，继续判断上一个父节点，，直到对顶元素
+        // 从数组最右一个元素的 父节点开始，计算堆性质。 i-- ，继续判断上一个父节点，，直到对顶元素
+        //  这里决定 大顶堆 还是小顶堆
         for (i = n / 2 - 1; i >= 0; i--) {
             heapify(nums, n, i);
         }
@@ -129,16 +133,17 @@ public class Sort {
         int i;
         for (i = len - 1; i >= len - k + 1; i--) {
             swap(nums, 0, i);
+            // 并更堆大小为 i，从0 维护堆的性质
             heapify(nums, i, 0);
         }
         return nums[0];
     }
-    
+
 
     public static void main(String[] args) {
         int[] nums = new int[]{1, 4, 2, 4, 1, 3, 9};
 
-        //heapSort(nums, nums.length);
+        heapSort(nums, nums.length);
 
         System.out.println(topN(nums, 4));
     }

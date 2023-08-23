@@ -568,7 +568,7 @@ class ArraySolution {
     /**
      * 37 下一个排列， 按递增递减序列处理
      *
-     * @param args
+     * @param
      */
     public static void nextOrder(int[] nums) {
         if (nums.length < 2) {
@@ -793,6 +793,31 @@ class ArraySolution {
         return nums[low];
     }
 
+    /**
+     * 560 连续子数组和为 k 的个数
+     * O(n^2) 解法是 从当前指针，往前扫描  i = 2 ，扫描 i 2 到 0 中 和为k count 就+1
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
+    public static int subarraySum(int[] nums, int k) {
+        int count = 0, pre = 0;
+        HashMap<Integer, Integer> mp = new HashMap<>();
+        mp.put(0, 1);
+        for (int i = 0; i < nums.length; i++) {
+            pre += nums[i];
+            // 转换为  当前累计pre  - k 的pre 存不存在，存在就 ++
+            //  [[1,2,3](pre-k) 4, 5 , 6 ]
+            if (mp.containsKey(pre - k)) {
+                count += mp.get(pre - k);
+            }
+            // 当前值 放入pre map
+            mp.put(pre, mp.getOrDefault(pre, 0) + 1);
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
 //        int[][] nums = new int[][]{{1}, {3}};
 //        System.out.println(Arrays.toString(cyclePrint(nums).toArray()));
@@ -821,7 +846,8 @@ class ArraySolution {
         int[] nums1 = new int[]{1, -10, 2};
         //nextOrder(nums1);
         rotate(nums);
-
+        int[] arr = new int[]{-1, -1, 1};
+        System.out.println(subarraySum(arr, 0));
     }
 
 

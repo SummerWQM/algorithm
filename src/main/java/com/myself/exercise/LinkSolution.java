@@ -167,6 +167,13 @@ class LinkSolution {
         return hair;
     }
 
+    /**
+     * 类似有序数组合并
+     *
+     * @param l1
+     * @param l2
+     * @return
+     */
     public static Node merge2Link(Node l1, Node l2) {
         Node hair = new Node(0);
         Node pre = hair;
