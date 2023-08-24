@@ -1,5 +1,7 @@
 package com.myself.exercise;
 
+import com.myself.helper.ListNode;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -483,6 +485,43 @@ class LinkSolution {
         }
         return cachedNode.get(head);
     }
+
+    /**
+     * 61 旋转链表
+     *
+     * @param head
+     * @param k
+     * @return
+     */
+    public static ListNode rotateRight(ListNode head, int k) {
+        if (k == 0 || head == null || head.next == null) {
+            return head;
+        }
+        int n = 1;
+        ListNode iter = head;
+        // 便利一次 统计节点数量
+        while (iter.next != null) {
+            iter = iter.next;
+            n++;
+        }
+        // 计算k 到那个节点之间转换
+        int add = n - k % n;
+        // 等于n 直接返回头
+        if (add == n) {
+            return head;
+        }
+        // 尾指针，指向新的头。
+        iter.next = head;
+        // 移动k 个位置，即为新的头
+        while (add-- > 0) {
+            iter = iter.next;
+        }
+        // 产生新的头，从当前断开， 即为新的链表
+        ListNode ret = iter.next;
+        iter.next = null;
+        return ret;
+    }
+
 
     //===
     public static void main(String[] avg) {
