@@ -100,13 +100,15 @@ public class Sort {
 
     public static void heapSort(int[] nums, int n) {
 
+        // 大顶堆
         buildHeap(nums, n);
         int i;
         for (i = n - 1; i > 0; i--) {
-            // 取出最堆，最后一个， 维护 i个堆性质， 再继续取一个
+
+            // 将 0 最大的位置，和最后的位置交换, 即从小到大排序 ， 维护 i个堆性质， 再继续取一个
             // 解决 top N 问题，类似
             swap(nums, 0, i);
-            // 从 0 开始 维护堆性质
+            // 从 0 开始 维护堆性质 ,i 个数大小
             heapify(nums, i, 0);
         }
     }

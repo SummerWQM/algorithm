@@ -779,7 +779,7 @@ class ArraySolution {
      * @param nums
      * @return
      */
-    public  static  int findMin(int[] nums) {
+    public static int findMin(int[] nums) {
         int low = 0;
         int high = nums.length - 1;
         while (low < high) {
@@ -876,31 +876,36 @@ class ArraySolution {
 //        System.out.println(Arrays.toString(cyclePrint(nums).toArray()));
         // 输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]
         //输出：[[7,4,1],[8,5,2],[9,6,3]]
-        int[][] nums = new int[][]{
-                {1, 2, 3},
-                {4, 5, 6},
-                {7, 8, 9}
-        };
-
-        int[][] num2 = new int[][]{
-                {7, 8, 9},
-                {4, 5, 6},
-                {1, 2, 3}
-        };
-
-        int[][] num3 = new int[][]{
-                {7, 4, 1},
-                {8, 5, 2},
-                {9, 6, 3}
-        };
-
-        //int[] nums1 = new int[]{4, 5, 6};
-        // colorSort(nums);
-        int[] nums1 = new int[]{1, -10, 2};
-        //nextOrder(nums1);
-        rotate(nums);
+//        int[][] nums = new int[][]{
+//                {1, 2, 3},
+//                {4, 5, 6},
+//                {7, 8, 9}
+//        };
+//
+//        int[][] num2 = new int[][]{
+//                {7, 8, 9},
+//                {4, 5, 6},
+//                {1, 2, 3}
+//        };
+//
+//        int[][] num3 = new int[][]{
+//                {7, 4, 1},
+//                {8, 5, 2},
+//                {9, 6, 3}
+//        };
+//
+//        //int[] nums1 = new int[]{4, 5, 6};
+//        // colorSort(nums);
+//        int[] nums1 = new int[]{1, -10, 2};
+//        //nextOrder(nums1);
+//        rotate(nums);
         int[] arr = new int[]{-1, -1, 1};
-        System.out.println(findMin(arr));
+        List<Integer>[] heedle = new List[arr.length];
+
+
+
+
+        System.out.println(heedle.length);
     }
 
 
