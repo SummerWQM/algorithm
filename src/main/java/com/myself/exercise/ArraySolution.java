@@ -818,6 +818,37 @@ class ArraySolution {
         return count;
     }
 
+    /**
+     * ****8
+     * 209.子数组长度最小，且 满足 和为 s.
+     * 完全是 正整数的，就可以使用滑动 双指针
+     *
+     * @param s
+     * @param nums
+     * @return
+     */
+    public static int minSubArrayLen(int s, int[] nums) {
+        int n = nums.length;
+        if (n == 0) {
+            return 0;
+        }
+        int ans = Integer.MAX_VALUE;
+        int start = 0, end = 0;
+        int sum = 0;
+        while (end < n) {
+            sum += nums[end];
+            if (sum >= s) {
+                ans = Math.min(ans, end - start + 1);
+                sum -= nums[start];
+                start++;
+            } else {
+                end++;
+            }
+        }
+        return ans == Integer.MAX_VALUE ? 0 : ans;
+    }
+
+
     public static void main(String[] args) {
 //        int[][] nums = new int[][]{{1}, {3}};
 //        System.out.println(Arrays.toString(cyclePrint(nums).toArray()));

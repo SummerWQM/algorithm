@@ -522,7 +522,6 @@ class LinkSolution {
         return ret;
     }
 
-
     //===
     public static void main(String[] avg) {
         Node head = buildLinkRandom(10);
