@@ -64,8 +64,8 @@ class ArraySolution {
             } else if (nums[i] + nums[j] > k) {
                 j--;
             } else {
-                list.add(nums[i]);
-                list.add(nums[j]);
+                list.add(nums[i++]);
+                list.add(nums[j--]);
             }
         }
         return list;
@@ -779,7 +779,7 @@ class ArraySolution {
      * @param nums
      * @return
      */
-    public int findMin(int[] nums) {
+    public  static  int findMin(int[] nums) {
         int low = 0;
         int high = nums.length - 1;
         while (low < high) {
@@ -848,6 +848,28 @@ class ArraySolution {
         return ans == Integer.MAX_VALUE ? 0 : ans;
     }
 
+    /**
+     * 有序数组原地删除重复项
+     * 26
+     *
+     * @param nums
+     */
+    public static int removeRepeat(int[] nums) {
+        int p = 0, q = 1, n = nums.length;
+        if (n < 2) {
+            return n == 1 ? 1 : 0;
+        }
+        while (q < n) {
+            if (nums[p] != nums[q]) {
+                nums[p + 1] = nums[q];
+                p++;
+            }
+            q++;
+        }
+        // 返回长度，不是索引
+        return p + 1;
+    }
+
 
     public static void main(String[] args) {
 //        int[][] nums = new int[][]{{1}, {3}};
@@ -878,7 +900,7 @@ class ArraySolution {
         //nextOrder(nums1);
         rotate(nums);
         int[] arr = new int[]{-1, -1, 1};
-        System.out.println(subarraySum(arr, 0));
+        System.out.println(findMin(arr));
     }
 
 
