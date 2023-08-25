@@ -3,6 +3,10 @@ package com.myself.helper;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * a
+ * 全排列 交换写法， 不使用 标记位 boolean[] 数组
+ */
 public class FullPermutation {
 
     public static <T> List<List<T>> getSingleFullPermutation(List<T> list) {
@@ -13,7 +17,6 @@ public class FullPermutation {
         arrange(resultlist, list, 0, list.size());
         return resultlist;
     }
-
 
 
     private static <T> void arrange(List<List<T>> resultlist, List<T> list, Integer start, Integer end) {

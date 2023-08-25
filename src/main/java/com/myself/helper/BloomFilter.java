@@ -3,7 +3,7 @@ package com.myself.helper;
 import java.util.BitSet;
 
 
-// 布鲁克隆 实现
+// 布隆过滤器实现
 public class BloomFilter {
 
     /**

@@ -870,6 +870,24 @@ class ArraySolution {
         return p + 1;
     }
 
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int n = triangle.size();
+        int[][] f = new int[n][n];
+        f[0][0] = triangle.get(0).get(0);
+        for (int i = 1; i < n; ++i) {
+            f[i][0] = f[i - 1][0] + triangle.get(i).get(0);
+            for (int j = 1; j < i; ++j) {
+                f[i][j] = Math.min(f[i - 1][j - 1], f[i - 1][j]) + triangle.get(i).get(j);
+            }
+            f[i][i] = f[i - 1][i - 1] + triangle.get(i).get(i);
+        }
+        int minTotal = f[n - 1][0];
+        for (int i = 1; i < n; ++i) {
+            minTotal = Math.min(minTotal, f[n - 1][i]);
+        }
+        return minTotal;
+    }
+
 
     public static void main(String[] args) {
 //        int[][] nums = new int[][]{{1}, {3}};
@@ -899,13 +917,21 @@ class ArraySolution {
 //        int[] nums1 = new int[]{1, -10, 2};
 //        //nextOrder(nums1);
 //        rotate(nums);
-        int[] arr = new int[]{-1, -1, 1};
-        List<Integer>[] heedle = new List[arr.length];
+        int[] arr = new int[]{4, 5, 6, 2, 3};
 
+        int l = 0, r = arr.length - 1;
 
+        while (l < r) {
+            int mid = (l + r) >> 1;
+            if (arr[mid] < arr[r]) {
+                r = mid;
+            } else {
+                l = mid + 1;
+            }
+        }
 
+        System.out.println(arr[l]);
 
-        System.out.println(heedle.length);
     }
 
 
