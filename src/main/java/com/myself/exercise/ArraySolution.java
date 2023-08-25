@@ -888,35 +888,26 @@ class ArraySolution {
         return minTotal;
     }
 
+    private int getNext(int n) {
+        int totalSum = 0;
+        while (n > 0) {
+            int d = n % 10;
+            n = n / 10;
+            totalSum += d * d;
+        }
+        return totalSum;
+    }
+
+    public boolean isHappy(int n) {
+        Set<Integer> seen = new HashSet<>();
+        while (n != 1 && !seen.contains(n)) {
+            seen.add(n);
+            n = getNext(n);
+        }
+        return n == 1;
+    }
 
     public static void main(String[] args) {
-//        int[][] nums = new int[][]{{1}, {3}};
-//        System.out.println(Arrays.toString(cyclePrint(nums).toArray()));
-        // 输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]
-        //输出：[[7,4,1],[8,5,2],[9,6,3]]
-//        int[][] nums = new int[][]{
-//                {1, 2, 3},
-//                {4, 5, 6},
-//                {7, 8, 9}
-//        };
-//
-//        int[][] num2 = new int[][]{
-//                {7, 8, 9},
-//                {4, 5, 6},
-//                {1, 2, 3}
-//        };
-//
-//        int[][] num3 = new int[][]{
-//                {7, 4, 1},
-//                {8, 5, 2},
-//                {9, 6, 3}
-//        };
-//
-//        //int[] nums1 = new int[]{4, 5, 6};
-//        // colorSort(nums);
-//        int[] nums1 = new int[]{1, -10, 2};
-//        //nextOrder(nums1);
-//        rotate(nums);
         int[] arr = new int[]{4, 5, 6, 2, 3};
 
         int l = 0, r = arr.length - 1;
@@ -929,11 +920,7 @@ class ArraySolution {
                 l = mid + 1;
             }
         }
-
-        System.out.println(arr[l]);
-
     }
-
 
 }
 
