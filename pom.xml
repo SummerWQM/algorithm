@@ -13,12 +13,13 @@
         <version>2.3.12.RELEASE</version>
         <relativePath/>
     </parent>
-    <properties>
-        <cat-client.version>1.6.1-SNAPSHOT</cat-client.version>
-        <apollo.version>1.6.3-weimob-RELEASE</apollo.version>
-    </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.alibaba.spring</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>1.0.11</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -30,20 +31,9 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.76</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.csp</groupId>
-            <artifactId>sentinel-core</artifactId>
-            <version>1.8.4</version>
+            <version>2.0.31</version>
         </dependency>
 
-        <dependency>
-<<<<<<< HEAD
-            <groupId>com.ctrip.framework.apollo</groupId>
-            <artifactId>apollo-client</artifactId>
-            <version>${apollo.version}</version>
-        </dependency>
 
 
 <!--        <dependency>-->
@@ -57,28 +47,6 @@
 <!--            <artifactId>spring-boot-starter-jdbc</artifactId>-->
 <!--        </dependency>-->
 
-        <dependency>
-            <groupId>com.weimob.moat</groupId>
-            <artifactId>moat-client</artifactId>
-            <version>1.0.6</version>
-        </dependency>
-        <dependency>
-        <groupId>com.dianping.cat</groupId>
-        <artifactId>cat-client</artifactId>
-        <version>${cat-client.version}</version>
-        </dependency>
-        <dependency>
-            <artifactId>weimob-soa-common</artifactId>
-            <groupId>com.weimob</groupId>
-            <version>1.0.3.7-SNAPSHOT</version>
-        </dependency>
-=======
-            <groupId>com.alibaba.csp</groupId>
-            <artifactId>sentinel-core</artifactId>
-            <version>1.8.6</version>
-        </dependency>
-
->>>>>>> 288f4f61a2e55209ab7d247794c1bd1101321127
     </dependencies>
     <build>
         <plugins>
