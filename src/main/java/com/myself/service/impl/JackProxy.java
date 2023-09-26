@@ -16,6 +16,10 @@ public class JackProxy implements MethodInterceptor {
         if (Object.class.equals(clazz)) {
             return method.invoke(this, objects);
         }
+        // 无参扩展点 无需支持。
+        if (null == objects || objects.length == 0) {
+            throw new IllegalArgumentException("invalid param");
+        }
 
         return "cglib  invoker hello";
     }
