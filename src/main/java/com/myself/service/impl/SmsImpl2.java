@@ -16,6 +16,9 @@ public class SmsImpl2 implements BeanFactoryAware {
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
         System.out.println(smsInterface.hello());
+        System.out.println(smsInterface.hell2());
+
+        System.out.println(smsInterface.hashCode());
 
     }
 }

@@ -56,6 +56,11 @@ public class SmsImpl1 implements SmsInterface {
         return null;
     }
 
+    @Override
+    public String hell2() {
+        return null;
+    }
+
 
     static class Person {
         private String name;

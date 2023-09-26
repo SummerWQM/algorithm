@@ -4,4 +4,6 @@ public interface SmsInterface {
 
 
     String hello();
+
+    String hell2();
 }
