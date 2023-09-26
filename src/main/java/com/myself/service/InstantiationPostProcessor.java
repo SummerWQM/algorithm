@@ -15,7 +15,8 @@ import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.stereotype.Component;
 
 
-/** 实现在 populateBean 阶段 InstantiationAwareBeanPostProcessor 自定义注解解析，代理生成。
+/**
+ * 实现在 populateBean 阶段 InstantiationAwareBeanPostProcessor 自定义注解解析，代理生成。
  * @see AbstractAutowireCapableBeanFactory#applyMergedBeanDefinitionPostProcessors(RootBeanDefinition, Class, String)
  * @see MergedBeanDefinitionPostProcessor
  * doCreateBean 创建 Bean 时,在 populateBean、initializeBean 赋值属性，初始化Bean 之前调用
