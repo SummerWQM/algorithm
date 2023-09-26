@@ -3,6 +3,9 @@ package com.myself.exercise.dancebyte;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 访问次数优先
+ */
  class LRUCache {
 
     static class DoubleLinkNode {

@@ -553,17 +553,6 @@ class ArraySolution {
         return false;
     }
 
-    /**
-     * 合并二维数组区间
-     *
-     * @param
-     */
-
-    public static int[][] merged(int[][] intervals) {
-
-        return new int[][]{};
-    }
-
 
     /**
      * 37 下一个排列， 按递增递减序列处理
@@ -603,6 +592,8 @@ class ArraySolution {
     public static int firstMissingPositive(int[] nums) {
         int n = nums.length;
         // 将负数 标记为正数, 不考虑 大于n 的数
+        // [1,2,4]
+
         for (int i = 0; i < n; ++i) {
             if (nums[i] <= 0) {
                 nums[i] = n + 1;
@@ -611,13 +602,13 @@ class ArraySolution {
 
         for (int i = 0; i < n; ++i) {
             int num = Math.abs(nums[i]);
-            // 将存在的位置的下标，一次标记为负数， 缺失的数 一定是 1-N ,小于
+            // 将存在的位置的下标，一次标记为负数， 缺失的数 一定是 1->N ,小于
             // 标记小于N 的数
             if (num <= n) {
                 nums[num - 1] = -Math.abs(nums[num - 1]);
             }
         }
-        // 便利大于 0 的数，缺失的索引 i +1 即为缺失的正数
+        // 遍历大于 0 的数，缺失的索引 i +1 即为缺失的正数
         for (int i = 0; i < n; ++i) {
             if (nums[i] > 0) {
                 return i + 1;

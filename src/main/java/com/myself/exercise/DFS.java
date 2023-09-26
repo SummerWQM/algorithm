@@ -27,7 +27,6 @@ public class DFS {
         } else {
             return;
         }
-        int len = nums.length;
         // 能重复使用, 所以每次从 0 开始
         for (int num : nums) {
             path.add(num);

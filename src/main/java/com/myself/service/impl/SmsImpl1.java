@@ -5,7 +5,9 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -16,6 +18,12 @@ public class SmsImpl1 implements SmsInterface {
 
     Person person;
 
+    private static final  ThreadLocal<Object> local = new ThreadLocal<>();
+
+    static {
+
+        local.set(1);
+    }
 
     public void getT() {
         System.out.println("smsImpl1 test code");
@@ -24,24 +32,8 @@ public class SmsImpl1 implements SmsInterface {
 
     public static void main(String[] avg) throws ClassNotFoundException {
 
-
-//        A a = new A();
-//
-//        a.wait();
-        //      System.out.println(a.toString())
-
-//        Scanner scan = new Scanner(System.in);
-//        String s = scan.nextLine();
-//
-//        // ClassLoader.getSystemClassLoader().loadClass("cn.");
-//        Class.forName("cn.com.java");
-//
-//        System.out.printf(s);
-
         String[] c = new String[]{"a", "b", "c"};
-
         Integer[] d = new Integer[]{1, 23, 4};
-
 
         printArray(c);
         printArray(d);
@@ -57,10 +49,6 @@ public class SmsImpl1 implements SmsInterface {
         );
 
         Map<String, List<Person>> re = bookList.stream().collect(Collectors.groupingBy(Person::getName));
-
-
-        int i = 2;
-
     }
 
 

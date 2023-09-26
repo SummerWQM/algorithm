@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeSet;
 
-public class LFU {
+/**
+ * 访问频率计数优先
+ */
+class LFUCache {
 
     // 缓存容量，时间戳
     int capacity, time;
@@ -13,7 +16,7 @@ public class LFU {
     // 平衡二叉树 来 维护 最小访问次数
     TreeSet<Node> S;
 
-    public LFU(int capacity) {
+    public LFUCache(int capacity) {
         this.capacity = capacity;
         this.time = 0;
         key_table = new HashMap<Integer, Node>();
@@ -68,36 +71,39 @@ public class LFU {
             key_table.put(key, cache);
         }
     }
+
+    static class Node implements Comparable<Node> {
+        int cnt, time, key, value;
+
+        Node(int cnt, int time, int key, int value) {
+            this.cnt = cnt;
+            this.time = time;
+            this.key = key;
+            this.value = value;
+        }
+
+        public boolean equals(Object anObject) {
+            if (this == anObject) {
+                return true;
+            }
+            if (anObject instanceof Node) {
+                Node rhs = (Node) anObject;
+                return this.cnt == rhs.cnt && this.time == rhs.time;
+            }
+            return false;
+        }
+
+        // 次数相同 比较时间
+        public int compareTo(Node rhs) {
+            return cnt == rhs.cnt ? time - rhs.time : cnt - rhs.cnt;
+        }
+
+        public int hashCode() {
+            return cnt * 1000000007 + time;
+        }
+
+    }
+
+
 }
 
-class Node implements Comparable<Node> {
-    int cnt, time, key, value;
-
-    Node(int cnt, int time, int key, int value) {
-        this.cnt = cnt;
-        this.time = time;
-        this.key = key;
-        this.value = value;
-    }
-
-    public boolean equals(Object anObject) {
-        if (this == anObject) {
-            return true;
-        }
-        if (anObject instanceof Node) {
-            Node rhs = (Node) anObject;
-            return this.cnt == rhs.cnt && this.time == rhs.time;
-        }
-        return false;
-    }
-
-    // 次数相同 比较时间
-    public int compareTo(Node rhs) {
-        return cnt == rhs.cnt ? time - rhs.time : cnt - rhs.cnt;
-    }
-
-    public int hashCode() {
-        return cnt * 1000000007 + time;
-    }
-
-}

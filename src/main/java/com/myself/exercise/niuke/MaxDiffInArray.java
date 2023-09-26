@@ -15,15 +15,15 @@ public class MaxDiffInArray {
 
         int min = arr[0];
 
-        for (int i = 0; i < arr.length; i++) {
-            int diff = arr[i] - min;
+        for (int j : arr) {
+            int diff = j - min;
 
             if (diff > max) {
                 max = diff;
             }
 
-            if (arr[i] < min) {
-                min = arr[i];
+            if (j < min) {
+                min = j;
             }
 
         }

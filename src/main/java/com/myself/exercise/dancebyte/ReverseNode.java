@@ -94,9 +94,11 @@ public class ReverseNode {
         head = pre.next;
 
         for (int i = left; i < right; i++) {
-
+            // 1->2->3
+            // 2
             ListNode nxt = head.next; // 指向 head 之后的节点
             //head节点连接nxt节点之后链表部分，也就是向后移动一位
+            // 2-3
             head.next = nxt.next;
             //nxt节点移动到需要反转链表部分的首部
             nxt.next = pre.next;
