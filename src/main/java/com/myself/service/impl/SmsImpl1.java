@@ -51,6 +51,11 @@ public class SmsImpl1 implements SmsInterface {
         Map<String, List<Person>> re = bookList.stream().collect(Collectors.groupingBy(Person::getName));
     }
 
+    @Override
+    public String hello() {
+        return null;
+    }
+
 
     static class Person {
         private String name;

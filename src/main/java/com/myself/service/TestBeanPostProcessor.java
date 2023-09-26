@@ -4,8 +4,10 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,6 +20,11 @@ import org.springframework.stereotype.Component;
  * -> applyBeanPostProcessorsBeforeInitialization 初始化前调用
  * -> invokeInitMethods  @PostConstruct
  * -> applyBeanPostProcessorsBeforeInitialization 初始化后调用
+ *
+ * @see AbstractApplicationContext#registerBeanPostProcessors(ConfigurableListableBeanFactory)
+ *
+ *
+ * registerBeanPostProcessors 初始化 BeanPostProcessor 优先其他普通 Bean的初始化
  */
 @Component
 public class TestBeanPostProcessor implements BeanPostProcessor, BeanFactoryAware {
