@@ -34,7 +34,6 @@ public class TestBeanPostProcessor implements BeanPostProcessor, BeanFactoryAwar
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) {
 
-
         System.out.println(beanName);
         return bean;
     }

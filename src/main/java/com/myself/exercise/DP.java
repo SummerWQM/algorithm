@@ -18,7 +18,7 @@ public class DP {
         int re = 0;
         for (int price : prices) {
             if (price < min) {
-                price = min;
+                min = price;
             } else {
                 re = Math.max(re, price - min);
             }
