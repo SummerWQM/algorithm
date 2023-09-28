@@ -18,9 +18,10 @@ public class Node {
         Node hair = new Node(-1);
         Node pre = hair;
         while (i < n) {
-            Node cur = new Node(i++);
+            Node cur = new Node((int) (Math.random() * 100));
             pre.next = cur;
             pre = cur;
+            i++;
         }
         return hair.next;
 
@@ -95,29 +96,41 @@ public class Node {
         return hair.next;
     }
 
-
-    public static int maxProduct(int[] nums) {
-
-        int maxF = nums[0], minF = nums[0], ans = nums[0];
-        int length = nums.length;
-        for (int i = 1; i < length; ++i) {
-            int mx = maxF, mn = minF;
-            maxF = Math.max(mx * nums[i], Math.max(nums[i], mn * nums[i]));
-            minF = Math.min(mn * nums[i], Math.min(nums[i], mx * nums[i]));
-            ans = Math.max(maxF, ans);
-        }
-        return ans;
+    public static Node sortLink(Node head) {
+        return doSortLink(head, null);
     }
 
+    public static Node doSortLink(Node head, Node tail) {
+        if (head == null) {
+            return head;
+        }
+        if (head.next == tail) {
+            head.next = null;
+            return head;
+        }
+        Node slow = head, fast = head;
+
+        while (fast != tail) {
+            slow = slow.next;
+            fast = fast.next;
+            if (fast != tail) {
+                fast = fast.next;
+            }
+        }
+
+        Node mid = slow;
+        Node left = doSortLink(head, mid);
+        Node right = doSortLink(mid, tail);
+
+        return mergeLink(left, right);
+    }
 
     public static void main(String[] args) {
 
-        Node l1 = buildNode(3);
-        Node l2 = buildNode(3);
-        Node re = mergeLink(l1, l2);
-        System.out.println(printLink(re));
-
-        System.out.println(maxProduct(new int[]{2, 3, -2, 4}));
+        Node l1 = buildNode(5);
+        System.out.println(printLink(l1));
+        Node ans = sortLink(l1);
+        System.out.println(printLink(ans));
     }
 
 

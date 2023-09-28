@@ -135,9 +135,7 @@ public class DP {
                 if (word1.charAt(i - 1) == word2.charAt(j - 1)) dp[i][j] = dp[i - 1][j - 1];
                 else dp[i][j] = Math.min(
                         // 前一个字符， 替换，删除、插入 取最小  + 1
-                        Math.min(dp[i - 1][j - 1], dp[i][j - 1]),
-                        dp[i - 1][j]
-                ) + 1;
+                        Math.min(dp[i - 1][j - 1], dp[i][j - 1]), dp[i - 1][j]) + 1;
             }
         }
         return dp[n1][n2];
@@ -241,6 +239,41 @@ public class DP {
         return dp[len - 1];
 
     }
+
+    /**
+     * @param s1
+     * @param s2
+     * @param s3
+     * @return
+     * @see 97  s1 s2 能否交替组成 s3
+     */
+    public static boolean isInterleave(String s1, String s2, String s3) {
+
+        int m = s1.length(), n = s2.length(), t = s3.length();
+
+        if (m + n != t) {
+            return false;
+        }
+
+        boolean[][] f = new boolean[m][n];
+
+        f[0][0] = true;
+
+        for (int i = 0; i < m; i++) {
+
+            for (int j = 0; j < n; j++) {
+                int p = i + j - 1;
+                if (i > 0) {
+                    f[i][j] = f[i][j] || (f[i - 1][j] && s1.charAt(i - 1) == s3.charAt(p));
+                }
+                if (j > 0) {
+                    f[i][j] = f[i][j] || (f[i][j - 1] && s2.charAt(j - 1) == s3.charAt(p));
+                }
+            }
+        }
+        return f[m][n];
+    }
+
 
     public static void main(String[] args) {
 
