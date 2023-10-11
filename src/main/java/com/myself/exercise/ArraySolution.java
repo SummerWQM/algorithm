@@ -88,22 +88,18 @@ class ArraySolution {
 
                 int temp = nums[left];
                 // 移除两边 各自都相同的 元素
-                while (left <= right && nums[right] == temp)
-                    right--;
-                while (left <= right && nums[left] == temp)
-                    left++;
+                while (left <= right && nums[right] == temp) right--;
+                while (left <= right && nums[left] == temp) left++;
             } else if (nums[left] < nums[right]) {
                 sum++;
                 int temp = nums[left];
                 // 右边大， 右边不动， 移动 左指针
-                while (left <= right && nums[left] == temp)
-                    left++;
+                while (left <= right && nums[left] == temp) left++;
             } else {
                 sum++;
                 // 左边大， 左边不动， 移动右指针 想通的数据
                 int temp = nums[right];
-                while (left <= right && nums[right] == temp)
-                    right--;
+                while (left <= right && nums[right] == temp) right--;
             }
         }
         return sum;
@@ -273,13 +269,6 @@ class ArraySolution {
     }
 
 
-//    public static void main(String[] avg) {
-//
-//        int[] nums = new int[]{2, 4};
-//
-//        System.out.println(Character.isLetter('*'));
-//    }
-
     // 核心是判断 值一定在mid 左右 或mid 右边 即可
     public static int find(int[] nums, int target) {
         int n = nums.length;
@@ -353,10 +342,7 @@ class ArraySolution {
                 } else if (sum < target) {
                     second++;
                 } else {
-                    List<Integer> list = new ArrayList<Integer>();
-                    list.add(nums[first]);
-                    list.add(nums[second]);
-                    list.add(nums[third]);
+                    List<Integer> list = Arrays.asList(nums[first], nums[second], nums[third]);
                     ans.add(list);
                     third--;
                     second++;
@@ -491,7 +477,7 @@ class ArraySolution {
     }
 
     /**
-     * 类似 循环俩表的思想，
+     * 类似 循环链表的思想，
      * 找存在环的数组， 数组前提是 [1,n] 的n+1个元素的数组
      *
      * @param nums
@@ -799,6 +785,7 @@ class ArraySolution {
         for (int i = 0; i < nums.length; i++) {
             pre += nums[i];
             // 转换为  当前累计pre  - k 的pre 存不存在，存在就 ++
+            // 转换为 pre 里有多少个k
             //  [[1,2,3](pre-k) 4, 5 , 6 ]
             if (mp.containsKey(pre - k)) {
                 count += mp.get(pre - k);
@@ -898,20 +885,6 @@ class ArraySolution {
         return n == 1;
     }
 
-    public static void main(String[] args) {
-        int[] arr = new int[]{4, 5, 6, 2, 3};
-
-        int l = 0, r = arr.length - 1;
-
-        while (l < r) {
-            int mid = (l + r) >> 1;
-            if (arr[mid] < arr[r]) {
-                r = mid;
-            } else {
-                l = mid + 1;
-            }
-        }
-    }
 
     /**
      * 考虑负数，连续子数组乘积最大值  152
@@ -935,6 +908,70 @@ class ArraySolution {
             ans = Math.max(maxF, ans);
         }
         return ans;
+    }
+
+    /**
+     * 128 最长连续序列
+     * 考 Hash
+     *
+     * @param nums
+     * @return
+     */
+    public int longestConsecutive(int[] nums) {
+        Set<Integer> num_set = new HashSet<Integer>();
+
+        // set 去重
+        for (int num : nums) {
+            num_set.add(num);
+        }
+
+        int longestStreak = 0;
+        // 遍历 数据， -1 不在 其中， 说明是 递增的 开头第一个
+        // 找其最大的连续序列。
+        for (int num : num_set) {
+            if (!num_set.contains(num - 1)) {
+                int currentNum = num;
+                int currentStreak = 1;
+
+                // 递增 序列 判断是否连续存在
+                while (num_set.contains(currentNum + 1)) {
+                    currentNum += 1;
+                    currentStreak += 1;
+                }
+                // 终止连续， 判断是否最大
+                longestStreak = Math.max(longestStreak, currentStreak);
+            }
+        }
+
+        return longestStreak;
+    }
+
+    public static void main(String[] args) {
+
+        int[] nums = new int[]{1, 2, 3, 4, 5, 4, 4, 4, 2, 3};
+
+        HashSet<Integer> setMap = new HashSet<>();
+        for (int num : nums) {
+            setMap.add(num);
+        }
+
+        int curMax = Integer.MIN_VALUE;
+
+        for (int num : setMap) {
+
+            if (!setMap.contains(num - 1)) {
+                int count = 0;
+                int curSum = num;
+                while (setMap.contains(curSum)) {
+                    curSum++;
+                    count++;
+                }
+                curMax = Math.max(curMax, count);
+            }
+        }
+
+        System.out.println(curMax);
+
     }
 
 }

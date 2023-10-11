@@ -1,5 +1,7 @@
 package com.myself.exercise;
 
+import java.util.Random;
+
 /**
  * 快速排序是一种高效的排序算法，它的时间复杂度为O(nlogn)。以下是Java实现的快速排序算法：
  * 快速排序的基本思想是：选定一个基准元素，然后将数组分成左右两个子数组，
@@ -83,11 +85,6 @@ public class Sort {
         }
     }
 
-    public static void swap(int[] nums, int i, int j) {
-        int tmp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = tmp;
-    }
 
     /**
      * 堆排序
@@ -149,5 +146,14 @@ public class Sort {
 
         System.out.println(topN(nums, 4));
     }
+
+
+
+    private static void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
 
 }

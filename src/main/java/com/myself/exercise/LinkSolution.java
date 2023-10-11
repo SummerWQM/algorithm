@@ -1,6 +1,7 @@
 package com.myself.exercise;
 
 import com.myself.helper.ListNode;
+import com.myself.helper.Node;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -522,11 +523,73 @@ class LinkSolution {
         return ret;
     }
 
+    /**
+     * 删除倒数第N 个节点
+     *
+     * @param args
+     */
+
+    public static com.myself.helper.Node delAfterK(com.myself.helper.Node head, int n) {
+
+        com.myself.helper.Node hair = new com.myself.helper.Node(-1);
+        hair.next = head;
+
+        com.myself.helper.Node fast = hair, slow = hair;
+
+        while (fast != null) {
+            fast = fast.next;
+            if (n < 1 && fast != null) {
+                slow = slow.next;
+            }
+            n--;
+        }
+        slow.next = slow.next.next;
+
+        return hair.next;
+
+    }
+
+    /**
+     * 反转指定区间
+     *
+     * @param avg
+     */
+
+    public static Node reverseBetween(Node head, int from, int to) {
+
+        Node hair = new Node(-1);
+        hair.next = head;
+        Node pre = hair, start = pre, end = pre;
+
+        for (int i = 0; i < from; i++) {
+            if (i > 0) {
+                pre = pre.next;
+            }
+            start = start.next;
+        }
+        for (int i = 0; i < to; i++) {
+            end = end.next;
+        }
+        pre.next = reverse(start, end);
+        return hair.next;
+    }
+
+    public static Node reverse(Node start, Node end) {
+        Node tail = end.next, pre = end.next, cur = start;
+        while (cur != tail) {
+            Node next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
+    }
+
     //===
     public static void main(String[] avg) {
-        Node head = buildLinkRandom(10);
+        Node head = buildLink(10);
         System.out.println(printLink(head));
-        System.out.println(printLink(reverse(head)));
+        System.out.println(printLink(reverseBetween(head, 4, 8)));
     }
 
 }

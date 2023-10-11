@@ -10,6 +10,29 @@ class StringSolution {
 //        System.out.println(Arrays.toString(groupAnagrams(strs).toArray()));
 //    }
 
+    /**
+     * 3、无重复字符串的最大长度
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring(String s) {
+        if (s.isEmpty()) return 0;
+        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+        int max = 0;
+        int left = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (map.containsKey(s.charAt(i))) {
+                // 避免回文串 "a b b a"  left 要取最大值。
+                left = Math.max(left, map.get(s.charAt(i)) + 1);
+            }
+            map.put(s.charAt(i), i);
+            max = Math.max(max, i - left + 1);
+        }
+        return max;
+
+    }
+
+
     public static List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> map = new HashMap<String, List<String>>();
         for (String str : strs) {
@@ -399,6 +422,41 @@ class StringSolution {
             }
         }
         return longest;
+    }
+
+    /**
+     * 中心扩散，边边界计算  start = i - （len-1)/2
+     * <p>
+     * end = i+len/2;
+     * <p>
+     * return  start,end+1;
+     */
+
+    class Solution {
+        public String longestPalindrome(String s) {
+            if (s == null || s.length() < 1) {
+                return "";
+            }
+            int start = 0, end = 0;
+            for (int i = 0; i < s.length(); i++) {
+                int len1 = expandAroundCenter(s, i, i);
+                int len2 = expandAroundCenter(s, i, i + 1);
+                int len = Math.max(len1, len2);
+                if (len > end - start) {
+                    start = i - (len - 1) / 2;
+                    end = i + len / 2;
+                }
+            }
+            return s.substring(start, end + 1);
+        }
+
+        public int expandAroundCenter(String s, int left, int right) {
+            while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+                --left;
+                ++right;
+            }
+            return right - left - 1;
+        }
     }
 
 

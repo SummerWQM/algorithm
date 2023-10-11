@@ -18,10 +18,9 @@ public class Node {
         Node hair = new Node(-1);
         Node pre = hair;
         while (i < n) {
-            Node cur = new Node((int) (Math.random() * 100));
+            Node cur = new Node(i++);
             pre.next = cur;
             pre = cur;
-            i++;
         }
         return hair.next;
 
@@ -125,12 +124,12 @@ public class Node {
         return mergeLink(left, right);
     }
 
+
+
     public static void main(String[] args) {
 
-        Node l1 = buildNode(5);
+        Node l1 = buildNode(2);
         System.out.println(printLink(l1));
-        Node ans = sortLink(l1);
-        System.out.println(printLink(ans));
     }
 
 
