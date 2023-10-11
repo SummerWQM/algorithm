@@ -3,6 +3,10 @@ package com.myself.exercise;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 滑动窗口、字符串压缩、基本计算器字符计算、
+ */
+
 class StringSolution {
 //    public static void main(String[] avg) {
 //        String[] strs = new String[]{"eat", "tea", "tan", "ate", "nat", "bat"};
@@ -49,7 +53,7 @@ class StringSolution {
     }
 
     /**
-     * 438 找到字符串中所有字母异位词
+     * 438 找到字符串中所有字母异位词  ==  76. 最小覆盖子串 - 滑动窗口
      * <p>
      * p 字符串 的所有以为词的 起始索引， ==》 滑动窗口
      */
@@ -286,30 +290,40 @@ class StringSolution {
     }
 
     /**
-     * 76. 最小覆盖子串 - 滑动窗口
+     * 76. 最小覆盖子串 - 滑动窗口 == 438
+     *  包含窗口伸缩
      */
-
     public static String minWindow(String s, String t) {
         int[] hash = new int[128];
 
+        // 存在的窗口置 未负数
         for (char ch : t.toCharArray()) {
             hash[ch]--;
         }
+
         String res = "";
         int cnt = 0, len = s.length() + 1;
         char ch;
+
         for (int r = 0, l = 0; r < s.length(); r++) {
+            // 向右搜索 目标字符
             ch = s.charAt(r);
+
             // 不存在字符将大于 0
             hash[ch]++;
+
             // 存在字符时 移动 右边指针
-            if (hash[ch] <= 0) cnt++;
+            if (hash[ch] <= 0) cnt++; // 向右移动一个字符  <=0 存在 target 中，cnt 递增
             // 缩小左边指针, 左边指针超过 0 时有超过区间
+
             // 左边大于 0，不存在字符，或者 重复字符 缩减 左边指针
+            // 伸缩左边, 左边超过边缘，
             while (l < r && hash[s.charAt(l)] > 0) {
+                // 左指针右移 ， 值减一
                 hash[s.charAt(l++)]--;
             }
             // cnt == t 字符大小时 更新最小值
+            //
             if (cnt == t.length() && len > r - l + 1) {
                 len = r - l + 1;
                 res = s.substring(l, r + 1);
