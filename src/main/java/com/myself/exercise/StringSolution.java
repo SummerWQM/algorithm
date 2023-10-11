@@ -12,6 +12,7 @@ class StringSolution {
 
     /**
      * 3、无重复字符串的最大长度
+     *
      * @param s
      * @return
      */
@@ -47,43 +48,45 @@ class StringSolution {
 
     }
 
-    // 438  滑动窗口
-
+    /**
+     * 438 找到字符串中所有字母异位词
+     * <p>
+     * p 字符串 的所有以为词的 起始索引， ==》 滑动窗口
+     */
     public static List<Integer> findAnagrams(String s, String p) {
-
-        List<Integer> ans = new ArrayList<Integer>();
-
-        if (s == null || p == null || s.length() < p.length()) {
-            return ans;
-        }
 
         int sLen = s.length(), pLen = p.length();
 
+        if (sLen < pLen) {
+            return new ArrayList<Integer>();
+        }
+
+        List<Integer> ans = new ArrayList<Integer>();
         int[] sCount = new int[26];
         int[] pCount = new int[26];
+
+        // 只同时移动 滑块个长度 判断两个滑块是否相等
 
         for (int i = 0; i < pLen; ++i) {
             ++sCount[s.charAt(i) - 'a'];
             ++pCount[p.charAt(i) - 'a'];
         }
-
+        // 初始滑块在0 位置 // 判断两个滑块是否相同，即数组相等。
         if (Arrays.equals(sCount, pCount)) {
             ans.add(0);
         }
-
+        // 开始移动 目标窗口，
         for (int i = 0; i < sLen - pLen; ++i) {
-            --sCount[s.charAt(i) - 'a'];
-            ++sCount[s.charAt(i + pLen) - 'a'];
-
+            --sCount[s.charAt(i) - 'a'];// 移动滑动 从 0 到i
+            ++sCount[s.charAt(i + pLen) - 'a']; // 右移一位。
+            // 相等即为 新的异位词，起始点。
             if (Arrays.equals(sCount, pCount)) {
                 ans.add(i + 1);
             }
         }
 
-
         return ans;
     }
-
 
 //    public static void main(String[] args) {
 //
@@ -463,7 +466,7 @@ class StringSolution {
     public static void main(String[] avg) throws InterruptedException {
 
         //System.out.println(minWindow("ADOBECODEBANC", "ABC"));
-        System.out.println(getString("3[a]2[bc]"));
+        System.out.println(Arrays.toString(findAnagrams("fffabc", "abc").toArray()));
 
     }
 

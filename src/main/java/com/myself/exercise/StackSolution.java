@@ -96,6 +96,8 @@ public class StackSolution {
         return ans;
     }
 
+
+
     public static void main(String[] args) {
         int[] re = new int[]{1, 3, -1, -3, 5, 3, 6, 7};
         System.out.println(Arrays.toString(slidMax(re, 3)));
