@@ -968,30 +968,29 @@ class ArraySolution {
     public static int findSingleNumber(int[] nums) {
         int left = 0;
         int right = nums.length - 1;
+        Arrays.sort(nums);
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            // 总结出来规律， 已偶数位标准，
+            // 如果出现在 和偶数位 和后边以为相等， 说明，出现 一次的 在偶数位 后边， left = mid +2
+            // 如果 偶数位和后边一位 不等， 说明 出现 在  mid 前边， right = mid
+            // 确保 mid 是偶数索引，使得它和它后面的元素构成一对
+            // 只扫描 偶数位
+            if (mid % 2 != 0) {
+                mid--;
+            }
 
-        while (left <= right) {
-            int mid = (left + right) / 2;
-            // 左右不能，返回 mid.
-            if (nums[mid] != nums[mid - 1] && nums[mid] != nums[mid + 1]) {
-                return nums[mid];
-                // 和左边相等
-            } else if (nums[mid] == nums[mid - 1]) {
-                // 往右移动指针
-                if ((mid - left + 1) % 2 == 0) {
-                    left = mid + 1;
-                } else {
-                    right = mid - 2;
-                }
-                //和右边相等
-            } else {
-                if ((right - mid + 1) % 2 == 0) {
-                    right = mid - 1;
-                } else {
-                    left = mid + 2;
-                }
+            // 如果 mid 和它后面的元素不相等，说明单独的元素在 mid 及其后面的元素中
+            if (nums[mid] != nums[mid + 1]) {
+                right = mid;
+            }
+            // 否则，单独的元素在 mid 的后面
+            else {
+                left = mid + 2;
             }
         }
 
+        // 返回最后找到的唯一的元素
         return nums[left];
     }
 
