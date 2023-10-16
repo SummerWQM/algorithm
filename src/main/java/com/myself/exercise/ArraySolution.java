@@ -202,7 +202,7 @@ class ArraySolution {
         int index = 0, size = nums.length;
 
         while (index < size) {
-            // 左边第一个小于自己的，维护一个单调递增的 栈
+            // 左边第一个小于自己的，维护一个单调递减的 栈
             if (!stack.isEmpty() && nums[stack.peek()] >= nums[index]) {
                 stack.pop();
             } else {
@@ -558,6 +558,7 @@ class ArraySolution {
         if (i >= 0) {
             int j = nums.length - 1;
             //找到  第一个 大于 i 的值
+            // 1232  => 2 -> 知道第一个大于2的数据 1  2231
             while (j >= 0 && nums[i] >= nums[j]) {
                 j--;
             }
@@ -572,25 +573,36 @@ class ArraySolution {
      * 41、缺失的正数
      * <p>
      * # 缺失的一定是[1->N+1] 的数。 如果出现负号 一定有缺失
+     * <p>
+     * 方法一、
+     * // 1、简单解法  HashMap 存储在的数
+     * // 2、遍历 1 到N  的数（N 为数组的长度） ，是否在Map 中 即可判断，缺失的第一个正数
+     * 时间O(N) ,空间O(N)
+     * <p>
+     * 方法二、让数组下标 来当HashMap 的作用。
+     * <p>
+     * 1、 将所有负数 改写成，N+1
+     * 2、 遍历数组，存在的数，将其下标更新为 负数。
+     * 3、 遍历数组，返回大于0 的数的 下标+1 ,即为目标值。
      *
      * @param nums
      */
     public static int firstMissingPositive(int[] nums) {
         int n = nums.length;
         // 将负数 标记为正数, 不考虑 大于n 的数
-        // [1,2,4]
-
+        // [1,2,4,-10]
         for (int i = 0; i < n; ++i) {
             if (nums[i] <= 0) {
                 nums[i] = n + 1;
             }
         }
-
+        // 遍历大于N 或者更大的数据
         for (int i = 0; i < n; ++i) {
             int num = Math.abs(nums[i]);
             // 将存在的位置的下标，一次标记为负数， 缺失的数 一定是 1->N ,小于
             // 标记小于N 的数
             if (num <= n) {
+                // 将对应下标 置为负数
                 nums[num - 1] = -Math.abs(nums[num - 1]);
             }
         }
@@ -946,32 +958,47 @@ class ArraySolution {
         return longestStreak;
     }
 
-    public static void main(String[] args) {
+    /**
+     * 136. 数组中，一个只出现一次，其余出现2次。
+     * 二分写法
+     *
+     * @param nums
+     * @return
+     */
+    public static int findSingleNumber(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
 
-        int[] nums = new int[]{1, 2, 3, 4, 5, 4, 4, 4, 2, 3};
-
-        HashSet<Integer> setMap = new HashSet<>();
-        for (int num : nums) {
-            setMap.add(num);
-        }
-
-        int curMax = Integer.MIN_VALUE;
-
-        for (int num : setMap) {
-
-            if (!setMap.contains(num - 1)) {
-                int count = 0;
-                int curSum = num;
-                while (setMap.contains(curSum)) {
-                    curSum++;
-                    count++;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            // 左右不能，返回 mid.
+            if (nums[mid] != nums[mid - 1] && nums[mid] != nums[mid + 1]) {
+                return nums[mid];
+                // 和左边相等
+            } else if (nums[mid] == nums[mid - 1]) {
+                // 往右移动指针
+                if ((mid - left + 1) % 2 == 0) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 2;
                 }
-                curMax = Math.max(curMax, count);
+                //和右边相等
+            } else {
+                if ((right - mid + 1) % 2 == 0) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 2;
+                }
             }
         }
 
-        System.out.println(curMax);
+        return nums[left];
+    }
 
+    public static void main(String[] args) {
+        int[] nums = {1, 1, 2, 3, 3, 4, 4};
+        int singleNumber = findSingleNumber(nums);
+        System.out.println(singleNumber); // 输出: 4
     }
 
 }
